@@ -4,10 +4,16 @@ import com.season.dao.LoginLogDao;
 import com.season.dao.UserDao;
 import com.season.domain.LoginLog;
 import com.season.domain.User;
+import com.season.exception.ErrorFormException;
 import com.season.exception.UserExistException;
+import com.season.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,13 +28,33 @@ public class UserService {
     @Autowired
     private LoginLogDao loginLogDao;
 
-    public void register(User user) throws UserExistException {
+    public void register(User user, MultipartFile idCardImgFile) throws UserExistException {
+
+        //判空
+        if (StringUtils.isEmpty(user.getUserName()) || StringUtils.isEmpty(user.getPassword())) {
+            throw new ErrorFormException("用户名或密码为空");
+        }
+        if (idCardImgFile.isEmpty() || idCardImgFile.getSize() > 1024 * 1024) {
+            throw new ErrorFormException("学生卡图片为空，或超过限制的大小");
+        }
+
         User u = this.getUserByUserName(user.getUserName());
         if (u != null)
             throw new UserExistException("用户名已经存在");
         else {
             user.setUserType(User.NORMAL_USER);
             userDao.save(user);
+
+            //上传文件路径
+            String path = FileUtil.prepareWrite("images/");
+            //上传文件名
+//                String filename = idCardImgFile.getOriginalFilename();
+            try {
+                idCardImgFile.transferTo(new File(path, user.getUserName()));
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new ErrorFormException("上传图片失败");
+            }
         }
     }
 

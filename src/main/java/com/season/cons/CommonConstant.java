@@ -23,4 +23,8 @@ public class CommonConstant
     * 每页的记录数
     */
    public static final int PAGE_SIZE = 15;
+
+   public static final String BASE_PATH_LINUX = "/canteen/";
+
+   public static final String BASE_PATH_WIN = "d://canteen/";
 }

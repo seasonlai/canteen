@@ -2,8 +2,8 @@
 
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()
-            +":"+request.getServerPort()+path+"/";
+    String basePath = request.getScheme() + "://" + request.getServerName()
+            + ":" + request.getServerPort() + path + "/";
 %>
 <%--
   Created by IntelliJ IDEA.
@@ -21,40 +21,44 @@
 </head>
 <body>
 
-    <h3 class="text-center">新用户注册</h3>
+<h3 class="text-center">新用户注册</h3>
 
-    <div class="row" style="width:300px;margin: 32px auto">
-        <div class="col-lg-6">
+<div class="row" style="width:300px;margin: 32px auto">
+    <div class="col-lg-6">
 
-            <form role="form"
-                  method="post" onsubmit="return myCheck()"
-                  action="<c:url value="/login/doRegister.html"/>">
+        <form role="form"
+              method="post" onsubmit="return myCheck()"
+              enctype="multipart/form-data"
+              action="<c:url value="/login/doRegister.html"/>">
 
-                <div class="form-group">
-                    <label>请输入用户名</label>
-                    <input name="userName" style="width:300px;" class="form-control" id="userName">
-                    <%--<p class="help-block">Example block-level help text here.</p>--%>
-                </div>
+            <div class="form-group">
+                <label>请输入用户名</label>
+                <input name="userName" style="width:300px;" class="form-control" id="userName">
+                <%--<p class="help-block">Example block-level help text here.</p>--%>
+            </div>
 
-                <div class="form-group">
-                    <label>请输入密码</label>
-                    <input class="form-control" style="width:300px;" name="password" id="pwd" type="password" placeholder="6位数字以上">
-                </div>
+            <div class="form-group">
+                <label>请输入密码</label>
+                <input class="form-control" style="width:300px;" name="password" id="pwd" type="password"
+                       placeholder="6位数字以上">
+            </div>
 
-                <div class="form-group">
-                    <label>请次输入密码</label>
-                    <input class="form-control" style="width:300px;" id="pwd2" type="password" placeholder="6位数字以上">
-                </div>
+            <div class="form-group">
+                <label>请次输入密码</label>
+                <input class="form-control" style="width:300px;" id="pwd2" type="password" placeholder="6位数字以上">
+            </div>
 
-                <div class="form-group">
-                    <label>学生证图片</label>
-                    <input type="file">
-                    <p class="help-block">请选择小于1M的图片</p>
-                </div>
+            <div class="form-group">
+                <label>学生证图片</label>
+                <input type="file" id="idCardImg" name="idCardImg" style="width:300px;">
+                <p class="help-block">请选择<1M的图片</p>
+            </div>
+            <div class="form-group row">
                 <button type="submit" style="width: 260px;margin: 12px auto;" class="btn btn-default">注册</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
 </body>
 
 <!-- jQuery -->
@@ -67,21 +71,22 @@
 
 <script>
 
-    var errorMsg="${errorMsg}";
-    if(errorMsg)
+    var errorMsg = "${errorMsg}";
+    if (errorMsg)
         alert(errorMsg);
 
     function myCheck() {
-        if(!$('#userName').val()){
+
+        if (!$('#userName').val()) {
             alert('用户名不能为空')
             return false;
         }
-        if ($('#pwd').val()!=$('#pwd2').val()) {
+        if ($('#pwd').val() != $('#pwd2').val()) {
             alert("两次输入的密码不一致");
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 </script>
 </html>

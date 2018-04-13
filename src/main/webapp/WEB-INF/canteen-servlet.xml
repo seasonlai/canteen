@@ -15,6 +15,7 @@
 
     <mvc:annotation-driven/>
 
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/page/" p:suffix=".jsp"/>
     <bean id="multipartResolver"

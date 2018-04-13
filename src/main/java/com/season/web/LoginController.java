@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.Date;
 
 @Controller
@@ -60,11 +63,11 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
-    public ModelAndView register(HttpServletRequest request, User user) {
-        User dbuser = userService.getUserByUserName(user.getUserName());
+    public ModelAndView register(HttpServletRequest request, User user,
+                                 @RequestParam("idCardImg")MultipartFile idCardImgFile) {
         ModelAndView mav = new ModelAndView("/success");
         try {
-            userService.register(user);
+            userService.register(user,idCardImgFile);
         } catch (UserExistException e) {
             mav.addObject("errorMsg", e.getMessage());
             mav.setViewName("forward:/register.jsp");

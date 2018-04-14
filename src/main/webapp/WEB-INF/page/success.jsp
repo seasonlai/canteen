@@ -8,7 +8,7 @@
 <title><c:if test='${!empty successMsg}'>${successMsg}</c:if> <c:if
 		test='${empty successMsg}'> 操作成功</c:if></title>
 <script language=javascript>
-	setTimeout("window.location.href='index.html'", 180)
+	setTimeout("window.location.href='<c:url value="/index.html"/>'", 180)
 </script>
 </head>
 <body>

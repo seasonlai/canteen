@@ -19,7 +19,7 @@
         <a class="navbar-brand" href="index.html">饭堂系统</a>
     </div>
 
-    <div class="nav navbar-right top-nav">
+    <div class="nav navbar-right top-nav" style="padding-top: 5px">
 
         <c:if test="${empty USER_CONTEXT.userName}">
             <a class="navbar-text" href="<c:url value="/register.jsp"/>">注册</a>
@@ -27,49 +27,40 @@
         </c:if>
 
         <c:if test="${!empty USER_CONTEXT.userName}">
-            欢迎您,${USER_CONTEXT.userName}&nbsp;&nbsp;
-            <img src="<%=basePath%>/static/img/head_def.jpg" width="45" height="45" class="img-circle">
+            <span style="color: white">欢迎您，${USER_CONTEXT.userName}&nbsp;&nbsp;</span>
+            <img src="<%=basePath%>static/img/head_def.jpg" width="40" height="40" class="img-circle">
         </c:if>
     </div>
 
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> 饭堂概况</a>
-            </li>
             <li>
-                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> 用餐预约</a>
-            </li>
-            <li>
-                <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-            </li>
-            <li>
-                <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-            </li>
-            <li>
-                <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-            </li>
-            <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-            </li>
-            <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
-                    Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
+                <a href="javascript:;" data-toggle="collapse" data-target="#people_data">
+                    <i class="fa fa-fw fa-bar-chart-o"></i> 饭堂数据<i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="people_data" class="collapse"> <%--aria-labelledby="dLabel"--%>
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="#">人次统计/预估</a>
                     </li>
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="#">用餐预约统计</a>
+                    </li>
+                    <li>
+                        <a href="#">数据修改</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                <a href="charts.html"><i class="fa fa-fw fa-dashboard"></i> 餐品管理</a>
             </li>
             <li>
-                <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                <a href="tables.html"><i class="fa fa-fw fa-book"></i> 用餐预约</a>
+            </li>
+            <li>
+                <a href="forms.html"><i class="fa fa-fw fa-edit"></i> 我的预约</a>
+            </li>
+            <li>
+                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>用户日志</a>
             </li>
         </ul>
     </div>

@@ -2,6 +2,7 @@ package com.season.web;
 
 import com.season.cons.CommonConstant;
 import com.season.domain.User;
+import com.season.exception.MyException;
 import com.season.exception.UserExistException;
 import com.season.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -19,13 +20,12 @@ import java.io.File;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController extends BaseController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/doLogin")
+    @RequestMapping("/login/doLogin")
     public ModelAndView login(HttpServletRequest request, User user) {
         User dbUser = userService.getUserByUserName(user.getUserName());
         ModelAndView mav = new ModelAndView("forward:/login.jsp");
@@ -39,49 +39,58 @@ public class LoginController extends BaseController {
             dbUser.setLastIp(request.getRemoteAddr());
             dbUser.setLastVisit(new Date());
             userService.loginSuccess(dbUser);
-            setSessionUser(request,dbUser);
-            String toUrl = (String)request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
+            setSessionUser(request, dbUser);
+            String toUrl = (String) request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
             request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
             //如果当前会话中没有保存登录之前的请求URL，则直接跳转到主页
-            if(StringUtils.isEmpty(toUrl)){
+            if (StringUtils.isEmpty(toUrl)) {
                 toUrl = "/index.html";
             }
-            mav.setViewName("redirect:"+toUrl);
+            mav.setViewName("redirect:" + toUrl);
         }
         return mav;
     }
 
     /**
      * 登录注销
+     *
      * @param session
      * @return
      */
-    @RequestMapping("/doLogout")
+    @RequestMapping("/login/doLogout")
     public String logout(HttpSession session) {
         session.removeAttribute(CommonConstant.USER_CONTEXT);
         return "forward:/index.jsp";
     }
 
-    @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
-    public ModelAndView register(HttpServletRequest request, User user,
-                                 @RequestParam("idCardImg")MultipartFile idCardImgFile) {
+    @RequestMapping(value = "/login/doRegister", method = RequestMethod.POST)
+    public ModelAndView register(HttpServletRequest request,
+                                 @RequestParam("userName") String userName,
+                                 @RequestParam("password") String pwd,
+                                 @RequestParam("idCardImg") MultipartFile idCardImgFile) {
+
         ModelAndView mav = new ModelAndView("/success");
+        User user = new User();
         try {
-            userService.register(user,idCardImgFile);
-        } catch (UserExistException e) {
+            user.setUserName(userName);
+            user.setPassword(pwd);
+            userService.register(user, idCardImgFile);
+        } catch (MyException e) {
             mav.addObject("errorMsg", e.getMessage());
             mav.setViewName("forward:/register.jsp");
+            return mav;
         }
+        setSessionUser(request,user);
         return mav;
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request) {
         return "forward:/login.jsp";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/login/register", method = RequestMethod.GET)
     public String registerPage(HttpServletRequest request) {
         System.out.println("register================================");
         return "forward:/register.jsp";

@@ -1,5 +1,4 @@
 package com.season.exception;
 
-public class NotLoginException extends RuntimeException{
-	
+public class NotLoginException extends MyException{
 }

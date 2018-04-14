@@ -21,8 +21,7 @@ public class CanteenFilter implements Filter {
     // ① 不需要登录即可访问的URI资源
     private static final String[] INHERENT_ESCAPE_URIS = {"/index.jsp",
             "/index.html", "/login.jsp", "/login/doLogin.html",
-            "/register.jsp", "/register.html", "/board/listBoardTopics-",
-            "/board/listTopicPosts-"};
+            "/register.jsp", "/register.html","/login/doRegister.html"};
 
 
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -64,7 +63,7 @@ public class CanteenFilter implements Filter {
                 || (request.getContextPath() + "/").equalsIgnoreCase(requestURI))
             return true;
         for (String uri : INHERENT_ESCAPE_URIS) {
-            if (requestURI != null && requestURI.indexOf(uri) >= 0) {
+            if (requestURI != null && requestURI.contains(uri)) {
                 return true;
             }
         }

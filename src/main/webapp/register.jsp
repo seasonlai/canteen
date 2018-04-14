@@ -19,44 +19,53 @@
     <link href='<%=basePath%>static/css/bootstrap.min.css' rel="stylesheet">
 
 </head>
-<body>
+<body style="background-color: #2e6da4">
+<div style="width:400px;margin: 50px auto;background-color: white">
+    <h3 class="text-center" style="padding-top: 20px">新用户注册</h3>
 
-<h3 class="text-center">新用户注册</h3>
+    <div class="row" style="width:300px;margin: 32px auto">
+        <div class="col-lg-6">
 
-<div class="row" style="width:300px;margin: 32px auto">
-    <div class="col-lg-6">
+            <form role="form"
+                  method="post" onsubmit="return myCheck()"
+                  enctype="multipart/form-data"
+                  action="<c:url value="/login/doRegister.html"/>">
 
-        <form role="form"
-              method="post" onsubmit="return myCheck()"
-              enctype="multipart/form-data"
-              action="<c:url value="/login/doRegister.html"/>">
+                <div class="form-group">
+                    <input name="userName" style="width:300px;" class="form-control" id="userName" placeholder="请输入用户名">
+                    <%--<p class="help-block">Example block-level help text here.</p>--%>
+                </div>
 
-            <div class="form-group">
-                <label>请输入用户名</label>
-                <input name="userName" style="width:300px;" class="form-control" id="userName">
-                <%--<p class="help-block">Example block-level help text here.</p>--%>
-            </div>
+                <div class="form-group">
+                    <input class="form-control" style="width:300px;" name="password" id="pwd" type="password"
+                           placeholder="请输入密码">
+                </div>
 
-            <div class="form-group">
-                <label>请输入密码</label>
-                <input class="form-control" style="width:300px;" name="password" id="pwd" type="password"
-                       placeholder="6位数字以上">
-            </div>
+                <div class="form-group">
+                    <input class="form-control" style="width:300px;" id="pwd2" type="password" placeholder="请再次输入密码">
+                </div>
 
-            <div class="form-group">
-                <label>请次输入密码</label>
-                <input class="form-control" style="width:300px;" id="pwd2" type="password" placeholder="6位数字以上">
-            </div>
+                <div class="form-group" style="width:300px;">
+                    <div class="file-container"
+                         style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                        <button class="btn btn-default fileinput-button" type="button">学生证图片</button>
+                        <input type="file" name="idCardImg" id="idCardImg" onchange="loadFile(this.files[0])"
+                               style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                    </div>
+                    <span id="filename" style="width: 250px;margin-top:20px;vertical-align: middle">未选择文件</span>
+                    <p class="help-block">请选择<1M的图片</p>
+                </div>
 
-            <div class="form-group">
-                <label>学生证图片</label>
-                <input type="file" id="idCardImg" name="idCardImg" style="width:300px;">
-                <p class="help-block">请选择<1M的图片</p>
-            </div>
-            <div class="form-group row">
-                <button type="submit" style="width: 260px;margin: 12px auto;" class="btn btn-default">注册</button>
-            </div>
-        </form>
+                <%--<div class="form-group">--%>
+                <%--<button class="btn btn-default fileinput-button" type="button">学生证图片</button>--%>
+                <%--<input type="file" id="idCardImg" id='file' onchange="loadFile(this.files[0])" name="idCardImg" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">--%>
+                <%--<p class="help-block">请选择<1M的图片</p>--%>
+                <%--</div>--%>
+                <button type="submit" style="width: 260px;margin-left: 18px;margin-top: 20px;margin-bottom: 20px"
+                        class="btn btn-success">注册
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 </body>
@@ -67,8 +76,6 @@
 <!-- Bootstrap Core JavaScript -->
 <script src='<%=basePath%>static/js/bootstrap.min.js'></script>
 
-<script src=='<%=basePath%>static/register/register.js'></script>
-
 <script>
 
     var errorMsg = "${errorMsg}";
@@ -78,7 +85,11 @@
     function myCheck() {
 
         if (!$('#userName').val()) {
-            alert('用户名不能为空')
+            alert('用户名不能为空');
+            return false;
+        }
+        if(!$('#pwd').val()){
+            alert('密码不能为空');
             return false;
         }
         if ($('#pwd').val() != $('#pwd2').val()) {
@@ -88,5 +99,10 @@
 
         return true;
     }
+
+    function loadFile(file) {
+        $("#filename").html(file.name);
+    }
+
 </script>
 </html>

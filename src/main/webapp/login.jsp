@@ -33,11 +33,11 @@
 
         <div class="page-container">
             <h1>用户登录</h1>
-            <input type="text" name="userName" class="username" placeholder="请输入您的用户名！">
-            <input type="password" name="password" class="password" placeholder="请输入您的用户密码！">
-            <form action="" method="post">
+            <form action="<c:url value='/login/doLogin.html'/>" method="post">
+                <input type="text" name="userName" class="username" placeholder="请输入您的用户名！">
+                <input type="password" name="password" class="password" placeholder="请输入您的用户密码！">
                 <%--<input type="Captcha" class="Captcha" name="Captcha" placeholder="请输入验证码！">--%>
-                <button type="submit" class="submit_button">登录</button>
+                <button type="submit" style="margin-left: 15px" class="submit_button">登录</button>
                 <div class="error"><span>+</span></div>
             </form>
             <%--<div class="connect">--%>

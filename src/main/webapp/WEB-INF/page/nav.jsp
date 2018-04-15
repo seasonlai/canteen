@@ -6,6 +6,9 @@
             + ":" + request.getServerPort() + path + "/";
 
 %>
+<%--<script type="javascript">--%>
+    <%--var basePath = <%=basePath%>;--%>
+<%--</script>--%>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">饭堂系统</a>
+        <a class="navbar-brand" href="<c:url value="/index.html"/>">饭堂系统</a>
     </div>
 
     <div class="nav navbar-right top-nav" style="padding-top: 5px">
@@ -34,13 +37,13 @@
 
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
+        <ul class="nav navbar-nav side-nav"   style="width: 185px">
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#people_data">
                     <i class="fa fa-fw fa-bar-chart-o"></i> 饭堂数据<i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="people_data" class="collapse"> <%--aria-labelledby="dLabel"--%>
                     <li>
-                        <a href="#">人次统计/预估</a>
+                        <a href="<c:url value="/data/data.html"/> ">人次统计/预估</a>
                     </li>
                     <li>
                         <a href="#">用餐预约统计</a>
@@ -51,13 +54,13 @@
                 </ul>
             </li>
             <li>
-                <a href="charts.html"><i class="fa fa-fw fa-dashboard"></i> 餐品管理</a>
+                <a href="<c:url value="/food/food_manager.html"/>"><i class="fa fa-fw fa-dashboard"></i> 餐品管理</a>
             </li>
             <li>
-                <a href="tables.html"><i class="fa fa-fw fa-book"></i> 用餐预约</a>
+                <a href="<c:url value="/food/food_book.html"/>"><i class="fa fa-fw fa-book"></i> 用餐预约</a>
             </li>
             <li>
-                <a href="forms.html"><i class="fa fa-fw fa-edit"></i> 我的预约</a>
+                <a href="<c:url value="/order/myOrder.html"/>"><i class="fa fa-fw fa-edit"></i> 我的预约</a>
             </li>
             <li>
                 <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>用户日志</a>

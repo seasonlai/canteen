@@ -27,4 +27,5 @@ public class CommonConstant
    public static final String BASE_PATH_LINUX = "/canteen/";
 
    public static final String BASE_PATH_WIN = "d://canteen/";
+
 }

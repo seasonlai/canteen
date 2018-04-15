@@ -18,10 +18,20 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
     <link href='<%=basePath%>static/css/bootstrap.min.css' rel="stylesheet">
+    <link href="<%=basePath%>static/css/bootstrap-overrides.css" type="text/css" rel="stylesheet">
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/elements.css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/icons.css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/elements.css">
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="<%=basePath%>static/css/compiled/gallery.css" type="text/css" media="screen"/>
+
+    <!-- libraries -->
+    <link href="<%=basePath%>static/css/lib/font-awesome.css" type="text/css" rel="stylesheet"/>
 
     <!-- Custom CSS -->
     <link href='<%=basePath%>static/css/sb-admin.css' rel="stylesheet">
@@ -38,106 +48,178 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
 
-<div id="wrapper">
+<div id="wrapper" style="padding-left: 185px">
     <jsp:include page="nav.jsp"/>
 
-    <div id="page-wrapper">
-
-        <div class="form-group input-group">
-            <input type="text" class="form-control">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">
+    <div id="page-wrapper" style="height: 100%">
+        <div class="container-fluid">
+            <div class="input-group" style="float: right">
+                <select class="form-control" style="width:150px;height: 33px">
+                    <option value="0">全部分类</option>
+                    <option value="1">肉类</option>
+                    <option value="2">蔬菜类</option>
+                    <option value="3">粉面类</option>
+                    <option value="4">汤品类</option>
+                    <option value="4">甜品类</option>
+                </select>
+                <input type="text" class="form-control" style="width:280px;height: 33px;margin-left: 30px"
+                       placeholder="Search...">
+                <%--<span class="input-group-btn">--%>
+                <button class="btn btn-default" style="height: 33px" type="button">
                     <i class="fa fa-search"></i>
                 </button>
-            </span>
-        </div>
+                <%--</span>--%>
+            </div>
+            <div id="pad-wrapper" class="gallery" style="clear: both;margin-top: 56px">
+                <!-- gallery wrapper -->
+                <div class="gallery-wrapper" style="margin-top: 20px">
+                    <div class="row gallery-row">
+                        <!-- single image -->
+                        <div class="col-md-3 img-container">
+                            <div class="img-box">
+                            <span class="icon edit">
+                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
+                            </span>
+                            <span class="icon trash">
+                                <i class="gallery-trash"></i>
+                            </span>
+                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
+                                <p class="title">
+                                    Beach pic title
+                                </p>
+                            </div>
+                        </div>
+                        <!-- single image -->
+                        <div class="col-md-3 img-container">
+                            <div class="img-box">
+                            <span class="icon edit">
+                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
+                            </span>
+                            <span class="icon trash">
+                                <i class="gallery-trash"></i>
+                            </span>
+                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
+                                <p class="title">
+                                    Beach pic title 2
+                                </p>
+                            </div>
+                        </div>
+                        <!-- single image -->
+                        <div class="col-md-3 img-container">
+                            <div class="img-box">
+                            <span class="icon edit">
+                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
+                            </span>
+                            <span class="icon trash">
+                                <i class="gallery-trash"></i>
+                            </span>
+                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
+                                <p class="title">
+                                    Beach pic title 3
+                                </p>
+                            </div>
+                        </div>
+                        <!-- single image -->
+                        <div class="col-md-3 img-container">
+                            <div class="img-box">
+                            <span class="icon edit">
+                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
+                            </span>
+                            <span class="icon trash">
+                                <i class="gallery-trash"></i>
+                            </span>
+                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
+                                <p class="title">
+                                    Beach pic title
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gallery-row">
+                        <!-- single image -->
+                        <div class="col-md-3 img-container">
+                            <div class="img-box">
+                            <span class="icon edit">
+                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
+                            </span>
+                            <span class="icon trash">
+                                <i class="gallery-trash"></i>
+                            </span>
+                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
+                                <p class="title">
+                                    Beach pic title 2
+                                </p>
+                            </div>
+                        </div>
+                        <!-- single image -->
+                        <div class="col-md-3 img-container">
+                            <div class="img-box">
+                            <span class="icon edit">
+                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
+                            </span>
+                            <span class="icon trash">
+                                <i class="gallery-trash"></i>
+                            </span>
+                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
+                                <p class="title">
+                                    Beach pic title 3
+                                </p>
+                            </div>
+                        </div>
 
+                        <!-- new image button -->
+                        <div class="col-md-3 new-img">
+                            <a data-toggle="modal" href="#myModal">
+                                <img src="<%=basePath%>static/img/food.png" class="img-responsive"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end gallery wrapper -->
 
-        <div class="row">
-            <div class="col-md-3">
-                <div class="panel" style="border: 1px black solid">
-                    <%--<div>--%>
-                    <img class="panel-heading thumbnail" style="padding: 0px" src="<%=basePath%>static/img/food.jpg" width="150" height="150">
-                    <%--</div>--%>
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-adn"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
             </div>
-            <div class="col-md-3">
-                <div class="panel panel-green">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-tasks fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">12</div>
-                                <div>New Tasks!</div>
-                            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Add new image</h4>
                         </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="input1" class="col-lg-2 control-label">Image:</label>
+                                    <div class="col-lg-10">
+                                        <input type="file" id="input1" class="pull-left"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input1" class="col-lg-2 control-label">Description:</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" class="form-control" id="inputPassword1"
+                                               placeholder="Description">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-yellow">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-shopping-cart fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">124</div>
-                                <div>New Orders!</div>
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-support fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">13</div>
-                                <div>Support Tickets!</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
         </div>
     </div>
-</div>
+    <script src="<%=basePath%>static/js/jquery.js"></script>
+    <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
+    <script src="<%=basePath%>static/food/theme.js"></script>
 </body>
 </html>

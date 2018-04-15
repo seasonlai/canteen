@@ -59,4 +59,6 @@ public class LoginLog extends BaseDomain {
     public void setIp(String ip) {
         this.ip = ip;
     }
+
+
 }

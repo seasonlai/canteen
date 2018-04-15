@@ -11,17 +11,24 @@ public class FileUtil {
 
     public static String prepareWrite(String path) {
         //如果文件不为空，写入上传路径
-        String rPath;
-        if(File.separator.equals("/")){
-            rPath = CommonConstant.BASE_PATH_LINUX;
-        }else
-            rPath=CommonConstant.BASE_PATH_WIN;
-
-        File file = new File(rPath,path);
-        if(!file.exists()){
+        File file = new File(getBasePath(), path);
+        if (!file.exists()) {
             file.mkdirs();
         }
         return file.getAbsolutePath();
     }
 
+    public static String getServerFilePath(String path) {
+        return getServerFile(path).getAbsolutePath();
+    }
+
+    public static File getServerFile(String path) {
+        return new File(getBasePath(),path);
+    }
+
+
+    public static String getBasePath() {
+        return File.separator.equals("/") ?
+                CommonConstant.BASE_PATH_LINUX : CommonConstant.BASE_PATH_WIN;
+    }
 }

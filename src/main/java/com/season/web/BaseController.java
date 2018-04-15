@@ -2,6 +2,7 @@ package com.season.web;
 import com.season.cons.CommonConstant;
 import com.season.domain.User;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
 import javax.servlet.http.HttpServletRequest;

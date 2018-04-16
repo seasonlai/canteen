@@ -49,7 +49,7 @@
                         <a href="#">用餐预约统计</a>
                     </li>
                     <li>
-                        <a href="#">数据修改</a>
+                        <a href="<c:url value="/data/data-edit.html"/>">数据修改</a>
                     </li>
                 </ul>
             </li>

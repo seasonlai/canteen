@@ -24,6 +24,7 @@ function updateFood(index) {
 
     $foodModify.find('input').val(null);
 
+    $foodModify.find('#food_modify_title').html('餐品修改');
     $foodModify.find('#foodName').val(food.foodName);
     $foodModify.find('#foodPrice').val(food.foodPrice);
     $foodModify.find('#foodKind').val(food.foodKind.kindCode);

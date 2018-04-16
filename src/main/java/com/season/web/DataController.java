@@ -2,6 +2,10 @@ package com.season.web;
 
 import com.season.cons.CommonConstant;
 import com.season.domain.MsgBean;
+import com.season.domain.PersonData;
+import com.season.exception.MyException;
+import com.season.service.DataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +21,10 @@ import java.util.Map;
  * Created by season on 2018/4/15.
  */
 @Controller
-public class DataController {
+public class DataController extends BaseController{
+
+    @Autowired
+    DataService dataService;
 
     @RequestMapping("/data/data.html")
     public ModelAndView personData() {
@@ -69,5 +76,29 @@ public class DataController {
 
         return null;
     }
+
+    @RequestMapping("/data/data-modify")
+    @ResponseBody
+    public MsgBean dataModify(PersonData data,
+                              @RequestParam("type")String type){
+        try {
+            switch (type){
+                case "0":
+                    break;
+                case "1":
+                    dataService.add(data);
+                    break;
+                case "2":
+                    dataService.modify(data);
+                    break;
+            }
+        }catch (MyException e){
+            return new MsgBean().setCode(-1)
+                    .setMsg(e.getMessage());
+        }
+
+        return new MsgBean().setCode(0);
+    }
+
 
 }

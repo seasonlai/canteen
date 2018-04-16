@@ -14,7 +14,7 @@
     <context:component-scan base-package="com.season.web"/>
 
     <mvc:annotation-driven/>
-
+    <mvc:default-servlet-handler/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/page/" p:suffix=".jsp"/>

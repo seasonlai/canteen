@@ -67,13 +67,15 @@
                         <option value="${foodKind.kindCode}">${foodKind.kindName}</option>
                     </c:forEach>
                 </select>
+                <div class="input-group">
                 <input type="text" id="searchContent" class="form-control"
                        style="width:280px;height: 33px;margin-left: 30px"
                        placeholder="Search...">
                 <%--<span class="input-group-btn">--%>
-                <button class="btn btn-default" onclick="queryList()" style="height: 33px" type="button">
+                <button class="btn btn-default input-group-addon" onclick="queryList()" style="width:35px;height: 33px" type="button">
                     <i class="fa fa-search"></i>
                 </button>
+                </div>
                 <%--</span>--%>
             </div>
             <div id="pad-wrapper" class="gallery" style="clear: both;margin-top: 56px">

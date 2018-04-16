@@ -55,13 +55,16 @@
                     <i class="fa fa-bar-chart-o fa-fw"></i> 用餐人数统计/预估
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                最近一周
-                                <span class="caret"></span>
+                            <button id="countKindBtn" type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <%--<c:forEach end="exitId" var="countKind" items="${countKinds}">--%>
+                                    <%--${countKind.name}--%>
+                                    <%--<c:set var="exitId" value="0"></c:set>--%>
+                                <%--</c:forEach>--%>
+
                             </button>
-                            <ul class="dropdown-menu pull-right" role="menu">
+                            <ul class="dropdown-menu pull-right" id="countKindList" role="menu">
                                 <c:forEach var="countKind" items="${countKinds}">
-                                    <li><a onclick="refreshChart(${countKind.code})">${countKind.name}</a></li>
+                                    <li><a onclick="refreshChart('${countKind.code}','${countKind.name}')">${countKind.name}</a></li>
                                 </c:forEach>
                             </ul>
                         </div>
@@ -82,8 +85,8 @@
 <script src="<%=basePath%>static/js/vendor/raphael/raphael.min.js"></script>
 <script src="<%=basePath%>static/js/vendor/morrisjs/morris.min.js"></script>
 <script src="<%=basePath%>static/person/morris-data.js"></script>
+<script src="<%=basePath%>static/person/data_count.js"></script>
 
 <script src="<%=basePath%>static/js/init.js"></script>
-<%--<script src="<%=basePath%>static/food/theme.js"></script>--%>
 </body>
 </html>

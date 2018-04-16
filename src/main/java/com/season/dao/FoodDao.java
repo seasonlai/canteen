@@ -15,6 +15,8 @@ public class FoodDao extends BaseDao<Food> {
 
     private static final String QUERY_FOOD_BY_USERNAME = "from Food f where f.foodName like ?";
 
+    private static final String QUERY_FOOD_BY_USERNAME_KIND = "from Food f where f.foodName like ? and f.foodKind.kindCode = ?";
+
 
 
     public Food getFoodByFoodName(String foodName) {
@@ -30,8 +32,14 @@ public class FoodDao extends BaseDao<Food> {
      * @param foodName 用户名查询条件
      * @return 用户名前缀匹配的所有User对象
      */
-    public List<Food> queryFoodByFoodName(String foodName){
-        return (List<Food>)hibernateTemplate.find(QUERY_FOOD_BY_USERNAME, "%"+foodName +"%");
+    public List<Food> queryFoodByFoodNameAndKind(String foodName,int... kindCode){
+
+        if(kindCode==null||kindCode[0]<=0){
+            return (List<Food>)hibernateTemplate.find(QUERY_FOOD_BY_USERNAME, "%"+foodName +"%");
+        }
+
+
+        return  (List<Food>)hibernateTemplate.find(QUERY_FOOD_BY_USERNAME_KIND,"%"+foodName +"%",kindCode[0]);
     }
 
 }

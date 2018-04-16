@@ -28,4 +28,7 @@ public class CommonConstant
 
    public static final String BASE_PATH_WIN = "d://canteen/";
 
+   public static final String[] PERSON_COUNT={"最近一周","最近一个月","最近三个月","最近一年"};
+
+   public static final String[] MEAL_KIND={"早餐","午餐","晚餐","夜宵"};
 }

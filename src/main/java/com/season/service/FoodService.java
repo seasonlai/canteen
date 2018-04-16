@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by season on 2018/4/15.
@@ -25,7 +26,7 @@ public class FoodService {
     @Autowired
     FoodDao foodDao;
 
-    public void publish(FoodMultipart food) throws MyException {
+    public void publish(FoodMultipart food) {
 
         if (StringUtils.isEmpty(food.getFoodName())
                 || StringUtils.isEmpty(food.getFoodPrice())
@@ -33,7 +34,7 @@ public class FoodService {
                 ) {
             throw new MyException("存在信息未填，请检查！");
         }
-        if (food.getFile().isEmpty() || food.getFile().getSize() > 1024 * 1024) {
+        if (food.getFile()==null||food.getFile().isEmpty() || food.getFile().getSize() > 1024 * 1024) {
             throw new MyException("图片为空或超过1M");
         }
 
@@ -48,11 +49,37 @@ public class FoodService {
         } catch (IOException e) {
 //            e.printStackTrace();
             logger.error(e.getMessage(), e);
+            throw new MyException("上传图片失败");
         }
 
-        food.setPublishDate(new Date());
-        food.setFile(null);
-        foodDao.save(food);
+        foodDao.save(food.getFood());
     }
 
+
+    public void update(FoodMultipart food) {
+        Food target = foodDao.load(food.getFoodId());
+        if (food.getFile()!=null&&!food.getFile().isEmpty()) {
+            String filePath = FileUtil.prepareWrite("/food");
+            try {
+                food.getFile().transferTo(new File(filePath, food.getFoodName()));
+            } catch (IOException e) {
+//                e.printStackTrace();
+                logger.error(e.getMessage(), e);
+                throw new MyException("上传图片失败");
+            }
+        }
+        target.setFoodPrice(food.getFoodPrice());
+        target.setFoodName(food.getFoodName());
+        target.setFoodKind(food.getFoodKind());
+//        target.set
+        foodDao.update(target);
+    }
+
+    public List<Food> queryList(String name, int kind) {
+        return foodDao.queryFoodByFoodNameAndKind(StringUtils.isEmpty(name) ? "" : name, kind);
+    }
+
+    public void del(Food food) {
+        foodDao.remove(food);
+    }
 }

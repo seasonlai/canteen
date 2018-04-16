@@ -30,7 +30,7 @@ $(function() {
     // }).addClass('active').parent().parent().addClass('in').parent();
     var element = $('ul.nav a').filter(function() {
         return this.href == url;
-    }).parent().addClass('active');
+    }).addClass('active').parent();
 
     while (true) {
         if (element.is('li')) {

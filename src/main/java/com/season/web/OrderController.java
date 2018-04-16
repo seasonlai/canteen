@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class OrderController {
 
-    @RequestMapping("/order/myOrder")
+    @RequestMapping("/order/myOrder.html")
     public ModelAndView orderPage(){
         ModelAndView mav =new ModelAndView("my_order");
         return mav;

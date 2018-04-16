@@ -20,7 +20,7 @@ public class Food extends BaseDomain{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "food_id")
-    private int foodId;
+    private Integer foodId;
     @Column(name = "food_image")
     private String foodImage;
     @Column(name = "food_price")
@@ -33,11 +33,11 @@ public class Food extends BaseDomain{
     @JoinColumn(name = "kind_code")
     private FoodKind foodKind;
 
-    public int getFoodId() {
+    public Integer getFoodId() {
         return foodId;
     }
 
-    public void setFoodId(int foodId) {
+    public void setFoodId(Integer foodId) {
         this.foodId = foodId;
     }
 

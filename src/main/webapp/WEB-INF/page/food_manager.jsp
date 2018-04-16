@@ -59,50 +59,36 @@
         <div class="container-fluid">
             <button data-toggle="modal" onclick="publishFood()" class="btn btn-info">发布新餐品</button>
             <div class="input-group" style="float: right">
-                <select class="form-control" style="width:150px;height: 33px">
-                    <option value="0">全部分类</option>
-                    <option value="1">肉类</option>
-                    <option value="2">蔬菜类</option>
-                    <option value="3">粉面类</option>
-                    <option value="4">汤品类</option>
-                    <option value="4">甜品类</option>
+                <button class="form-control btn btn-default" onclick="queryList()"
+                        style="margin-right:12px;width: 35px;height: 33px" type="button">
+                    <i class="fa fa-refresh"></i>
+                </button>
+                <select id="searchKind" class="form-control" style="width:150px;height: 33px" onchange="queryList()">
+                    <option value="-1">全部分类</option>
+                    <c:forEach items="${foodKinds}" var="foodKind">
+                        <option value="${foodKind.kindCode}">${foodKind.kindName}</option>
+                    </c:forEach>
                 </select>
-                <input type="text" class="form-control" style="width:280px;height: 33px;margin-left: 30px"
+                <input id="searchContent" type="text" class="form-control"
+                       style="width:280px;height: 33px;margin-left: 30px"
                        placeholder="Search...">
                 <%--<span class="input-group-btn">--%>
-                <button class="btn btn-default" style="height: 33px" type="button">
+                <button class="btn btn-default" onclick="queryList()" style="height: 33px" type="button">
                     <i class="fa fa-search"></i>
                 </button>
                 <%--</span>--%>
             </div>
             <div id="pad-wrapper" class="gallery" style="clear: both;margin-top: 36px">
                 <!-- gallery wrapper -->
-                <div class="gallery-wrapper" style="margin-top: 20px">
-                    <div class="row gallery-row">
-                        <!-- single image -->
-                        <div class="col-md-3 img-container">
-                            <div class="img-box">
-                            <span class="icon edit">
-                                <a data-toggle="modal" href="#" onclick="updateFood(this)"><i class="gallery-edit"></i></a>
-                            </span>
-                            <span class="icon trash">
-                                <i class="gallery-trash"></i>
-                            </span>
-                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
-                                <span>凉瓜炒蛋</span>
-                                <%--<p class="title">--%>
-                                <%--Beach pic title--%>
-                                <%--</p>--%>
-                            </div>
-                        </div>
-                    </div>
+                <div id="gallery-wrappe" class="gallery-wrapper" style="margin-top: 20px">
                 </div>
                 <!-- end gallery wrapper -->
 
             </div>
 
             <!-- 商品编辑 -->
-            <div class="modal fade" data-backdrop='false' id="foodModify" tabindex="-1" role="dialog" aria-labelledby="foodModifyLabel"
+            <div class="modal fade" data-backdrop='false' id="foodModify" tabindex="-1" role="dialog"
+                 aria-labelledby="foodModifyLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -123,6 +109,7 @@
                                     <div class="col-lg-10">
                                         <input type="text" name="foodName" class="form-control" id="foodName"
                                                placeholder="请输入餐品名称">
+                                        <input type="hidden" name="foodId" id="foodId">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -135,7 +122,7 @@
                                 <div class="form-group">
                                     <label for="foodKind" class="col-lg-2 control-label">餐品类别:</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control" name="foodKind" id="foodKind">
+                                        <select class="form-control" name="kindCode" id="foodKind">
                                             <c:forEach items="${foodKinds}" var="foodKind">
                                                 <option value="${foodKind.kindCode}">${foodKind.kindName}</option>
                                             </c:forEach>

@@ -20,8 +20,8 @@ public class CanteenFilter implements Filter {
 
     // ① 不需要登录即可访问的URI资源
     private static final String[] INHERENT_ESCAPE_URIS = {"/index.jsp",
-            "/index.html", "/login.jsp", "/login/doLogin.html",
-            "/register.jsp", "/register.html","/login/doRegister.html",
+            "/index.html", "/login.jsp", "/login/doLogin",
+            "/register.jsp", "/register.html","/login/doRegister",
             "/food/food_book.html"
     };
 

@@ -1,6 +1,5 @@
-package com.season.web;
+package com.season.exception;
 
-import com.season.exception.MyException;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
@@ -22,6 +21,7 @@ public class CanteenHandlerExceptionResolver extends SimpleMappingExceptionResol
         if (e instanceof MyException){
             request.setAttribute("ex", e);
         }else {
+            request.setAttribute("ex", e);
             logger.error(e.getMessage(), e);
         }
         return super.doResolveException(request, response, o, e);

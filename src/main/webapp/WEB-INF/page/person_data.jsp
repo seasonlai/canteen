@@ -52,7 +52,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+                    <i class="fa fa-bar-chart-o fa-fw"></i> 用餐人数统计/预估
                     <div class="pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -60,12 +60,9 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
-                                <li><a href="#">最近一周</a>
-                                </li>
-                                <li><a href="#">最近一个月</a>
-                                </li>
-                                <li><a href="#">最近一年</a>
-                                </li>
+                                <c:forEach var="countKind" items="${countKinds}">
+                                    <li><a onclick="refreshChart(${countKind.code})">${countKind.name}</a></li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
@@ -86,6 +83,7 @@
 <script src="<%=basePath%>static/js/vendor/morrisjs/morris.min.js"></script>
 <script src="<%=basePath%>static/person/morris-data.js"></script>
 
+<script src="<%=basePath%>static/js/init.js"></script>
 <%--<script src="<%=basePath%>static/food/theme.js"></script>--%>
 </body>
 </html>

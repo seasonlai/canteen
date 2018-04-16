@@ -57,126 +57,28 @@
     <div id="page-wrapper" style="height: 100%">
         <div class="container-fluid">
             <div class="input-group" style="float: right">
-                <select class="form-control" style="width:150px;height: 33px">
-                    <option value="0">全部分类</option>
-                    <option value="1">肉类</option>
-                    <option value="2">蔬菜类</option>
-                    <option value="3">粉面类</option>
-                    <option value="4">汤品类</option>
-                    <option value="4">甜品类</option>
+                <button class="form-control btn btn-default" onclick="queryList()"
+                        style="margin-right:12px;width: 35px;height: 33px" type="button">
+                    <i class="fa fa-refresh"></i>
+                </button>
+                <select class="form-control" onchange="queryList()" id="searchKind" style="width:150px;height: 33px">
+                    <option value="-1">全部分类</option>
+                    <c:forEach items="${foodKinds}" var="foodKind">
+                        <option value="${foodKind.kindCode}">${foodKind.kindName}</option>
+                    </c:forEach>
                 </select>
-                <input type="text" class="form-control" style="width:280px;height: 33px;margin-left: 30px"
+                <input type="text" id="searchContent" class="form-control"
+                       style="width:280px;height: 33px;margin-left: 30px"
                        placeholder="Search...">
                 <%--<span class="input-group-btn">--%>
-                <button class="btn btn-default" style="height: 33px" type="button">
+                <button class="btn btn-default" onclick="queryList()" style="height: 33px" type="button">
                     <i class="fa fa-search"></i>
                 </button>
                 <%--</span>--%>
             </div>
             <div id="pad-wrapper" class="gallery" style="clear: both;margin-top: 56px">
                 <!-- gallery wrapper -->
-                <div class="gallery-wrapper" style="margin-top: 20px">
-                    <div class="row gallery-row">
-                        <!-- single image -->
-                        <div class="col-md-3 img-container">
-                            <div class="img-box">
-                            <span class="icon edit">
-                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
-                            </span>
-                            <span class="icon trash">
-                                <i class="gallery-trash"></i>
-                            </span>
-                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
-                                <p class="title">
-                                    Beach pic title
-                                </p>
-                            </div>
-                        </div>
-                        <!-- single image -->
-                        <div class="col-md-3 img-container">
-                            <div class="img-box">
-                            <span class="icon edit">
-                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
-                            </span>
-                            <span class="icon trash">
-                                <i class="gallery-trash"></i>
-                            </span>
-                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
-                                <p class="title">
-                                    Beach pic title 2
-                                </p>
-                            </div>
-                        </div>
-                        <!-- single image -->
-                        <div class="col-md-3 img-container">
-                            <div class="img-box">
-                            <span class="icon edit">
-                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
-                            </span>
-                            <span class="icon trash">
-                                <i class="gallery-trash"></i>
-                            </span>
-                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
-                                <p class="title">
-                                    Beach pic title 3
-                                </p>
-                            </div>
-                        </div>
-                        <!-- single image -->
-                        <div class="col-md-3 img-container">
-                            <div class="img-box">
-                            <span class="icon edit">
-                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
-                            </span>
-                            <span class="icon trash">
-                                <i class="gallery-trash"></i>
-                            </span>
-                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
-                                <p class="title">
-                                    Beach pic title
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row gallery-row">
-                        <!-- single image -->
-                        <div class="col-md-3 img-container">
-                            <div class="img-box">
-                            <span class="icon edit">
-                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
-                            </span>
-                            <span class="icon trash">
-                                <i class="gallery-trash"></i>
-                            </span>
-                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
-                                <p class="title">
-                                    Beach pic title 2
-                                </p>
-                            </div>
-                        </div>
-                        <!-- single image -->
-                        <div class="col-md-3 img-container">
-                            <div class="img-box">
-                            <span class="icon edit">
-                                <a data-toggle="modal" href="#myModal"><i class="gallery-edit"></i></a>
-                            </span>
-                            <span class="icon trash">
-                                <i class="gallery-trash"></i>
-                            </span>
-                                <img src="<%=basePath%>static/img/food.jpg" class="img-responsive"/>
-                                <p class="title">
-                                    Beach pic title 3
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- new image button -->
-                        <div class="col-md-3 new-img">
-                            <a data-toggle="modal" href="#myModal">
-                                <img src="<%=basePath%>static/img/food.png" class="img-responsive"/>
-                            </a>
-                        </div>
-                    </div>
+                <div id="gallery-wrapper" class="gallery-wrapper" style="margin-top: 20px">
                 </div>
                 <!-- end gallery wrapper -->
 
@@ -218,8 +120,13 @@
 
         </div>
     </div>
+    <script>
+        var basePath = "<%=basePath%>";
+    </script>
     <script src="<%=basePath%>static/js/jquery.js"></script>
     <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
     <script src="<%=basePath%>static/food/theme.js"></script>
+    <script src="<%=basePath%>static/food/food_book.js"></script>
+        <script src="<%=basePath%>static/js/init.js"></script>
 </body>
 </html>

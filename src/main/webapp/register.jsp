@@ -29,7 +29,7 @@
             <form role="form"
                   method="post" onsubmit="return myCheck()"
                   enctype="multipart/form-data"
-                  action="<c:url value="/login/doRegister.html"/>">
+                  action="<c:url value="/login/doRegister"/>">
 
                 <div class="form-group">
                     <input name="userName" style="width:300px;" class="form-control" id="userName" placeholder="请输入用户名">

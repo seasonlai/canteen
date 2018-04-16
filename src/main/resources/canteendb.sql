@@ -8,6 +8,14 @@ DROP TABLE IF EXISTS t_user;
 
 DROP TABLE IF EXISTS t_login_log;
 
+DROP TABLE IF EXISTS t_food;
+
+DROP TABLE IF EXISTS t_food_kind;
+
+DROP TABLE IF EXISTS t_person_data;
+
+DROP TABLE IF EXISTS t_order;
+
 #
 # Source for table t_login_log
 #
@@ -72,14 +80,14 @@ CREATE TABLE `t_food` (
   COMMENT '餐品名',
   `food_price`   VARCHAR(30) NOT NULL
   COMMENT '餐品价格',
-  `id_card_img`  VARCHAR(100)         DEFAULT NULL
+  `food_image`   VARCHAR(100)         DEFAULT NULL
   COMMENT '学生证图片路径',
   `publish_date` DATETIME             DEFAULT NULL
   COMMENT '发布时间',
-  `kind_code`    INT(11)              DEFAULT NULL
+  `kind_code`    INT(5)               DEFAULT NULL
   COMMENT '餐品类别',
   PRIMARY KEY (`food_id`),
-  KEY `AK_AK_USER_USER_NAME` (`food_name`)
+  KEY `AK_AK_FOOD_FOOD_NAME` (`food_name`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 4
@@ -94,7 +102,7 @@ CREATE TABLE `t_food_kind` (
   COMMENT '类别Id',
   `kind_name`   VARCHAR(30) NOT NULL
   COMMENT '类别名',
-  `parent_code` INT(11)              DEFAULT NULL
+  `parent_code` INT(5)               DEFAULT NULL
   COMMENT '父类别',
   PRIMARY KEY (`kind_code`)
 )
@@ -107,3 +115,45 @@ INSERT INTO `t_food_kind` VALUES (2, '蔬菜类', NULL);
 INSERT INTO `t_food_kind` VALUES (3, '粉面类', NULL);
 INSERT INTO `t_food_kind` VALUES (4, '汤品类', NULL);
 INSERT INTO `t_food_kind` VALUES (5, '甜品类', NULL);
+INSERT INTO `t_food_kind` VALUES (6, '其他', NULL);
+
+
+CREATE TABLE `t_person_data` (
+  `data_id`      INT(11)  NOT NULL AUTO_INCREMENT
+  COMMENT '数据Id',
+  `actual_num`   INT(11)           DEFAULT 0
+  COMMENT '实际用餐数',
+  `estimate_num` INT(11)           DEFAULT 0
+  COMMENT '预估用餐数',
+  `data_date`    DATETIME NOT NULL
+  COMMENT '数据时间',
+  PRIMARY KEY (`data_id`),
+  KEY `AK_AK_DATA_DATE_NAME` (`data_date`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 4
+  DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE `t_order` (
+  `order_id`       INT(11)  NOT NULL AUTO_INCREMENT
+  COMMENT '数据Id',
+  `food_id`        INT(11)  NOT NULL
+  COMMENT '餐品ID',
+  `user_id`        INT(11)  NOT NULL
+  COMMENT '用户id',
+  `meal_kind`      INT(2)            DEFAULT 0
+  COMMENT '早午晚夜餐',
+  `order_status`   INT(2)            DEFAULT 0
+  COMMENT '订单状态',
+  `subscribe_date` DATETIME NOT NULL
+  COMMENT '预约时间',
+  `order_date`     DATETIME NOT NULL
+  COMMENT '下单时间',
+  PRIMARY KEY (`order_id`),
+  KEY `AK_AK_ORDER_SUBSCRIBE_DATE` (`subscribe_date`),
+  KEY `AK_AK_ORDER_ORDER_DATE` (`order_date`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 4
+  DEFAULT CHARSET = utf8;

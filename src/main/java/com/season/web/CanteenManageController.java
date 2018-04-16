@@ -19,7 +19,7 @@ public class CanteenManageController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/index.html"}, method = RequestMethod.GET)
     public String indexPage(HttpServletRequest request) {
         return "home";
     }

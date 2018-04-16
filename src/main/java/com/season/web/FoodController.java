@@ -34,12 +34,16 @@ public class FoodController extends BaseController {
     @Autowired
     FoodKindDao foodKindDao;
 
-    @RequestMapping("/food/food_book")
-    public String food_book() {
-        return "food_book";
+    @RequestMapping("/food/food_book.html")
+    public ModelAndView food_book() {
+        ModelAndView mav =new ModelAndView("food_book");
+
+        List<FoodKind> foodKinds = foodKindDao.loadAll();
+        mav.addObject("foodKinds",foodKinds);
+        return mav;
     }
 
-    @RequestMapping("/food/food_manager")
+    @RequestMapping("/food/food_manager.html")
     public ModelAndView food_manager() {
         ModelAndView mav =new ModelAndView("food_manager");
 
@@ -53,7 +57,13 @@ public class FoodController extends BaseController {
     @ResponseBody
     public MsgBean food_add(HttpServletRequest request, FoodMultipart food) {
 
-        food.setFoodImage(getAppbaseUrl(request, "/food/img-" + food.getFoodName() + ".html"));
+        FoodKind foodKind = foodKindDao.load(food.getKindCode());
+        if(foodKind==null)
+            return new MsgBean().setCode(-1).setMsg("不支持的类别");
+
+        food.setFoodKind(foodKind);
+        food.setFoodImage(getWholeUrl(request, "/food/img-" + food.getFoodName()));
+
         try {
             foodService.publish(food);
         } catch (MyException e) {
@@ -64,6 +74,41 @@ public class FoodController extends BaseController {
         return new MsgBean().setCode(0)
                 .setMsg("添加成功");
     }
+
+
+    @RequestMapping(value = "/food/food_edit-update", method = RequestMethod.POST)
+    @ResponseBody
+    public MsgBean food_update(HttpServletRequest request, FoodMultipart food) {
+        FoodKind foodKind = foodKindDao.load(food.getKindCode());
+        if(foodKind==null)
+            return new MsgBean().setCode(-1).setMsg("不支持的类别");
+        food.setFoodKind(foodKind);
+
+        try {
+            foodService.update(food);
+        } catch (MyException e) {
+            return new MsgBean().setCode(-1)
+                    .setMsg(e.getMessage());
+        }
+
+        return new MsgBean().setCode(0)
+                .setMsg("修改成功");
+    }
+
+    @RequestMapping(value = "/food/food_edit-del", method = RequestMethod.POST)
+    @ResponseBody
+    public MsgBean food_del(Food food) {
+
+        try {
+            foodService.del(food);
+        } catch (MyException e) {
+            return new MsgBean().setCode(-1)
+                    .setMsg(e.getMessage());
+        }
+        return new MsgBean().setCode(0)
+                .setMsg("删除成功");
+    }
+
 
     @RequestMapping("/food/img-{foodName}")
     public void get_food_img(@PathVariable("foodName") String foodName,
@@ -84,5 +129,15 @@ public class FoodController extends BaseController {
         }
 
     }
+
+
+    @RequestMapping("/food/food_list")
+    @ResponseBody
+    public MsgBean<List<Food>> query_food_list(@RequestParam("foodName")String name,@RequestParam("kind")int kind){
+        List<Food> foods = foodService.queryList(name, kind);
+        return new MsgBean<List<Food>>().setCode(0)
+                .setData(foods);
+    }
+
 
 }

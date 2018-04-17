@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,6 +54,10 @@ public class BaseDao<T> {
 
     public void remove(T entity){
         hibernateTemplate.delete(entity);
+    }
+
+    public void remove(Collection<T> entity){
+        hibernateTemplate.deleteAll(entity);
     }
 
     public void update(T entity){

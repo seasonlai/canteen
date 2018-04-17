@@ -36,7 +36,7 @@ public class Page {
     /**
      * 取当前页中的记录.
      */
-    public List getResult() {
+    public List getData() {
         return data;
     }
 

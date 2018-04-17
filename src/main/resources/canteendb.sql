@@ -119,7 +119,7 @@ INSERT INTO `t_food_kind` VALUES (6, '其他', NULL);
 
 
 CREATE TABLE `t_person_data` (
-  `data_id`      INT(11)  NOT NULL AUTO_INCREMENT
+  `data_id`      INT(5)  NOT NULL AUTO_INCREMENT
   COMMENT '数据Id',
   `actual_num`   INT(11)           DEFAULT 0
   COMMENT '实际用餐数',
@@ -129,6 +129,19 @@ CREATE TABLE `t_person_data` (
   COMMENT '数据时间',
   PRIMARY KEY (`data_id`),
   KEY `AK_AK_DATA_DATE_NAME` (`data_date`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 4
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE `t_person_data_tmp` (
+  `data_id`      INT(5)  NOT NULL
+  COMMENT '数据Id',
+  `actual_num`   INT(11) DEFAULT 0
+  COMMENT '实际用餐数',
+  `data_date`    DATETIME NOT NULL
+  COMMENT '数据时间',
+  PRIMARY KEY (`data_id`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 4

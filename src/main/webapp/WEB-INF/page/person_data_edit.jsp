@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%
     String path = request.getContextPath();
@@ -72,33 +73,44 @@
                             <li class="glyphicon glyphicon-trash"></li>
                         </button>
                     </div>
-                    <div class="pull-right">
-                        <div class="input-group pull-right">
-                            <%--<button class="glow left large active">全部</button>--%>
-                            <%--<button class="glow middle large">未完成</button>--%>
-                            <input type="text" id="startTime" style="height:30px;width:200px;"  data-provide="datepicker" class="form-control datepicker" placeholder="开始时间">
-                            <input type="text" id="endTime" style="height:30px;width:200px;margin-left: 5px"  data-provide="datepicker" class="form-control datepicker" placeholder="终止时间">
-                            <button class="btn btn-default input-group-addon" style="width: 35px;height:30px" ><i class="fa fa-search"></i></button>
-                        </div>
+                    <div class="pull-right form-inline" role="form" aria-orientation="horizontal">
+                            <div class="input-group">
+                                <input type="text" id="startTime" style="height:30px;width:200px;"
+                                       data-provide="datepicker"
+                                       class="form-control datepicker" placeholder="开始时间">
+                                <button onclick="clearInput('startTime')" style="width: 31px;height:30px" class="input-group-addon"><i
+                                        class=" fa fa-remove"></i></button>
+
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="endTime" style="height:30px;width:200px;margin-left: 5px"
+                                       data-provide="datepicker" class="form-control datepicker" placeholder="终止时间">
+                                <button onclick="clearInput('endTime')" style="width: 31px;height:30px" class="input-group-addon"><i
+                                        class=" fa fa-remove"></i></button>
+                            </div>
+                            <button class="btn btn-default" style="width: 35px;height:30px;margin-left: 12px;"
+                                    onclick="queryPageList()"><i class="fa fa-search"></i></button>
                         <%--<input type="text" class="search order-search" placeholder="Search for an order.."/>--%>
                     </div>
                 </div>
                 <%--<input type="text" id="datepicker" class="form-control">--%>
                 <%--<div class="input-group date" data-provide="datepicker">--%>
-                    <%----%>
-                    <%--<div class="input-group-addon">--%>
-                        <%--<span class="glyphicon glyphicon-th"></span>--%>
-                    <%--</div>--%>
+                <%----%>
+                <%--<div class="input-group-addon">--%>
+                <%--<span class="glyphicon glyphicon-th"></span>--%>
+                <%--</div>--%>
                 <%--</div>--%>
                 <div class="row" style="margin-top: 16px">
-                    <table class="table table-hover">
+                    <table id="tb_data" class="table table-hover">
                         <thead>
-                        <tr>
-                            <th class="col-md-1">
-                                <input type="checkbox">
+                        <tr class="headTitle">
+                            <th class="col-md-1 text-center">
+                                <input type="checkbox" id="checkAllBtn" onclick="checkAll()">
                             </th>
-                            <th class="col-md-2">
-                                数据日期
+
+                            <th class="col-md-1">
+                                <span class="line"></span>
+                                序号
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
@@ -108,56 +120,28 @@
                                 <span class="line"></span>
                                 预估用餐人数
                             </th>
+                            <th class="col-md-2">
+                                数据日期
+                            </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <!-- row -->
-                        <tr class="first">
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>
-                                <a href="#">#459</a>
-                            </td>
-                            <td>
-                                Jan 03, 2013
-                            </td>
-                            <td>
-                                <a href="#">John Smith</a>
-                            </td>
-                            <td>
-                                <span class="label label-success">Completed</span>
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                $ 3,500.00
-                            </td>
-                        </tr>
+                        <tbody id="tBody">
+
                         </tbody>
                     </table>
                 </div>
             </div>
             <!-- end orders table -->
             <div class="text-center">
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
+                <ul id="splitBar" class="pagination">
                 </ul>
             </div>
-
 
 
             <!-- 数据编辑 -->
             <div class="modal fade" data-backdrop='false' id="dataModify" tabindex="-1" role="dialog"
                  aria-labelledby="dataModifyLabel"
-                    aria-hidden="true">
+                 aria-hidden="true">
                 <div class="modal-dialog" style="width: 450px;">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -169,14 +153,17 @@
                                 <div class="form-group">
                                     <label for="dataDate" class="col-lg-4 control-label">数据日期:</label>
                                     <div class="col-lg-8">
-                                        <input type="text" id="dataDate" style="height:30px;width:200px;"  data-provide="datepicker" class="form-control datepicker" placeholder="开始时间">
+                                        <input type="text" id="dataDate" style="height:30px;width:200px;"
+                                               data-provide="datepicker" class="form-control datepicker"
+                                               placeholder="开始时间">
                                         <input type="hidden" name="dataId" id="dataId">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="dataPerson" class="col-lg-4 control-label">用餐人数:</label>
                                     <div class="col-lg-8">
-                                        <input type="text"  style="width: 200px" name="dataPerson" class="form-control" id="dataPerson"
+                                        <input type="text" style="width: 200px" name="dataPerson" class="form-control"
+                                               id="dataPerson"
                                                placeholder="请输入用餐人数">
                                     </div>
                                 </div>
@@ -195,6 +182,9 @@
         </div>
     </div>
 </div>
+<script>
+    var basePath = "<%=basePath%>";
+</script>
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <%--<script src="<%=basePath%>static/js/jquery.min.js"></script>--%>
 <script src="<%=basePath%>static/js/bootstrap.min.js"></script>

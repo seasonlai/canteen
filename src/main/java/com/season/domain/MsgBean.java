@@ -35,4 +35,9 @@ public class MsgBean<T> {
         this.data = data;
         return this;
     }
+
+    public static MsgBean success(){
+        return new MsgBean().setCode(0)
+                .setMsg("成功");
+    }
 }

@@ -1,7 +1,9 @@
 package com.season.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,9 +27,13 @@ public class PersonData {
     @Column(name = "estimate_num")
     private Integer estimateNum;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
     @Column(name = "data_date")
     private Date dataDate;
 
+    public PersonData() {
+    }
 
     public Integer getDataId() {
         return dataId;

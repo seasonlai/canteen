@@ -93,8 +93,10 @@ public class BaseDao<T> {
     private Query createQuery(String hql, Object[] values) {
         Assert.hasText(hql);
         Query query = getSession().createQuery(hql);
-        for (int i = 0; i < values.length; i++) {
-            query.setParameter(i, values[i]);
+        if(values!=null) {
+            for (int i = 0; i < values.length; i++) {
+                query.setParameter(i, values[i]);
+            }
         }
         return query;
     }

@@ -32,7 +32,18 @@ public class PersonData {
     @Column(name = "data_date")
     private Date dataDate;
 
+    @Column(name = "is_weekend")
+    private int isWeekend;
+
     public PersonData() {
+    }
+
+    public int getIsWeekend() {
+        return isWeekend;
+    }
+
+    public void setIsWeekend(int isWeekend) {
+        this.isWeekend = isWeekend;
     }
 
     public Integer getDataId() {

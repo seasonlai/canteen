@@ -1,6 +1,7 @@
 package com.season.algorithm;
 
 import com.season.dao.DataDao;
+import com.season.dao.DataTmpDao;
 import com.season.domain.PersonDataTmp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,28 +13,76 @@ import java.util.concurrent.*;
 /**
  * 预估人数
  */
-@Repository
 public class PersonAlgorithm {
 
-    @Autowired
-    DataDao dataDao;
+    static DataDao dataDao;
+    static DataTmpDao dataTmpDao;
 
-    // 1、创建一个单线程池
-    static ExecutorService executorService = Executors.newSingleThreadExecutor();
+    static volatile boolean hasData;
 
-    static List<PersonDataTmp> tasks;
+    static boolean isStart;
 
-    public static synchronized void addTask(PersonDataTmp dataTmp) {
-        if(tasks==null){
-            tasks=new LinkedList<>();
-        }
-        tasks.add(dataTmp);
-//        executorService.submit()
+    static ThreadPoolExecutor threadPoolExecutor;
+
+    public static void start() {
+        dataDao = new DataDao();
+        dataTmpDao = new DataTmpDao();
+        threadPoolExecutor = new ThreadPoolExecutor(3, 8,
+                60L, TimeUnit.SECONDS,
+                new SynchronousQueue<Runnable>(), new MyRejectHandler());
+
+        isStart = true;
+//        List<PersonDataTmp> data = dataTmpDao.getData(8);
+//        for (PersonDataTmp dataTmp : data) {
+//            threadPoolExecutor.execute(new MyTask(dataTmp,dataDao,dataTmpDao));
+//        }
+//        hasData = data.size() >= 8;
     }
 
     public static void stop() {
-        if (!executorService.isShutdown())
-            executorService.shutdown();
+        if (!isStart)
+            return;
+        if (!threadPoolExecutor.isShutdown())
+            threadPoolExecutor.shutdownNow();
+        isStart = false;
+    }
+
+    public static synchronized void addTask(PersonDataTmp dataTmp) {
+        if (!isStart)
+            throw new RuntimeException("PersonAlgorithm had not start");
+        threadPoolExecutor.execute(new MyTask(dataTmp, dataDao, dataTmpDao));
+    }
+
+    static class MyTask implements Runnable {
+
+        PersonDataTmp dataTmp;
+        DataDao dataDao;
+        DataTmpDao dataTmpDao;
+
+        public MyTask(PersonDataTmp dataTmp, DataDao dataDao, DataTmpDao dataTmpDao) {
+            this.dataTmp = dataTmp;
+            this.dataDao = dataDao;
+            this.dataTmpDao = dataTmpDao;
+        }
+
+        @Override
+        public void run() {
+
+            //查当前日期的前两天+
+
+
+
+//            threadPoolExecutor.get
+        }
+    }
+
+    static class MyRejectHandler implements RejectedExecutionHandler {
+
+        @Override
+        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+            MyTask task = (MyTask) r;
+            task.dataTmpDao.save(task.dataTmp);
+        }
     }
 
 

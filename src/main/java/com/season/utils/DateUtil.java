@@ -453,8 +453,6 @@ public class DateUtil {
     /**
      * 天数差
      *
-     * @param date1
-     * @param date2
      * @return
      */
     public static int diffDay(Date before, Date after) {
@@ -523,6 +521,17 @@ public class DateUtil {
         calendar.set(Calendar.MINUTE, 00);
         calendar.set(Calendar.SECOND, 00);
         return calendar.getTime();
+    }
+
+
+    public static boolean isWeekend(Date date) {
+        if(date==null)
+            return false;
+        Calendar cal = Calendar.getInstance();
+
+        cal.setTime(date);
+
+        return cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
     }
 
 }

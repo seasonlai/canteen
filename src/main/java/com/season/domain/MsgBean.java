@@ -40,4 +40,7 @@ public class MsgBean<T> {
         return new MsgBean().setCode(0)
                 .setMsg("成功");
     }
+    public static MsgBean error(){
+        return new MsgBean().setCode(-1);
+    }
 }

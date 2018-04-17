@@ -79,6 +79,9 @@
         </div>
     </div>
 </div>
+<script>
+    var basePath = "<%=basePath%>";
+</script>
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
 <!-- Morris Charts JavaScript -->

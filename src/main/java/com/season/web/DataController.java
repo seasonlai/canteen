@@ -54,26 +54,7 @@ public class DataController extends BaseController {
     @ResponseBody
     @RequestMapping("/data/data-count")
     public MsgBean countData(@RequestParam("kind") Integer kind) {
-        if (kind < 0 || kind >= CommonConstant.PERSON_COUNT.length) {
-            return new MsgBean().setCode(-1).setMsg("不支持的统计类型");
-        }
-        switch (kind) {
-            case 0://一周
-
-                break;
-            case 1://一个月
-
-                break;
-            case 2://三个月
-
-                break;
-            case 3://一年
-
-                break;
-
-        }
-
-        return null;
+        return dataService.countData(kind);
     }
 
     @RequestMapping("/data/data-modify")

@@ -141,8 +141,10 @@ CREATE TABLE `t_order` (
   COMMENT '餐品ID',
   `user_id`        INT(11)  NOT NULL
   COMMENT '用户id',
-  `meal_kind`      INT(2)            DEFAULT 0
+  `food_time`      INT(2)            DEFAULT 0
   COMMENT '早午晚夜餐',
+  `food_count`     INT(5)            DEFAULT 1
+  COMMENT '数量',
   `order_status`   INT(2)            DEFAULT 0
   COMMENT '订单状态',
   `subscribe_date` DATETIME NOT NULL
@@ -152,6 +154,27 @@ CREATE TABLE `t_order` (
   PRIMARY KEY (`order_id`),
   KEY `AK_AK_ORDER_SUBSCRIBE_DATE` (`subscribe_date`),
   KEY `AK_AK_ORDER_ORDER_DATE` (`order_date`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 4
+  DEFAULT CHARSET = utf8;
+
+#
+# 购物车
+#
+CREATE TABLE `t_shop_car` (
+  `car_id`     INT(11) NOT NULL AUTO_INCREMENT
+  COMMENT '数据Id',
+  `food_id`    INT(11) NOT NULL
+  COMMENT '餐品ID',
+  `user_id`    INT(11) NOT NULL
+  COMMENT '用户id',
+  `food_time`  INT(2)           DEFAULT 0
+  COMMENT '早午晚夜餐',
+  `food_count` INT(5)           DEFAULT 1
+  COMMENT '数量',
+  PRIMARY KEY (`car_id`),
+  KEY `AK_AK_ORDER_SUBSCRIBE_DATE` (`user_id`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 4

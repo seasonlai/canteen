@@ -69,3 +69,8 @@
     </div>
     <!-- /.navbar-collapse -->
 </nav>
+
+
+<button style="position: absolute;right: 20px;bottom: 50px;" class="btn btn-lg btn-default" >
+    <li class="glyphicon glyphicon-shopping-cart"></li>
+</button>

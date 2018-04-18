@@ -35,6 +35,9 @@ public class DataService {
         if (data.getActualNum() <= 0) {
             throw new MyException("信息有误");
         }
+        PersonData personData = dataDao.query_data_for_date(data.getDataDate());
+        if (personData != null)
+            throw new MyException("该日期已存在");
         dataDao.save(data);
 
     }

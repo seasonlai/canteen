@@ -1,5 +1,6 @@
 package com.season.web;
 
+import com.season.cons.CommonConstant;
 import com.season.dao.FoodKindDao;
 import com.season.domain.Food;
 import com.season.domain.FoodKind;
@@ -19,7 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by season on 2018/4/15.
@@ -40,6 +44,16 @@ public class FoodController extends BaseController {
 
         List<FoodKind> foodKinds = foodKindDao.loadAll();
         mav.addObject("foodKinds",foodKinds);
+
+        List<Map> supportCount = new ArrayList<>();
+        for (int i = 0; i < CommonConstant.MEAL_KIND.length; i++) {
+            Map<String, Object> kv = new HashMap<>();
+            kv.put("code", i);
+            kv.put("name", CommonConstant.MEAL_KIND[i]);
+            supportCount.add(kv);
+        }
+
+        mav.addObject("foodTime",supportCount);
         return mav;
     }
 

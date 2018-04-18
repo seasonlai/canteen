@@ -1,6 +1,7 @@
 package com.season.web;
 
 import com.season.dao.ShopCarDao;
+import com.season.domain.Food;
 import com.season.domain.MsgBean;
 import com.season.domain.ShopCar;
 import com.season.domain.User;
@@ -8,39 +9,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
  * Created by season on 2018/4/19.
  */
 @Controller
-public class ShopCarController {
+public class ShopCarController extends BaseController {
 
     @Autowired
     ShopCarDao shopCarDao;
 
-    @RequestMapping("/shopcar/list")
-    public MsgBean carList(User user) {
+    @RequestMapping("/shopcar/myShopCar.html")
+    public ModelAndView myShopCar(HttpServletRequest request) {
 
-        List<ShopCar> shopCars = shopCarDao.queryByUser(user);
+        ModelAndView mav = new ModelAndView("my_shopcar");
+        mav.addObject("foodTime", getMealKind());
+        return mav;
+    }
+
+    @RequestMapping("/shopcar/list")
+    @ResponseBody
+    public MsgBean carList(HttpServletRequest request) {
+
+        List<ShopCar> shopCars = shopCarDao.queryByUser(getSessionUser(request));
 
         return MsgBean.success().setData(shopCars);
     }
 
 
-    @RequestMapping("/shopcar/modify")
-    public MsgBean carList(ShopCar shopCar,Integer type) {
+    @RequestMapping("/shopcar/add")
+    @ResponseBody
+    public MsgBean carAdd(HttpServletRequest request, ShopCar shopCar, Food food) {
 
-        switch (type){
-            case 1:
-                shopCarDao.save(shopCar);
-                break;
+        shopCar.setFood(food);
+        shopCar.setUser(getSessionUser(request));
 
-            case 2:
-                shopCarDao.update(shopCar);
-                break;
-        }
+        shopCarDao.save(shopCar);
 
         return MsgBean.success();
     }
@@ -61,7 +70,6 @@ public class ShopCarController {
 //
 //        return MsgBean.success();
 //    }
-
 
 
 }

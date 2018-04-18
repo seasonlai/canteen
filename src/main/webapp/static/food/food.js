@@ -35,7 +35,7 @@ function updateFood(index) {
 function deleteFood(index) {
 
     var food = foodsCache[index];
-    if(!confirm("确定删除改商品吗？")){
+    if(!confirm("确定删除该商品吗？")){
         return;
     }
 
@@ -76,20 +76,24 @@ function foodModify() {
         return;
     }
     var foodKind = $foodModify.find('#foodKind').val();
+    $("#processbar").modal('show');
     $('#foodForm').ajaxSubmit({
         url: basePath + (modifyType == '1'?'food/food_edit-add':'food/food_edit-update'),
         type: "post", /*设置表单以post方法提交*/
         dataType: "json", /*设置返回值类型为文本*/
         success: function (data) {
+
+            $("#processbar").modal('hide');
             if (data.code != 0) {
                 alert(data.msg);
                 return;
             }
             $foodModify.modal('hide');
-            alert('添加成功');
+            // alert('添加成功');
             queryList();
         },
         error: function (msg) {
+            $("#processbar").modal('hide');
             alert("请求失败")
         }
     })

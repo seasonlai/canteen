@@ -20,12 +20,32 @@ public class ShopCar {
     private Integer carId;
     @Column(name = "food_time")
     private Integer foodTime;
+    @Column(name = "food_count")
+    private Integer foodCount;
+    @Column(name = "food_total_price")
+    private Integer foodTotalPrice;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
     @JoinColumn(name = "food_id")
     private Food food;
+
+    public Integer getFoodTotalPrice() {
+        return foodTotalPrice;
+    }
+
+    public void setFoodTotalPrice(Integer foodTotalPrice) {
+        this.foodTotalPrice = foodTotalPrice;
+    }
+
+    public Integer getFoodCount() {
+        return foodCount;
+    }
+
+    public void setFoodCount(Integer foodCount) {
+        this.foodCount = foodCount;
+    }
 
     public Integer getCarId() {
         return carId;

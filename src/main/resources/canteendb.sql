@@ -173,6 +173,8 @@ CREATE TABLE `t_shop_car` (
   COMMENT '早午晚夜餐',
   `food_count` INT(5)           DEFAULT 1
   COMMENT '数量',
+  `food_total_price` INT(5)           DEFAULT 1
+  COMMENT '总价',
   PRIMARY KEY (`car_id`),
   KEY `AK_AK_ORDER_SUBSCRIBE_DATE` (`user_id`)
 )

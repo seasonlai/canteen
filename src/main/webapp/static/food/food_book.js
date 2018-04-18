@@ -9,7 +9,10 @@ $(function () {
     });
 
     queryList();
-
+    // var tomorrow = new Date();
+    // tomorrow.setDate(tomorrow.getDate() + 1);
+    // var s1 = ;
+    $('#foodDate').datepicker('setStartDate',getDateStr(1));
 });
 
 
@@ -63,8 +66,9 @@ function queryList() {
 
 function sureToCard(index) {
     var food = foodsCache[index];
-    $('#modal_title').html(food.foodName);
+    $('#myModal #modal_title').html(food.foodName);
     $('#myModal #foodImg').attr('src', food.foodImage);
+    $('#myModal #foodId').val(food.foodId);
     $('#myModal').modal('show');
 
 }
@@ -111,18 +115,32 @@ function addToCard() {
         return
     }
 
+    var foodId = $myModal.find('#foodId').val();
     $.ajax({
-        url: basePath + 'food/food_list',
+        url: basePath + 'shopcar/add',
         dataType: 'json',
-        data: {foodName: name, kind: kind},
+        data: {foodTime: time, foodCount: count,foodId:foodId},
         type: 'post',
         success: function (msg) {
-
-
+            if(msg.code!='0'){
+                alert(msg.msg);
+                return;
+            }
+            $myModal.modal('hide');
+            alert('添加成功');
         },
         error: function () {
             alert("请求失败")
         }
     })
 
+}
+
+function getDateStr(AddDayCount) {
+    var dd = new Date();
+    dd.setDate(dd.getDate() + AddDayCount);   //获取AddDayCount天后的日期
+    var year = dd.getFullYear();
+    var mon = dd.getMonth()+1;                             //获取当前月份的日期
+    var day = dd.getDate();
+    return year + "-" + mon + "-" + day;
 }

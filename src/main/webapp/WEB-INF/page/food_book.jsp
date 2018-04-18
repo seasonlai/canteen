@@ -99,21 +99,22 @@
                         <div class="modal-body">
                             <form class="form-horizontal" role="form">
                                 <div class="form-group text-center" >
-                                    <img id="foodImg" src="" height="150px" class="thumbnail"/>
+                                    <img id="foodImg"  height="150px" class="thumbnail text-center"/>
+                                    <input type="hidden" id="foodId">
                                 </div>
                                 <div class="form-group">
                                     <label for="foodDate" class="col-md-3 control-label">预约日期:</label>
                                     <div class="col-md-8">
                                         <input type="text" id="foodDate" style="height:30px;width:200px;"
                                                data-provide="datepicker" class="form-control datepicker"
-                                               placeholder="开始时间">
+                                               placeholder="选择时间">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="foodTime" class="col-md-3 control-label">用餐时间:</label>
 
                                     <div class="col-md-8">
-                                        <select id="foodTime" class="form-control" style="height:30px;width:200px;">
+                                        <select id="foodTime" class="form-control" style="height:32px;width:200px;">
                                             <c:forEach items="${foodTime}" var="item">
                                                 <option value="${item.code}">${item.name}</option>
                                             </c:forEach>
@@ -123,12 +124,12 @@
                                 <div class="form-group">
                                     <label for="foodCount" class="col-md-3 control-label">餐品份数:</label>
                                     <div class="col-md-8  form-inline">
-                                        <button class="btn btn-info btn-circle form-group-sm">
+                                        <button class="btn btn-info btn-circle " onclick="cutCount()" type="button">
                                             <li class="fa fa-minus"></li>
                                         </button>
-                                        <input type="text" id="foodCount" class="form-control" value="1"
-                                               style="height:30px;width: 35px">
-                                        <button class="btn btn-info btn-circle">
+                                        <input type="text"  id="foodCount" class="form-control text-center" value="1"
+                                               style="height:30px;width: 55px">
+                                        <button class="btn btn-info btn-circle" onclick="addCount()" type="button">
                                             <li class="fa fa-plus"></li>
                                         </button>
                                     </div>
@@ -147,6 +148,7 @@
     </div>
     <script>
         var basePath = "<%=basePath%>";
+        <%--var globUser = "${USER_CONTEXT}"--%>
     </script>
     <script src="<%=basePath%>static/js/jquery.js"></script>
     <script src="<%=basePath%>static/js/bootstrap.min.js"></script>

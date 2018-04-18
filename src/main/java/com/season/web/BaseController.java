@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Wellhope on 2017/10/28.
@@ -63,6 +67,19 @@ public class BaseController {
 
     @Override
     public String toString() {
+
         return ToStringBuilder.reflectionToString(this);
+    }
+
+
+    public List<Map> getMealKind(){
+        List<Map> supportCount = new ArrayList<>();
+        for (int i = 0; i < CommonConstant.MEAL_KIND.length; i++) {
+            Map<String, Object> kv = new HashMap<>();
+            kv.put("code", i);
+            kv.put("name", CommonConstant.MEAL_KIND[i]);
+            supportCount.add(kv);
+        }
+        return supportCount;
     }
 }

@@ -7,7 +7,7 @@
 
 %>
 <%--<script type="javascript">--%>
-    <%--var basePath = '${basePath}';--%>
+<%--var basePath = '${basePath}';--%>
 <%--</script>--%>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -37,7 +37,7 @@
 
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav"   style="width: 185px">
+        <ul class="nav navbar-nav side-nav" style="width: 185px">
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#people_data">
                     <i class="fa fa-fw fa-bar-chart-o"></i> 饭堂数据<i class="fa fa-fw fa-caret-down"></i></a>
@@ -60,7 +60,10 @@
                 <a href="<c:url value="/food/food_book.html"/>"><i class="fa fa-fw fa-book"></i> 用餐预约</a>
             </li>
             <li>
-                <a href="<c:url value="/order/myOrder.html"/>"><i class="fa fa-fw fa-edit"></i> 我的预约</a>
+                <a href="<c:url value="/shopcar/myShopCar.html"/>"><i class="fa fa-fw fa-shopping-cart"></i> 我的购物车</a>
+            </li>
+            <li>
+                <a href="<c:url value="/order/myOrder.html"/>"><i class="fa fa-fw fa-edit"></i> 我的订单</a>
             </li>
             <li>
                 <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>用户日志</a>
@@ -71,6 +74,28 @@
 </nav>
 
 
-<button style="position: absolute;right: 20px;bottom: 50px;" class="btn btn-lg btn-default" >
+<button style="position: absolute;right: 20px;bottom: 50px;" class="btn btn-lg btn-default">
     <li class="glyphicon glyphicon-shopping-cart"></li>
 </button>
+
+
+<div class="modal fade" id="processbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 id="processbar_title" class="modal-title">正在处理</h4>
+            </div>
+            <div class="modal-body">
+                <div style="display: none;position: absolute" class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                         style="width: 40%;">
+                        <span class="sr-only">正在处理</span>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>

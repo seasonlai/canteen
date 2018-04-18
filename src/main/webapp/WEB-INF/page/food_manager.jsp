@@ -73,7 +73,7 @@
                        style="width:280px;height: 33px;margin-left: 30px"
                        placeholder="Search...">
                 <%--<span class="input-group-btn">--%>
-                <button class="btn btn-default" onclick="queryList()" style="height: 33px" type="button">
+                <button class="btn btn-default input-group-addon" onclick="queryList()" style="height: 33px;width: 34px; " type="button">
                     <i class="fa fa-search"></i>
                 </button>
                 <%--</span>--%>

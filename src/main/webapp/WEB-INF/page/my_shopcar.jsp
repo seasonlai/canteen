@@ -10,7 +10,7 @@
 %>
 <html>
 <head>
-    <title>我的订单</title>
+    <title>我的购物车</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,17 +28,12 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/elements.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/icons.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/elements.css">
-    <!-- this page specific styles -->
-    <link rel="stylesheet" href="<%=basePath%>static/css/compiled/gallery.css" type="text/css" media="screen"/>
 
     <!-- libraries -->
     <link href="<%=basePath%>static/css/lib/font-awesome.css" type="text/css" rel="stylesheet"/>
 
     <!-- Custom CSS -->
     <link href='<%=basePath%>static/css/sb-admin.css' rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href='<%=basePath%>static/css/plugins/morris.css' rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href='<%=basePath%>static/font-awesome/css/font-awesome.min.css' rel="stylesheet" type="text/css">
@@ -80,32 +75,32 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th class="col-md-2">
-                                预约号
+                            <th class="col-sm-1 text-center" >
+                                <input type="checkbox">
                             </th>
-                            <th class="col-md-2">
+                            <th class="col-lg-4">
                                 <span class="line"></span>
                                 餐品名称
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                预约时间
+                                餐品数量
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                下单时间
+                                餐品价格
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                状态
+                                用餐时间
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                价格
+                                操作
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="shopCarBody">
                         <!-- row -->
                         <tr class="first">
                             <td>
@@ -127,66 +122,6 @@
                                 $ 3,500.00
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <a href="#">#510</a>
-                            </td>
-                            <td>
-                                Feb 22, 2013
-                            </td>
-                            <td>
-                                <a href="#">Anna Richards</a>
-                            </td>
-                            <td>
-                                <span class="label label-info">Pending</span>
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                $ 800.00
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">#590</a>
-                            </td>
-                            <td>
-                                Mar 03, 2013
-                            </td>
-                            <td>
-                                <a href="#">Steven McFly</a>
-                            </td>
-                            <td>
-                                <span class="label label-success">Completed</span>
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                $ 1,350.00
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">#618</a>
-                            </td>
-                            <td>
-                                Jan 03, 2013
-                            </td>
-                            <td>
-                                <a href="#">George Williams</a>
-                            </td>
-                            <td>
-                                <span class="label">Canceled</span>
-                            </td>
-                            <td>
-                                8
-                            </td>
-                            <td>
-                                $ 3,499.99
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -206,10 +141,12 @@
         </div>
     </div>
 </div>
-
+<script>
+    var basePath = "<%=basePath%>";
+    var foodTime = "${foodTime}";
+</script>
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>static/js/init.js"></script>
-<%--<script src="<%=basePath%>static/food/theme.js"></script>--%>
 </body>
 </html>

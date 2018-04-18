@@ -64,6 +64,10 @@ public class BaseDao<T> {
         hibernateTemplate.update(entity);
     }
 
+    public List runSql(String sql){
+        return getSession().createSQLQuery(sql).list();
+    }
+
     public List find(String sql){
         return hibernateTemplate.find(sql);
     }

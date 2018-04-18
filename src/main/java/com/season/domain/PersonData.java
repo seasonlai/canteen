@@ -1,6 +1,7 @@
 package com.season.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,19 +33,10 @@ public class PersonData {
     @Column(name = "data_date")
     private Date dataDate;
 
-    @Column(name = "is_weekend")
-    private int isWeekend;
+//
+//    public PersonData() {
+//    }
 
-    public PersonData() {
-    }
-
-    public int getIsWeekend() {
-        return isWeekend;
-    }
-
-    public void setIsWeekend(int isWeekend) {
-        this.isWeekend = isWeekend;
-    }
 
     public Integer getDataId() {
         return dataId;

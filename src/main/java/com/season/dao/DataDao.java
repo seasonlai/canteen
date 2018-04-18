@@ -5,6 +5,7 @@ import com.season.utils.DateUtil;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -30,12 +31,12 @@ public class DataDao extends BaseDao<PersonData> {
     private static final String DATE_FORMAT =
             "yyyy-MM-dd";
     private static final String QUERY_DATA_NEC =
-            "from PersonData d where d.dataDate between ? and ? or d.dataDate between ? and ?";
+            "from PersonData d where (d.dataDate between ? and ?) or (d.dataDate between ? and ?)";
 
-    private static final String QUERY_DATA_NORMAL =
-            "select count(d.actualNum)/count(*) from PersonData d where DAYOFWEEK(d.dataDate) = 1 or DAYOFWEEK(d.dataDate) = 7";
     private static final String QUERY_DATA_WEEKEND =
-            "select count(d.actualNum)/count(*) from PersonData d where DAYOFWEEK(d.dataDate) != 1 and DAYOFWEEK(d.dataDate) != 7";
+            "select sum(d.actual_num)/count(*) from t_person_data d where DAYOFWEEK(d.data_date) = 1 or DAYOFWEEK(d.data_date) = 7";
+    private static final String QUERY_DATA_NORMAL =
+            "select sum(d.actual_num)/count(*) from t_person_data d where DAYOFWEEK(d.data_date) != 1 and DAYOFWEEK(d.data_date) != 7";
 
 
     public PersonData query_data_for_date(Date date) {
@@ -75,9 +76,12 @@ public class DataDao extends BaseDao<PersonData> {
     }
 
     public double query_data_M() {
-        double nomal = (double) find(QUERY_DATA_NORMAL).get(0);
-        double weekend = (double) find(QUERY_DATA_WEEKEND).get(0);
-        return nomal / weekend;
+        List nomalList = runSql(QUERY_DATA_NORMAL);
+        BigDecimal nomal = nomalList.get(0) != null ? (BigDecimal) nomalList.get(0) : new BigDecimal(0);
+        List weekList = runSql(QUERY_DATA_WEEKEND);
+        BigDecimal weekend = weekList.get(0) != null ? (BigDecimal) weekList.get(0) : new BigDecimal(1);
+
+        return nomal.divide(weekend).doubleValue();
     }
 
     public static void main(String... arg) {

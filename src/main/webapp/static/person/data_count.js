@@ -12,28 +12,53 @@ function refreshChart(kindCode, kindName) {
 
 }
 
+
 function queryCountData(kindCode) {
-    $.ajax({
-        url: basePath + '/data/data-count',
-        type: 'post',
-        data: {kind: kindCode},
-        dataType: 'json',
-        success: function (msg) {
-            Morris.Area({
-                element: 'morris-area-chart',
-                data:msg.data,
-                xkey: 'period',
-                ykeys: ['iphone', 'ipad', 'itouch'],
-                labels: ['iPhone', 'iPad', 'iPod Touch'],
-                pointSize: 2,
-                hideHover: 'auto',
-                resize: true
-            });
-        },
-        error: function () {
-            alert('请求失败');
-        }
-    })
+    // $('#morris-area-chart').empty();
+    // $.ajax({
+    //     url: basePath + '/data/data-count',
+    //     type: 'post',
+    //     data: {kind: kindCode},
+    //     dataType: 'json',
+    //     success: function (msg) {
+    //         if(msg.code!=0){
+    //             alert(msg.msg);
+    //             return;
+    //         }
+    //         Morris.Area({
+    //             element: 'morris-area-chart',
+    //             data:msg.data,
+    //             xkey: 'dataDate',
+    //             ykeys: ['actualNum', 'estimateNum'],
+    //             labels: ['实际用餐数', '预估用餐数'],
+    //             pointSize: 2,
+    //             hideHover: 'auto',
+    //             resize: true
+    //         });
+    //     },
+    //     error: function () {
+    //         alert('请求失败');
+    //     }
+    // })
 
-
+    new Morris.Line({
+        // ID of the element in which to draw the chart.
+        element: 'morris-area-chart',
+        // Chart data records -- each entry in this array corresponds to a point on
+        // the chart.
+        data: [
+            { year: '2008-10', value: 20 },
+            { year: '2009-11', value: 10 },
+            { year: '2010', value: 5 },
+            { year: '2011', value: 5 },
+            { year: '2012', value: 20 }
+        ],
+        // The name of the data record attribute that contains x-values.
+        xkey: 'year',
+        // A list of names of data record attributes that contain y-values.
+        ykeys: ['value'],
+        // Labels for the ykeys -- will be displayed when you hover over the
+        // chart.
+        labels: ['Value']
+    });
 }

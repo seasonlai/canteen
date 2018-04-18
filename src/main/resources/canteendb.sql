@@ -127,59 +127,12 @@ CREATE TABLE `t_person_data` (
   COMMENT '预估用餐数',
   `data_date`    DATE   NOT NULL
   COMMENT '数据时间',
-  `is_weekend`   DATE            DEFAULT 0
-  COMMENT '是否为周末',
   PRIMARY KEY (`data_id`),
   KEY `AK_AK_DATA_DATE_NAME` (`data_date`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 4
   DEFAULT CHARSET = utf8;
-
-# CREATE TABLE `t_param` (
-#   `param_id` INT(5) NOT NULL AUTO_INCREMENT
-#   COMMENT '参数Id',
-#   `param_a`  FLOAT(11)       DEFAULT 0
-#   COMMENT '参数A',
-#   `param_b`  FLOAT(11)       DEFAULT 0
-#   COMMENT '参数b',
-#   `param_c`  FLOAT(11)       DEFAULT 0
-#   COMMENT '数据时间',
-#   `param_d`  FLOAT(11)       DEFAULT 0
-#   COMMENT '是否为周末',
-#   PRIMARY KEY (`data_id`),
-#   KEY `AK_AK_DATA_DATE_NAME` (`data_date`)
-# )
-#   ENGINE = InnoDB
-#   AUTO_INCREMENT = 4
-#   DEFAULT CHARSET = utf8;
-
-# CREATE TABLE `t_person_data_tmp` (
-#   `data_id`      INT(5)  NOT NULL
-#   COMMENT '数据Id',
-#   `actual_num`   INT(11) DEFAULT 0
-#   COMMENT '实际用餐数',
-#   `data_date`    DATETIME NOT NULL
-#   COMMENT '数据时间',
-#   PRIMARY KEY (`data_id`)
-# )
-#   ENGINE = InnoDB
-#   AUTO_INCREMENT = 4
-#   DEFAULT CHARSET = utf8;
-#
-#
-# CREATE TABLE `t_average_data` (
-#   `data_id`      INT(1)  NOT NULL
-#   COMMENT '数据Id',
-#   `normal_count`   INT(11) DEFAULT 0
-#   COMMENT '实际用餐数',
-#   `weekend_count`    INT(11) DEFAULT 0
-#   COMMENT '数据时间',
-#   PRIMARY KEY (`data_id`)
-# )
-#   ENGINE = InnoDB
-#   AUTO_INCREMENT = 4
-#   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `t_order` (
   `order_id`       INT(11)  NOT NULL AUTO_INCREMENT

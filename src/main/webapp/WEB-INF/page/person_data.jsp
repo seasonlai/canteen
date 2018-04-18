@@ -8,6 +8,7 @@
             + ":" + request.getServerPort() + path + "/";
 
 %>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>统计/预估</title>
@@ -87,7 +88,7 @@
 <!-- Morris Charts JavaScript -->
 <script src="<%=basePath%>static/js/vendor/raphael/raphael.min.js"></script>
 <script src="<%=basePath%>static/js/vendor/morrisjs/morris.min.js"></script>
-<script src="<%=basePath%>static/person/morris-data.js"></script>
+<%--<script src="<%=basePath%>static/person/morris-data.js"></script>--%>
 <script src="<%=basePath%>static/person/data_count.js"></script>
 
 <script src="<%=basePath%>static/js/init.js"></script>

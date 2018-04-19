@@ -98,7 +98,7 @@ function submitOrder(index) {
             return;
         }
         checkItems.each(function () {
-            shopCars.push(shopCarCache[$(this).attrs('index')]);
+            shopCars.push(shopCarCache[$(this).attr('index')]);
         })
 
     } else {

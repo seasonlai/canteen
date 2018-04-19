@@ -65,7 +65,7 @@
                                 style="margin-right:12px;width: 35px;height: 33px" type="button">
                             <i class="fa fa-refresh"></i>
                         </button>
-                        <select class="form-control" onchange="queryList()" id="searchKind"
+                        <select class="form-control" onchange="queryList()" id="foodKind"
                                 style="width:150px;height: 33px">
                             <option value="-1">全部分类</option>
                             <c:forEach items="${foodKinds}" var="foodKind">
@@ -88,7 +88,7 @@
                             <input type="text" id="searchContent" style="height:30px;width:200px;"
                                    class="form-control" placeholder="搜索餐品名">
                         </div>
-                        <button class="btn btn-default input-group-adn"
+                        <button class="btn btn-default input-group-addon"
                                 style="width: 35px;height:30px;margin-left: 12px;"
                                 onclick="queryPageList()"><i class="fa fa-search"></i></button>
                         <%--<input type="text" class="search order-search" placeholder="Search for an order.."/>--%>

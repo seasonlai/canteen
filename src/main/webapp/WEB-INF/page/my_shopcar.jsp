@@ -105,7 +105,7 @@
                 <strong>总价：</strong>
                 <small>￥</small>
                 <span id="totalPrice" style="margin-right: 25px">0</span>
-                <button class="btn btn-warning"><span class="h4" style="color: white">下单</span></button>
+                <button class="btn btn-warning" onclick="submitOrder()" ><span class="h4" style="color: white">下单</span></button>
             </div>
 
 

@@ -62,6 +62,8 @@ public class DataService {
         return MsgBean.success();
     }
 
+
+
     public MsgBean countData(int kind) {
         if (kind < 0 || kind >= CommonConstant.PERSON_COUNT.length) {
             return new MsgBean().setCode(-1).setMsg("不支持的统计类型");

@@ -4,6 +4,7 @@ import com.season.domain.MyOrder;
 import com.season.domain.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,4 +20,12 @@ public class OrderDao extends BaseDao<MyOrder> {
     public List queryOrderByUser(User user) {
         return find(QUERY_ORDER_LIST_BY_USER, user);
     }
+
+    public List queryOrderByCondition(Date date, Integer foodKind, Integer foodTime, String content){
+
+        StringBuffer sb = new StringBuffer("select ");
+
+        return null;
+    }
+
 }

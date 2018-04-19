@@ -22,7 +22,7 @@ function queryShopCarList() {
             var orderStr = '';
             orders.forEach(function (order, index) {
                 // if(index)
-                var str = "<tr style='border-bottom: solid silver "+index>0?"1px":"0"+"'>";
+                var str = "<tr style='border-bottom: solid silver "+(index>0?"1px":"0")+"'>";
                 str += '<td>';
                 str += '<span>' + order.orderId + '</span>';
                 str += '</td>';

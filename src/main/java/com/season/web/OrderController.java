@@ -6,13 +6,11 @@ import com.season.domain.ShopCar;
 import com.season.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,5 +47,20 @@ public class OrderController extends BaseController {
 
         return MsgBean.success().setData(list);
     }
+
+
+    @ResponseBody
+    @RequestMapping("/order/data-list")
+    public MsgBean countBook(@RequestParam("foodKind") Integer foodKind
+            , @RequestParam("date") Date date, @RequestParam("content") String content
+            , @RequestParam("foodTime") Integer foodTime) {
+
+        if(date==null){
+            return MsgBean.error().setMsg("日期为空");
+        }
+
+        return orderService.countBook(date,foodKind,foodTime,content);
+    }
+
 
 }

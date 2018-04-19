@@ -2,6 +2,7 @@ package com.season.service;
 
 import com.season.dao.OrderDao;
 import com.season.dao.ShopCarDao;
+import com.season.domain.MsgBean;
 import com.season.domain.MyOrder;
 import com.season.domain.ShopCar;
 import com.season.domain.User;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,4 +44,12 @@ public class OrderService {
         return orderDao.queryOrderByUser(user);
     }
 
+
+
+    public MsgBean countBook(Date date, Integer foodKind, Integer foodTime, String content){
+
+
+        return MsgBean
+                .success();
+    }
 }

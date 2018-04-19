@@ -68,10 +68,19 @@
 
                 <div class="row filter-block">
                     <div class="pull-right">
-                        <div class="btn-group pull-right">
-                            <button class="glow left large active">全部</button>
-                            <button class="glow middle large">未完成</button>
-                            <button class="glow right large">已完成</button>
+                        <div id="statusBtnGroup" class="btn-group pull-right">
+                            <button status="-1" onclick="queryOrderList(-1)" class="glow left large active">全&nbsp;部</button>
+                            <c:forEach var="item" items="${orderStatusObj}" varStatus="stat">
+                                <c:if test="${!stat.last}">
+                                    <button status="${item.code}" onclick="queryOrderList(${item.code})" class="glow middle large">${item.name}</button>
+                                </c:if>
+                                <c:if test="${stat.last}">
+                                    <button status="${item.code}" onclick="queryOrderList(${item.code})" class="glow right large">${item.name}</button>
+                                </c:if>
+                            </c:forEach>
+                            <%--<button onclick="queryOrderList(0)" class="glow middle large">未完成</button>--%>
+                            <%--<button onclick="queryOrderList(1)" class="glow right large">已完成</button>--%>
+                            <%--<button onclick="queryOrderList(2)" class="glow right large">已取消</button>--%>
                         </div>
                         <%--<input type="text" class="search order-search" placeholder="Search for an order.."/>--%>
                     </div>
@@ -84,11 +93,11 @@
                             <th class="col-md-2">
                                 订单号
                             </th>
-                            <th class="col-md-2">
+                            <th class="col-md-4">
                                 <span class="line"></span>
                                 餐品名称
                             </th>
-                            <th class="col-md-2">
+                            <th class="col-md-1">
                                 <span class="line"></span>
                                 餐品数量
                             </th>

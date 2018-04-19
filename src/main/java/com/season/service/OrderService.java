@@ -1,11 +1,13 @@
 package com.season.service;
 
 import com.season.dao.OrderDao;
+import com.season.dao.Page;
 import com.season.dao.ShopCarDao;
 import com.season.domain.MsgBean;
 import com.season.domain.MyOrder;
 import com.season.domain.ShopCar;
 import com.season.domain.User;
+import com.season.exception.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,16 +42,35 @@ public class OrderService {
         shopCarDao.remove(tmpList);
     }
 
-    public List orderList(User user){
-        return orderDao.queryOrderByUser(user);
+    public List orderList(User user, Integer orderStatus){
+        return orderDao.queryOrderByUser(user,orderStatus);
+    }
+
+    public void orderDel(MyOrder order){
+        MyOrder myOrder = orderDao.load(order.getOrderId());
+        if(myOrder==null){
+            throw new MyException("订单不存在");
+        }
+        orderDao.remove(myOrder);
+    }
+
+    public void orderCancel(MyOrder order){
+        MyOrder myOrder = orderDao.load(order.getOrderId());
+        if(myOrder==null){
+            throw new MyException("订单不存在");
+        }
+        myOrder.setOrderStatus(2);
+        orderDao.update(myOrder);
     }
 
 
 
-    public MsgBean countBook(Date date, Integer foodKind, Integer foodTime, String content){
+    public MsgBean countBook(Integer pageSize, Integer pageNum, Date date,
+                             Integer foodKind, Integer foodTime, String content){
 
+        Page page = orderDao.queryOrderByCondition(pageNum, pageSize, date, foodKind, foodTime, content);
 
         return MsgBean
-                .success();
+                .success().setData(page);
     }
 }

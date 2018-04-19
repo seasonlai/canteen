@@ -1,5 +1,6 @@
 package com.season.web;
 
+import com.google.gson.Gson;
 import com.season.cons.CommonConstant;
 import com.season.dao.FoodKindDao;
 import com.season.dao.Page;
@@ -38,8 +39,11 @@ public class DataController extends BaseController {
     public ModelAndView personData_book() {
         ModelAndView mav = new ModelAndView("person_data_book");
         List<FoodKind> foodKinds = foodKindDao.loadAll();
+        Gson gson = new Gson();
         mav.addObject("foodKinds",foodKinds);
-        mav.addObject("foodTime",getMealKind());
+        mav.addObject("foodTimes", getMealKind());
+        mav.addObject("foodKindsJson", gson.toJson(foodKinds));
+        mav.addObject("foodTimesJson", gson.toJson(getMealKind()));
         return mav;
     }
 
@@ -86,7 +90,7 @@ public class DataController extends BaseController {
                                  @RequestParam("pageSize") Integer size,
                                  @RequestParam("startTime") String startTime,
                                  @RequestParam("endTime") String endTime
-                                 ) {
+    ) {
         Page page = dataService.queryDataList(no, size, startTime, endTime);
 
         return new MsgBean().setCode(0)
@@ -96,8 +100,8 @@ public class DataController extends BaseController {
 
     @RequestMapping(value = "/data/data-del", method = RequestMethod.POST)
     @ResponseBody
-    public MsgBean delData(@RequestBody List<PersonData> dataList){
-       return dataService.delData(dataList);
+    public MsgBean delData(@RequestBody List<PersonData> dataList) {
+        return dataService.delData(dataList);
     }
 
 

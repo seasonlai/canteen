@@ -101,7 +101,7 @@
             </div>
 
             <div class="pull-right"
-                 style="height:60px;position:absolute;bottom: 0px;right:12px;border-top: 1px solid silver;">
+                 style="height:60px;position:fixed;bottom: 0px;right:12px;border-top: 1px solid silver;">
                 <strong>总价：</strong>
                 <small>￥</small>
                 <span id="totalPrice" style="margin-right: 25px">0</span>

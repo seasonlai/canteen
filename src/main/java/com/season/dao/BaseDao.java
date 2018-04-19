@@ -84,7 +84,7 @@ public class BaseDao<T> {
         Assert.isTrue(pageNo>=1,"页数应从1开始");
         String countStr = "select count(*) "+removeSelect(hql);
         List countlist = hibernateTemplate.find(countStr, values);
-        long totalCount = (Long) countlist.get(0);
+        long totalCount = countlist.size()>0?(Long) countlist.get(0):0;
         if (totalCount < 1)
             return new Page();
         // 实际查询返回分页对象

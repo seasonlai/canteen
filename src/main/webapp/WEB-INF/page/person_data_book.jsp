@@ -75,7 +75,7 @@
                         <select class="form-control" onchange="queryList()" id="foodTimeKind"
                                 style="width:150px;height: 33px">
                             <option value="-1">全部时间段</option>
-                            <c:forEach items="${foodTime}" var="time">
+                            <c:forEach items="${foodTimes}" var="time">
                                 <option value="${time.code}">${time.name}</option>
                             </c:forEach>
                         </select>
@@ -87,10 +87,10 @@
                         <div class="input-group">
                             <input type="text" id="searchContent" style="height:30px;width:200px;"
                                    class="form-control" placeholder="搜索餐品名">
+                            <button class="btn btn-default input-group-addon"
+                                    style="width: 35px;height:30px;"
+                                    onclick="queryPageList()"><i class="fa fa-search"></i></button>
                         </div>
-                        <button class="btn btn-default input-group-addon"
-                                style="width: 35px;height:30px;margin-left: 12px;"
-                                onclick="queryPageList()"><i class="fa fa-search"></i></button>
                         <%--<input type="text" class="search order-search" placeholder="Search for an order.."/>--%>
                     </div>
                 </div>
@@ -115,6 +115,10 @@
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
+                                餐品数量
+                            </th>
+                            <th class="col-md-2">
+                                <span class="line"></span>
                                 餐品类别
                             </th>
                             <th class="col-md-2">
@@ -134,13 +138,13 @@
                 </div>
             </div>
             <!-- end orders table -->
-            <div id="splitBarDiv" class="text-center">
-                共&nbsp;
-                <span id="dataCount"></span>
-                &nbsp;条数据&nbsp;&nbsp;
-                <span id="pageCount"></span>
-                &nbsp;页
-                <ul id="splitBar" class="pagination">
+            <div id="splitBarDiv" style="display:flex;justify-content:center;align-items:center;">
+                    共&nbsp;
+                    <span id="dataCount"></span>
+                    &nbsp;条数据&nbsp;&nbsp;
+                    <span id="pageCount"></span>
+                    &nbsp;页
+                <ul id="splitBar" style="margin-left: 10px;" class="pagination">
                 </ul>
             </div>
 
@@ -191,6 +195,8 @@
 </div>
 <script>
     var basePath = "<%=basePath%>";
+    var foodTimes = JSON.parse('${foodTimesJson}');
+    var foodKinds = JSON.parse('${foodKindsJson}');
 </script>
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <%--<script src="<%=basePath%>static/js/jquery.min.js"></script>--%>

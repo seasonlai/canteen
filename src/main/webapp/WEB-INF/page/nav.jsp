@@ -74,7 +74,7 @@
 </nav>
 
 
-<button id="myShopCart" style="position: absolute;right: 20px;bottom: 50px;" class="btn btn-lg btn-default">
+<button id="myShopCart" style="position: fixed;right: 20px;bottom: 50px;" class="btn btn-lg btn-default">
     <li class="glyphicon glyphicon-shopping-cart"></li>
 </button>
 

@@ -1,16 +1,26 @@
 $(function () {
 
-    queryShopCarList();
+    queryOrderList();
 
 });
 
 var orderCache;
+var lastStatus = -1;
 
-function queryShopCarList() {
+function switchOrderStatusBtn(orderStatus) {
+    var $activeBtn = $('#statusBtnGroup button[status='+orderStatus+']');
+    $activeBtn.addClass('active');
+    $activeBtn.siblings().removeClass('active');
+}
+function queryOrderList(orderStatus) {
+    orderStatus = orderStatus == null ? lastStatus : orderStatus;
+    lastStatus = orderStatus;
+    switchOrderStatusBtn(orderStatus);
     $.ajax({
         url: basePath + 'order/list',
         dataType: 'json',
         type: 'get',
+        data: {orderStatus: orderStatus},
         success: function (msg) {
             var $orderBody = $('#orderBody');
             $orderBody.empty();
@@ -22,7 +32,7 @@ function queryShopCarList() {
             var orderStr = '';
             orders.forEach(function (order, index) {
                 // if(index)
-                var str = "<tr style='border-bottom: solid silver "+(index>0?"1px":"0")+"'>";
+                var str = "<tr style='border-bottom: solid silver " + (index > 0 ? "1px" : "0") + "'>";
                 str += '<td>';
                 str += '<span>' + order.orderId + '</span>';
                 str += '</td>';
@@ -65,12 +75,64 @@ function queryShopCarList() {
 }
 
 function cancelOrder(index) {
+    if (!window.confirm("确定取消订单吗")) {
+        return;
+    }
+    var order = orderCache[index];
+    var $processbar = $('#processbar');
+    $processbar.modal('show');
+    $.ajax({
+        url: basePath + 'order/cancel',
+        dataType: 'json',
+        type: 'post',
+        contentType : "application/json;charset=UTF-8",
+        data: JSON.stringify(order),
+        success: function (msg) {
+            if (msg.code != 0) {
+                alert(msg.msg);
+                return;
+            }
 
+            setTimeout(function () {
+                $processbar.modal('hide');
+                queryOrderList();
+            }, 1000);
+        },
+        error: function () {
+            alert('请求失败');
+        }
+    })
 }
 
 
 function delOrder(index) {
+    if (!window.confirm("确定删除该订单吗")) {
+        return;
+    }
+    var order = orderCache[index];
+    var $processbar = $('#processbar');
+    $processbar.modal('show');
+    $.ajax({
+        url: basePath + 'order/del',
+        dataType: 'json',
+        type: 'post',
+        contentType : "application/json;charset=UTF-8",
+        data: JSON.stringify(order),
+        success: function (msg) {
+            if (msg.code != 0) {
+                alert(msg.msg);
+                return;
+            }
 
+            setTimeout(function () {
+                $processbar.modal('hide');
+                queryOrderList();
+            }, 1000);
+        },
+        error: function () {
+            alert('请求失败');
+        }
+    })
 }
 
 

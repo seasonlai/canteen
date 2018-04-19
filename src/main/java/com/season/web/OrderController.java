@@ -2,9 +2,12 @@ package com.season.web;
 
 import com.google.gson.Gson;
 import com.season.domain.MsgBean;
+import com.season.domain.MyOrder;
 import com.season.domain.ShopCar;
+import com.season.exception.MyException;
 import com.season.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +29,7 @@ public class OrderController extends BaseController {
     public ModelAndView orderPage() {
         ModelAndView mav = new ModelAndView("my_order");
         Gson gson = new Gson();
+        mav.addObject("orderStatusObj", getOrderStatus());
         mav.addObject("orderStatus", gson.toJson(getOrderStatus()));
         mav.addObject("foodTime", gson.toJson(getMealKind()));
         return mav;
@@ -41,25 +45,58 @@ public class OrderController extends BaseController {
 
     @RequestMapping("/order/list")
     @ResponseBody
-    public MsgBean orderList(HttpServletRequest request) {
+    public MsgBean orderList(HttpServletRequest request,
+                             @RequestParam(value = "orderStatus", required = false)
+                                     Integer orderStatus) {
 
-        List list = orderService.orderList(getSessionUser(request));
+        List list = orderService.orderList(getSessionUser(request), orderStatus);
 
         return MsgBean.success().setData(list);
     }
 
+    @RequestMapping("/order/del")
+    @ResponseBody
+    public MsgBean orderDel(HttpServletRequest request,
+                               @RequestBody MyOrder order) {
+
+        try {
+            orderService.orderDel(order);
+        } catch (MyException e) {
+            return MsgBean.error().setMsg(e.getMessage());
+        }
+
+        return MsgBean.success();
+    }
+
+    @RequestMapping("/order/cancel")
+    @ResponseBody
+    public MsgBean orderCancel(HttpServletRequest request,
+                               @RequestBody MyOrder order) {
+
+        try {
+            orderService.orderCancel(order);
+        } catch (MyException e) {
+            return MsgBean.error().setMsg(e.getMessage());
+        }
+
+        return MsgBean.success();
+    }
 
     @ResponseBody
     @RequestMapping("/order/data-list")
-    public MsgBean countBook(@RequestParam("foodKind") Integer foodKind
-            , @RequestParam("date") Date date, @RequestParam("content") String content
-            , @RequestParam("foodTime") Integer foodTime) {
+    public MsgBean countBook(@RequestParam("foodKind") Integer foodKind,
+                             @RequestParam("date")
+                             @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+                             @RequestParam("content") String content,
+                             @RequestParam("foodTime") Integer foodTime,
+                             @RequestParam("pageSize") Integer pageSize,
+                             @RequestParam("pageNum") Integer pageNum) {
 
-        if(date==null){
+        if (date == null) {
             return MsgBean.error().setMsg("日期为空");
         }
 
-        return orderService.countBook(date,foodKind,foodTime,content);
+        return orderService.countBook(pageSize, pageNum, date, foodKind, foodTime, content);
     }
 
 

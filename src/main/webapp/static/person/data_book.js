@@ -5,16 +5,20 @@ $(function () {
         orientation: 'bottom',
         todayHighlight: true,
         language: "zh-CN"
+        // defaultDate : new Date()
     });
+    $('.datepicker').datepicker('setDate', new Date());
     $("[data-toggle='tooltip']").tooltip();
     queryPageList();
 });
 
-function queryPageList() {
+function queryPageList(num) {
+
+    num = num == null ? 1 : num;
 
     var date = $('#countTime').val();
 
-    if(!date){
+    if (!date) {
         alert('请选择统计日期');
         return;
     }
@@ -27,29 +31,107 @@ function queryPageList() {
     $.ajax({
         url: basePath + '/order/data-list',
         type: 'post',
-        data: {foodKind: foodKind,date: date,foodTime: foodTime,content: content},
+        data: {
+            foodKind: foodKind, date: date,
+            foodTime: foodTime, content: content,
+            pageNum: num, pageSize: 10
+        },
         dataType: 'json',
         success: function (msg) {
-            if(msg.code!=0){
+            if (msg.code != 0) {
                 alert(msg.msg);
                 return;
             }
-            new Morris.Line({
-                element: 'morris-area-chart',
-                data:msg.data,
-                xkey: 'dataDate',
-                ykeys: ['actualNum', 'estimateNum'],
-                labels: ['实际用餐数', '预估用餐数'],
-                pointSize: 2,
-                hideHover: 'auto',
-                resize: true
-            });
+
+            var page = msg.data;
+
+            var totalPageCount = page.totalPageCount;
+
+            var curPageNo = page.currentPageNo;
+
+            var totalDataCount = page.totalCount;
+
+            dataCache = page.data;
+
+            var $tBody = $('#tBody');
+            $tBody.empty();
+
+            var dataStr;
+            //数据处理
+            for (var i = 0; i < page.data.length; i++) {
+                dataStr += '<tr>';
+                dataStr += '<td>';
+                dataStr += '<span>' + (i + 1) + '</span>';
+                dataStr += '</td>';
+                dataStr += '<td>';
+                dataStr += page.data[i][0];
+                dataStr += '</td>';
+                dataStr += '<td>';
+                dataStr += page.data[i][1];
+                dataStr += '</td>';
+                dataStr += '<td>';
+                dataStr += foodKind>0?getFoodKind(foodKind) : '- -';
+                dataStr += '</td>';
+                dataStr += '<td>';
+                dataStr += foodTime>0?getFoodTime(foodTime) : '- -';
+                dataStr += '</td>';
+                dataStr += '<td>';
+                dataStr += date;
+                dataStr += '</td>';
+                dataStr += '</tr>';
+            }
+            $tBody.html(dataStr);
+
+            //分页处理
+            $('#dataCount').html(totalDataCount);
+            $('#pageCount').html(totalPageCount);
+            var $splitBar = $('#splitBar');
+            $splitBar.empty();
+            var splitBarStr = '<li><a href="#" ' + (page.hasPreviousPage ? 'onclick="queryPageList(' + (curPageNo - 1) + ')"' : '') + '>&laquo;</a></li>';
+            if (totalPageCount <= 5) {
+                for (var i = 1; i <= totalPageCount; i++) {
+                    splitBarStr += '<li ' + (i == curPageNo ? 'class="active" style="disabled:true;"' : '') + '>';
+                    splitBarStr += '<a href="#" ' + (i != curPageNo ? 'onclick="queryPageList(' + i + ')"' : '') + '>' + i + '</a>';
+                    splitBarStr += '</li>';
+                }
+            } else {
+                var i = curPageNo > 3 ? curPageNo - 2 : 1;
+                for (; i < curPageNo + 3 && i <= totalPageCount; i++) {
+                    splitBarStr += '<li ' + (i == curPageNo ? 'class="active" style="disabled:true;"' : '') + '>';
+                    splitBarStr += '<a href="#" ' + (i != curPageNo ? 'onclick="queryPageList(' + i + ')"' : '') + '>' + i + '</a>';
+                    splitBarStr += '</li>';
+                }
+                if (i < totalPageCount)
+                    splitBarStr += '...';
+            }
+            splitBarStr += '<li><a href="#" ' + (page.hasNextPage ? 'onclick="queryPageList(' + (curPageNo + 1) + ')"' : '') + '>&raquo;</a></li>';
+            $splitBar.html(splitBarStr);
         },
         error: function () {
             alert('请求失败');
         }
     })
+}
 
+function getFoodTime(kind) {
 
+    for (var i in foodTimes) {
 
+        if (foodTimes[i].code == kind)
+            return foodTimes[i].name;
+
+    }
+
+    return "&nbsp;";
+}
+
+function getFoodKind(kind) {
+
+    for (var i in foodKinds) {
+
+        if (foodKinds[i].kindCode == kind)
+            return foodKinds[i].kindName;
+
+    }
+    return "&nbsp;";
 }

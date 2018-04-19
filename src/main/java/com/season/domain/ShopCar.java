@@ -1,6 +1,8 @@
 package com.season.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,10 +22,14 @@ public class ShopCar {
     private Integer carId;
     @Column(name = "food_time")
     private Integer foodTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+    @Column(name = "subscribe_date")
+    private Date subscribeDate;
     @Column(name = "food_count")
     private Integer foodCount;
     @Column(name = "food_total_price")
-    private Integer foodTotalPrice;
+    private Float foodTotalPrice;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -31,11 +37,19 @@ public class ShopCar {
     @JoinColumn(name = "food_id")
     private Food food;
 
-    public Integer getFoodTotalPrice() {
+    public Date getSubscribeDate() {
+        return subscribeDate;
+    }
+
+    public void setSubscribeDate(Date subscribeDate) {
+        this.subscribeDate = subscribeDate;
+    }
+
+    public Float getFoodTotalPrice() {
         return foodTotalPrice;
     }
 
-    public void setFoodTotalPrice(Integer foodTotalPrice) {
+    public void setFoodTotalPrice(Float foodTotalPrice) {
         this.foodTotalPrice = foodTotalPrice;
     }
 

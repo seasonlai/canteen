@@ -8,9 +8,10 @@
             + ":" + request.getServerPort() + path + "/";
 
 %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>我的购物车</title>
+    <title>我的餐车</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +57,7 @@
             <div class="table-wrapper orders-table section">
                 <div class="row head">
                     <div class="col-md-12">
-                        <h4>我的用餐预约</h4>
+                        <h4>我的餐车</h4>
                     </div>
                 </div>
 
@@ -74,9 +75,9 @@
                 <div class="row" style="margin-top: 16px">
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th class="col-sm-1 text-center" >
-                                <input type="checkbox">
+                        <tr class="headTitle">
+                            <th class="col-sm-1 text-center">
+                                <input type="checkbox" id="checkAllBtn" onclick="checkAll()">
                             </th>
                             <th class="col-lg-4">
                                 <span class="line"></span>
@@ -88,11 +89,15 @@
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                餐品价格
+                                餐品单价
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
                                 用餐时间
+                            </th>
+                            <th class="col-md-2">
+                                <span class="line"></span>
+                                餐品总价
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
@@ -101,52 +106,30 @@
                         </tr>
                         </thead>
                         <tbody id="shopCarBody">
-                        <!-- row -->
-                        <tr class="first">
-                            <td>
-                                <a href="#">#459</a>
-                            </td>
-                            <td>
-                                Jan 03, 2013
-                            </td>
-                            <td>
-                                <a href="#">John Smith</a>
-                            </td>
-                            <td>
-                                <span class="label label-success">Completed</span>
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                $ 3,500.00
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- end orders table -->
-            <div class="text-center">
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
+
+            <div class="pull-right"
+                 style="height:60px;position:absolute;bottom: 0px;right:12px;border-top: 1px solid silver;">
+                <strong>总价：</strong>
+                <small>￥</small>
+                <span id="totalPrice" style="margin-right: 25px">0</span>
+                <button class="btn btn-warning"><span class="h4" style="color: white">下单</span></button>
             </div>
+
+
         </div>
     </div>
 </div>
 <script>
     var basePath = "<%=basePath%>";
-    var foodTime = "${foodTime}";
+    var foodTime = JSON.parse('${foodTime}');
 </script>
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>static/js/init.js"></script>
+<script src="<%=basePath%>static/shopcar/shopcar.js"></script>
 </body>
 </html>

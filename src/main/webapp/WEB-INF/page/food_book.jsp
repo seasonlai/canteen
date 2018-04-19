@@ -98,9 +98,15 @@
                         </div>
                         <div class="modal-body">
                             <form class="form-horizontal" role="form">
-                                <div class="form-group text-center" >
+                                <div class="form-group text-center" style="padding-left: 12px;">
                                     <img id="foodImg"  height="150px" class="thumbnail text-center"/>
                                     <input type="hidden" id="foodId">
+                                </div>
+                                <div class="form-group">
+                                    <label for="foodPrice" class="col-md-3 control-label">餐品单价:</label>
+                                    <div class="col-md-8" style="padding-top: 7px;">
+                                        <small>￥</small><span id="foodPrice"></span>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="foodDate" class="col-md-3 control-label">预约日期:</label>
@@ -114,7 +120,7 @@
                                     <label for="foodTime" class="col-md-3 control-label">用餐时间:</label>
 
                                     <div class="col-md-8">
-                                        <select id="foodTime" class="form-control" style="height:32px;width:200px;">
+                                        <select id="foodTime" class="form-control" style="height:31px;width:200px;">
                                             <c:forEach items="${foodTime}" var="item">
                                                 <option value="${item.code}">${item.name}</option>
                                             </c:forEach>
@@ -124,12 +130,12 @@
                                 <div class="form-group">
                                     <label for="foodCount" class="col-md-3 control-label">餐品份数:</label>
                                     <div class="col-md-8  form-inline">
-                                        <button class="btn btn-info btn-circle " onclick="cutCount()" type="button">
+                                        <button class="btn btn-info btn-circle " onfocus="return false;" onclick="cutCount()" type="button">
                                             <li class="fa fa-minus"></li>
                                         </button>
                                         <input type="text"  id="foodCount" class="form-control text-center" value="1"
-                                               style="height:30px;width: 55px">
-                                        <button class="btn btn-info btn-circle" onclick="addCount()" type="button">
+                                               onkeyup="value=value.replace(/[^\d]/g,'')" style="height:30px;width: 55px">
+                                        <button class="btn btn-info btn-circle" onfocus="return false;" onclick="addCount()" type="button">
                                             <li class="fa fa-plus"></li>
                                         </button>
                                     </div>
@@ -137,6 +143,12 @@
                             </form>
                         </div>
                         <div class="modal-footer">
+                            <div style="float: left">
+                                <strong>总价：</strong>
+                                <small>￥</small>
+                                <span id="foodTotalPrice">1.00</span>
+                            </div>
+
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <button type="button" class="btn btn-primary" onclick="addToCard()">确定</button>
                         </div>

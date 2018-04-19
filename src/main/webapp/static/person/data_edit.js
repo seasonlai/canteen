@@ -207,5 +207,5 @@ function clearInput(id) {
 
 function checkAll() {
     var status = $('#checkAllBtn').prop('checked');
-    $('#tb_data tr[class!="headTitle"]').find('input[type="checkbox"]').attr('checked', status);
+    $('#tBody tr').find('input[type="checkbox"]').prop('checked', status);
 }

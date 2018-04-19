@@ -135,7 +135,7 @@ CREATE TABLE `t_person_data` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `t_order` (
-  `order_id`       INT(11)  NOT NULL AUTO_INCREMENT
+  `order_id`       VARCHAR(50)  NOT NULL
   COMMENT '数据Id',
   `food_id`        INT(11)  NOT NULL
   COMMENT '餐品ID',
@@ -147,7 +147,7 @@ CREATE TABLE `t_order` (
   COMMENT '数量',
   `order_status`   INT(2)            DEFAULT 0
   COMMENT '订单状态',
-  `subscribe_date` DATETIME NOT NULL
+  `subscribe_date` DATE NOT NULL
   COMMENT '预约时间',
   `order_date`     DATETIME NOT NULL
   COMMENT '下单时间',
@@ -163,20 +163,22 @@ CREATE TABLE `t_order` (
 # 购物车
 #
 CREATE TABLE `t_shop_car` (
-  `car_id`     INT(11) NOT NULL AUTO_INCREMENT
+  `car_id`           INT(11) NOT NULL AUTO_INCREMENT
   COMMENT '数据Id',
-  `food_id`    INT(11) NOT NULL
+  `food_id`          INT(11) NOT NULL
   COMMENT '餐品ID',
-  `user_id`    INT(11) NOT NULL
+  `user_id`          INT(11) NOT NULL
   COMMENT '用户id',
-  `food_time`  INT(2)           DEFAULT 0
+  `food_time`        INT(2)           DEFAULT 0
   COMMENT '早午晚夜餐',
-  `food_count` INT(5)           DEFAULT 1
+  `food_count`       INT(5)           DEFAULT 1
   COMMENT '数量',
-  `food_total_price` INT(5)           DEFAULT 1
+  `food_total_price` FLOAT(11)        DEFAULT 0
   COMMENT '总价',
+  `subscribe_date` DATE NOT NULL
+  COMMENT '预约时间',
   PRIMARY KEY (`car_id`),
-  KEY `AK_AK_ORDER_SUBSCRIBE_DATE` (`user_id`)
+  KEY `AK_AK_SHOP_CAR_USER` (`user_id`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 4

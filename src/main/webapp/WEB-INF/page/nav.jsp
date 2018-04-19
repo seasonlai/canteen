@@ -60,7 +60,7 @@
                 <a href="<c:url value="/food/food_book.html"/>"><i class="fa fa-fw fa-book"></i> 用餐预约</a>
             </li>
             <li>
-                <a href="<c:url value="/shopcar/myShopCar.html"/>"><i class="fa fa-fw fa-shopping-cart"></i> 我的购物车</a>
+                <a href="<c:url value="/shopcar/myShopCar.html"/>"><i class="fa fa-fw fa-shopping-cart"></i> 我的餐车</a>
             </li>
             <li>
                 <a href="<c:url value="/order/myOrder.html"/>"><i class="fa fa-fw fa-edit"></i> 我的订单</a>
@@ -74,7 +74,7 @@
 </nav>
 
 
-<button style="position: absolute;right: 20px;bottom: 50px;" class="btn btn-lg btn-default">
+<button id="myShopCart" style="position: absolute;right: 20px;bottom: 50px;" class="btn btn-lg btn-default">
     <li class="glyphicon glyphicon-shopping-cart"></li>
 </button>
 

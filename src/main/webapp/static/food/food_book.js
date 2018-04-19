@@ -13,6 +13,14 @@ $(function () {
     // tomorrow.setDate(tomorrow.getDate() + 1);
     // var s1 = ;
     $('#foodDate').datepicker('setStartDate',getDateStr(1));
+
+
+    $('#myModal #foodCount').bind('input propertychange', function () {
+        var a = $('#myModal #foodCount').val();
+        var price = $('#myModal #foodPrice').html();
+        $('#myModal #foodTotalPrice').html(a*price);
+    });
+
 });
 
 
@@ -41,9 +49,9 @@ function queryList() {
             foods.forEach(function (food, index) {
                 var str = "";
                 str += '<div class="col-md-3">';
-                str += '<div class="img-box">';
+                str += '<div class="img-box text-center thumbnail">';
                 str += '<img width="280" height="280" src="' + food.foodImage + '"';
-                str += ' class="thumbnail img-responsive"/>';
+                str += ' class="img-responsive text-center" style="margin-bottom:20px"/>';
                 str += '<div class="text-left">';
                 str += '<span style="padding-left: 5px"><STRONG>' + food.foodName + '</STRONG></span>';
                 str += '<span style="padding-left: 12px"><small>￥' + food.foodPrice + '</small></span>';
@@ -67,6 +75,8 @@ function queryList() {
 function sureToCard(index) {
     var food = foodsCache[index];
     $('#myModal #modal_title').html(food.foodName);
+    $('#myModal #foodPrice').html(food.foodPrice);
+    $('#myModal #foodTotalPrice').html(food.foodPrice);
     $('#myModal #foodImg').attr('src', food.foodImage);
     $('#myModal #foodId').val(food.foodId);
     $('#myModal').modal('show');
@@ -83,6 +93,9 @@ function addCount() {
     } catch (e) {
         $count.val(1);
     }
+    var a = $count.val();
+    var price = $('#myModal #foodPrice').html();
+    $('#myModal #foodTotalPrice').html(a*price);
 }
 function cutCount() {
     var $count = $("#myModal #foodCount");
@@ -93,6 +106,9 @@ function cutCount() {
     } catch (e) {
         $count.val(1);
     }
+    var a = $count.val();
+    var price = $('#myModal #foodPrice').html();
+    $('#myModal #foodTotalPrice').html(a*price);
 }
 
 function addToCard() {
@@ -116,10 +132,14 @@ function addToCard() {
     }
 
     var foodId = $myModal.find('#foodId').val();
+    var foodTotalPrice = $myModal.find('#foodTotalPrice').html();
     $.ajax({
         url: basePath + 'shopcar/add',
         dataType: 'json',
-        data: {foodTime: time, foodCount: count,foodId:foodId},
+        data: {foodTime: time, foodCount: count,
+            foodId:foodId,foodTotalPrice:foodTotalPrice,
+            subscribeDate:date
+        },
         type: 'post',
         success: function (msg) {
             if(msg.code!='0'){

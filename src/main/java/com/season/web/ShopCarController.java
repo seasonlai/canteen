@@ -1,5 +1,6 @@
 package com.season.web;
 
+import com.google.gson.Gson;
 import com.season.dao.ShopCarDao;
 import com.season.domain.Food;
 import com.season.domain.MsgBean;
@@ -28,7 +29,7 @@ public class ShopCarController extends BaseController {
     public ModelAndView myShopCar(HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("my_shopcar");
-        mav.addObject("foodTime", getMealKind());
+        mav.addObject("foodTime", new Gson().toJson(getMealKind()));
         return mav;
     }
 

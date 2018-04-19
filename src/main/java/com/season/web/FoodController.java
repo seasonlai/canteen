@@ -44,16 +44,7 @@ public class FoodController extends BaseController {
 
         List<FoodKind> foodKinds = foodKindDao.loadAll();
         mav.addObject("foodKinds",foodKinds);
-
-        List<Map> supportCount = new ArrayList<>();
-        for (int i = 0; i < CommonConstant.MEAL_KIND.length; i++) {
-            Map<String, Object> kv = new HashMap<>();
-            kv.put("code", i);
-            kv.put("name", CommonConstant.MEAL_KIND[i]);
-            supportCount.add(kv);
-        }
-
-        mav.addObject("foodTime",supportCount);
+        mav.addObject("foodTime",getMealKind());
         return mav;
     }
 

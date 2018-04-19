@@ -46,7 +46,7 @@
                         <a href="<c:url value="/data/data.html"/> ">人次统计/预估</a>
                     </li>
                     <li>
-                        <a href="#">用餐预约统计</a>
+                        <a href="<c:url value="/data/data-book.html"/> ">预约用餐统计</a>
                     </li>
                     <li>
                         <a href="<c:url value="/data/data-edit.html"/>">数据修改</a>
@@ -65,9 +65,9 @@
             <li>
                 <a href="<c:url value="/order/myOrder.html"/>"><i class="fa fa-fw fa-edit"></i> 我的订单</a>
             </li>
-            <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>用户日志</a>
-            </li>
+            <%--<li>--%>
+                <%--<a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>用户日志</a>--%>
+            <%--</li>--%>
         </ul>
     </div>
     <!-- /.navbar-collapse -->

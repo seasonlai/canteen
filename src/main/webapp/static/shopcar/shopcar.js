@@ -48,12 +48,11 @@ function queryShopCarList() {
                 str += '<span><small>￥</small>' + shop.foodTotalPrice + '</span>';
                 str += '</td>';
                 str += '<td>';
-                str += '<button class="btn btn-primary btn-sm" onclick="submitOrder('+index+')">下单</button>';
+                str += '<button class="btn btn-primary btn-sm" onclick="submitOrder(' + index + ')">下单</button>';
                 str += '</td>';
                 str += '</tr>';
                 foodStr += str;
             });
-            foodStr += '</div>';
             $shopCarBody.html(foodStr);
             shopCarCache = shopCars;
         },
@@ -71,6 +70,11 @@ function selectCar(obj, index) {
     var $totalPrice = $('#totalPrice');
     var pre = new Number($totalPrice.html());
     $totalPrice.html(status ? pre + price : pre - price);
+    var len1 = $('#shopCarBody tr').find('input[type="checkbox"]').length;
+    console.log(len1);
+    var len2 = $('#shopCarBody tr').find('input:checked[type="checkbox"]').length;
+    console.log(len2);
+    $('#checkAllBtn').prop('checked', len1==len2);
 }
 
 function getFoodTime(kind) {
@@ -86,10 +90,10 @@ function getFoodTime(kind) {
 }
 
 function submitOrder(index) {
-    var shopCars=[]
-    if(!index){
+    var shopCars = []
+    if (index==null) {
         var checkItems = $('#shopCarBody tr').find('input:checked[type="checkbox"]');
-        if(!checkItems||checkItems.length<=0){
+        if (!checkItems || checkItems.length <= 0) {
             alert('请选择餐品项');
             return;
         }
@@ -97,15 +101,17 @@ function submitOrder(index) {
             shopCars.push(shopCarCache[$(this).attrs('index')]);
         })
 
-    }else {
+    } else {
         shopCars.push(shopCarCache[index]);
     }
 
+    console.log(JSON.stringify(shopCars));
     $.ajax({
         url: basePath + 'order/submit',
         dataType: 'json',
+        contentType : "application/json;charset=UTF-8",
         type: 'post',
-        data:shopCars,
+        data: JSON.stringify(shopCars),
         success: function (msg) {
             if (msg.code != 0) {
                 alert(msg.msg);

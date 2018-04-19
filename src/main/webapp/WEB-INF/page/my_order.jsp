@@ -8,6 +8,7 @@
             + ":" + request.getServerPort() + path + "/";
 
 %>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>我的订单</title>
@@ -61,7 +62,7 @@
             <div class="table-wrapper orders-table section">
                 <div class="row head">
                     <div class="col-md-12">
-                        <h4>我的用餐预约</h4>
+                        <h4>我的订单</h4>
                     </div>
                 </div>
 
@@ -81,11 +82,15 @@
                         <thead>
                         <tr>
                             <th class="col-md-2">
-                                预约号
+                                订单号
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
                                 餐品名称
+                            </th>
+                            <th class="col-md-2">
+                                <span class="line"></span>
+                                餐品数量
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
@@ -95,98 +100,21 @@
                                 <span class="line"></span>
                                 下单时间
                             </th>
-                            <th class="col-md-2">
+                            <th class="col-md-1">
                                 <span class="line"></span>
                                 状态
                             </th>
-                            <th class="col-md-2">
+                            <th class="col-lg-2">
                                 <span class="line"></span>
-                                价格
+                                总费用
+                            </th>
+                            <th class="col-md-3">
+                                <span class="line"></span>
+                                操作
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <!-- row -->
-                        <tr class="first">
-                            <td>
-                                <a href="#">#459</a>
-                            </td>
-                            <td>
-                                Jan 03, 2013
-                            </td>
-                            <td>
-                                <a href="#">John Smith</a>
-                            </td>
-                            <td>
-                                <span class="label label-success">Completed</span>
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                $ 3,500.00
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">#510</a>
-                            </td>
-                            <td>
-                                Feb 22, 2013
-                            </td>
-                            <td>
-                                <a href="#">Anna Richards</a>
-                            </td>
-                            <td>
-                                <span class="label label-info">Pending</span>
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                $ 800.00
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">#590</a>
-                            </td>
-                            <td>
-                                Mar 03, 2013
-                            </td>
-                            <td>
-                                <a href="#">Steven McFly</a>
-                            </td>
-                            <td>
-                                <span class="label label-success">Completed</span>
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                $ 1,350.00
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">#618</a>
-                            </td>
-                            <td>
-                                Jan 03, 2013
-                            </td>
-                            <td>
-                                <a href="#">George Williams</a>
-                            </td>
-                            <td>
-                                <span class="label">Canceled</span>
-                            </td>
-                            <td>
-                                8
-                            </td>
-                            <td>
-                                $ 3,499.99
-                            </td>
-                        </tr>
+                        <tbody id="orderBody">
                         </tbody>
                     </table>
                 </div>
@@ -206,10 +134,14 @@
         </div>
     </div>
 </div>
-
+<script>
+    var basePath = "<%=basePath%>";
+    var foodTime = JSON.parse('${foodTime}');
+    var orderStatus = JSON.parse('${orderStatus}');
+</script>
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>static/js/init.js"></script>
-<%--<script src="<%=basePath%>static/food/theme.js"></script>--%>
+<script src="<%=basePath%>static/order/order.js"></script>
 </body>
 </html>

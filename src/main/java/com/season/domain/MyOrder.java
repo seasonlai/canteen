@@ -18,7 +18,6 @@ import java.util.UUID;
 public class MyOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private String orderId;
     @Column(name = "food_time")
@@ -36,6 +35,7 @@ public class MyOrder {
     @JoinColumn(name = "food_id")
     private Food food;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone="GMT+8")
     @Column(name = "order_date")
     private Date orderDate;
 

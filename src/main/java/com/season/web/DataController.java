@@ -1,7 +1,9 @@
 package com.season.web;
 
 import com.season.cons.CommonConstant;
+import com.season.dao.FoodKindDao;
 import com.season.dao.Page;
+import com.season.domain.FoodKind;
 import com.season.domain.MsgBean;
 import com.season.domain.PersonData;
 import com.season.exception.MyException;
@@ -24,24 +26,23 @@ public class DataController extends BaseController {
 
     @Autowired
     DataService dataService;
+    @Autowired
+    FoodKindDao foodKindDao;
 
     @RequestMapping("/data/data.html")
     public ModelAndView personData() {
         ModelAndView mav = new ModelAndView("person_data");
-        List<Map> supportCount = new ArrayList<>();
-        for (int i = 0; i < CommonConstant.PERSON_COUNT.length; i++) {
-            Map<String, Object> kv = new HashMap<>();
-            kv.put("code", i);
-            kv.put("name", CommonConstant.PERSON_COUNT[i]);
-            supportCount.add(kv);
-        }
-        mav.addObject("countKinds", supportCount);
+
+        mav.addObject("countKinds", getPersonCount());
         return mav;
     }
 
     @RequestMapping("/data/data-book.html")
     public ModelAndView personData_book() {
         ModelAndView mav = new ModelAndView("person_data_book");
+        List<FoodKind> foodKinds = foodKindDao.loadAll();
+        mav.addObject("foodKinds",foodKinds);
+        mav.addObject("foodTime",getMealKind());
         return mav;
     }
 
@@ -101,4 +102,6 @@ public class DataController extends BaseController {
     public MsgBean delData(@RequestBody List<PersonData> dataList){
        return dataService.delData(dataList);
     }
+
+
 }

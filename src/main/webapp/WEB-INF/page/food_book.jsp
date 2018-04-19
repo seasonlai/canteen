@@ -8,6 +8,7 @@
             + ":" + request.getServerPort() + path + "/";
 
 %>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>用餐预约</title>

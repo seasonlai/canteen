@@ -4,6 +4,7 @@ import com.season.dao.OrderDao;
 import com.season.dao.ShopCarDao;
 import com.season.domain.MyOrder;
 import com.season.domain.ShopCar;
+import com.season.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,10 @@ public class OrderService {
             }
         }
         shopCarDao.remove(tmpList);
+    }
+
+    public List orderList(User user){
+        return orderDao.queryOrderByUser(user);
     }
 
 }

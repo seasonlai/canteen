@@ -61,17 +61,6 @@
                     </div>
                 </div>
 
-                <div class="row filter-block">
-                    <div class="pull-right">
-                        <div class="btn-group pull-right">
-                            <button class="glow left large active">全部</button>
-                            <button class="glow middle large">未完成</button>
-                            <button class="glow right large">已完成</button>
-                        </div>
-                        <%--<input type="text" class="search order-search" placeholder="Search for an order.."/>--%>
-                    </div>
-                </div>
-
                 <div class="row" style="margin-top: 16px">
                     <table class="table table-hover">
                         <thead>
@@ -91,7 +80,7 @@
                                 <span class="line"></span>
                                 餐品单价
                             </th>
-                            <th class="col-md-2">
+                            <th class="col-md-1">
                                 <span class="line"></span>
                                 用餐时间
                             </th>

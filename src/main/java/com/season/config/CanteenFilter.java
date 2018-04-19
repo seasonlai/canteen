@@ -1,4 +1,4 @@
-package com.season.web;
+package com.season.config;
 
 import com.season.cons.CommonConstant;
 import com.season.domain.User;
@@ -29,6 +29,8 @@ public class CanteenFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
+
+
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // ②-1 保证该过滤器在一次请求中只被调用一次

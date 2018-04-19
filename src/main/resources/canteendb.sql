@@ -145,6 +145,8 @@ CREATE TABLE `t_order` (
   COMMENT '早午晚夜餐',
   `food_count`     INT(5)            DEFAULT 1
   COMMENT '数量',
+  `food_total_price` FLOAT(11)        DEFAULT 0
+  COMMENT '总价',
   `order_status`   INT(2)            DEFAULT 0
   COMMENT '订单状态',
   `subscribe_date` DATE NOT NULL

@@ -30,7 +30,7 @@
 
     <filter>
         <filter-name>canteenFilter</filter-name>
-        <filter-class>com.season.web.CanteenFilter</filter-class>
+        <filter-class>com.season.config.CanteenFilter</filter-class>
     </filter>
 
     <filter-mapping>

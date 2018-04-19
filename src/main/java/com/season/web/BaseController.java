@@ -82,4 +82,27 @@ public class BaseController {
         }
         return supportCount;
     }
+
+
+    public List<Map> getOrderStatus(){
+        List<Map> supportCount = new ArrayList<>();
+        for (int i = 0; i < CommonConstant.ORDER_STATUS.length; i++) {
+            Map<String, Object> kv = new HashMap<>();
+            kv.put("code", i);
+            kv.put("name", CommonConstant.ORDER_STATUS[i]);
+            supportCount.add(kv);
+        }
+        return supportCount;
+    }
+
+    public List<Map> getPersonCount(){
+        List<Map> supportCount = new ArrayList<>();
+        for (int i = 0; i < CommonConstant.PERSON_COUNT.length; i++) {
+            Map<String, Object> kv = new HashMap<>();
+            kv.put("code", i);
+            kv.put("name", CommonConstant.PERSON_COUNT[i]);
+            supportCount.add(kv);
+        }
+        return supportCount;
+    }
 }

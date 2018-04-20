@@ -24,7 +24,7 @@ public class User extends BaseDomain {
     /**
      * 管理员类型
      */
-    public static final int FORUM_ADMIN = 2;
+    public static final int CANTEEN_ADMIN = 2;
     /**
      * 普通用户类型
      */

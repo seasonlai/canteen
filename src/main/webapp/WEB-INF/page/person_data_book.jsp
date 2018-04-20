@@ -138,14 +138,18 @@
                 </div>
             </div>
             <!-- end orders table -->
-            <div id="splitBarDiv" style="display:flex;justify-content:center;align-items:center;">
-                    共&nbsp;
-                    <span id="dataCount"></span>
-                    &nbsp;条数据&nbsp;&nbsp;
-                    <span id="pageCount"></span>
-                    &nbsp;页
+            <%--style="display:flex;justify-content:center;align-items:center;"--%>
+            <div id="splitBarDiv" class="text-center">
                 <ul id="splitBar" style="margin-left: 10px;" class="pagination">
                 </ul>
+                <br>
+                <div>
+                    共&nbsp;
+                    <span id="pageCount"></span>
+                    &nbsp;页&nbsp;&nbsp;
+                    <span id="dataCount"></span>
+                    条数据
+                </div>
             </div>
 
 
@@ -209,6 +213,7 @@
 <script src="<%=basePath%>static/js/vendor/morrisjs/morris.min.js"></script>
 <script src="<%=basePath%>static/person/data_book.js"></script>
 
+<script src="<%=basePath%>static/js/bootbox.min.js"></script>
 <script src="<%=basePath%>static/js/init.js"></script>
 </body>
 </html>

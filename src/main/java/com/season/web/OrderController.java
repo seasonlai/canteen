@@ -47,11 +47,12 @@ public class OrderController extends BaseController {
     @ResponseBody
     public MsgBean orderList(HttpServletRequest request,
                              @RequestParam(value = "orderStatus", required = false)
-                                     Integer orderStatus) {
+                                     Integer orderStatus,
+                             @RequestParam("pageNum")Integer pageNum,
+                             @RequestParam("pageSize")Integer pageSize) {
 
-        List list = orderService.orderList(getSessionUser(request), orderStatus);
-
-        return MsgBean.success().setData(list);
+        return MsgBean.success().setData(
+                orderService.orderList(getSessionUser(request), orderStatus,pageNum,pageSize));
     }
 
     @RequestMapping("/order/del")

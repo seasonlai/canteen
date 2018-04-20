@@ -34,7 +34,7 @@ public class FoodService {
                 ) {
             throw new MyException("存在信息未填，请检查！");
         }
-        if (food.getFile()==null||food.getFile().isEmpty() || food.getFile().getSize() > 1024 * 1024) {
+        if (food.getFile() == null || food.getFile().isEmpty() || food.getFile().getSize() > 1024 * 1024) {
             throw new MyException("图片为空或超过1M");
         }
 
@@ -56,9 +56,9 @@ public class FoodService {
     }
 
 
-    public void update(FoodMultipart food) {
+    public void update(FoodMultipart food, String newImgUrl) {
         Food target = foodDao.load(food.getFoodId());
-        if (food.getFile()!=null&&!food.getFile().isEmpty()) {
+        if (food.getFile() != null && !food.getFile().isEmpty()) {
             String filePath = FileUtil.prepareWrite("/food");
             try {
                 food.getFile().transferTo(new File(filePath, food.getFoodName()));
@@ -71,6 +71,7 @@ public class FoodService {
         target.setFoodPrice(food.getFoodPrice());
         target.setFoodName(food.getFoodName());
         target.setFoodKind(food.getFoodKind());
+        target.setFoodImage(newImgUrl);
 //        target.set
         foodDao.update(target);
     }
@@ -80,6 +81,8 @@ public class FoodService {
     }
 
     public void del(Food food) {
-        foodDao.remove(food);
+        Food updateFood = foodDao.load(food.getFoodId());
+        updateFood.setIsSaling(-1);
+        foodDao.update(updateFood);
     }
 }

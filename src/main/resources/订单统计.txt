@@ -1,3 +1,4 @@
+##统计
 SELECT
 t.subscribe_date,
 f.food_name,
@@ -12,3 +13,23 @@ AND
 t.subscribe_date = '2018-04-20'
 GROUP BY
 t.food_id
+
+
+##数据条数
+SELECT
+count(*)
+FROM
+(SELECT
+f.food_name,
+count(*)
+FROM
+t_order t LEFT JOIN t_food f
+ON
+t.food_id = f.food_id
+WHERE
+t.order_status = 1
+AND
+t.subscribe_date = '2018-04-20'
+GROUP BY
+t.food_id
+) r

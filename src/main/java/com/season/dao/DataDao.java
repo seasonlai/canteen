@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
+import static java.math.BigDecimal.ROUND_HALF_DOWN;
+
 /**
  * Created by season on 2018/4/16.
  */
@@ -54,7 +56,7 @@ public class DataDao extends BaseDao<PersonData> {
         } else if (!StringUtils.isEmpty(startTime)) {
             return pagedQuery(QUERY_DATA_LIST_START, no, size, DateUtil.convert2Date(startTime, DATE_FORMAT));
         } else {
-            return pagedQuery(QUERY_DATA_LIST_END, no, size, DateUtil.convert2Date(endTime, DATE_FORMAT));
+            return pagedQuery(QUERY_DATA_LIST_END,no, size, DateUtil.convert2Date(endTime, DATE_FORMAT));
         }
     }
 
@@ -81,7 +83,7 @@ public class DataDao extends BaseDao<PersonData> {
         List weekList = runSql(QUERY_DATA_WEEKEND);
         BigDecimal weekend = weekList.get(0) != null ? (BigDecimal) weekList.get(0) : new BigDecimal(1);
 
-        return nomal.divide(weekend).doubleValue();
+        return nomal.divide(weekend,10,ROUND_HALF_DOWN).doubleValue();
     }
 
     public static void main(String... arg) {

@@ -42,8 +42,8 @@ public class OrderService {
         shopCarDao.remove(tmpList);
     }
 
-    public List orderList(User user, Integer orderStatus){
-        return orderDao.queryOrderByUser(user,orderStatus);
+    public Page orderList(User user, Integer orderStatus, Integer pageNum, Integer pageSize){
+        return orderDao.queryOrderByUser(user,orderStatus,pageNum,pageSize);
     }
 
     public void orderDel(MyOrder order){

@@ -40,6 +40,12 @@ $(function () {
         }
     }
 
+    $('li.user-avatar').mouseover(function () {
+        $(this).addClass('open');
+    }).mouseout(function () {
+        $(this).removeClass('open');
+    });
+
 
 });
 
@@ -58,3 +64,76 @@ $.ajaxSetup({
     }
 
 });
+
+
+function sureWindow(msg) {
+
+    var fail;
+
+    var success;
+
+    bootbox.confirm({
+        title: "确认框",
+        message: msg,
+        size: "small",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> 取消'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> 确定'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                if (typeof success == 'function') {
+                    success();
+                }
+            } else {
+                if (typeof fail == 'function') {
+                    fail();
+                }
+            }
+            // console.log('This was logged in the callback: ' + result);
+        }
+
+    });
+
+    return {
+        sucess: function (fuc) {
+            success = fuc;
+        },
+        fail: function (fuc) {
+            fail = fuc;
+        }
+    }
+
+}
+
+function alertWindow(msg) {
+
+    var success;
+
+    bootbox.alert({
+        title: "提示框",
+        message: msg,
+        size: "small",
+        buttons: {
+            ok: {
+                label: '<i class="fa fa-check"></i> 确定'
+            }
+        },
+        callback: function () {
+            if (typeof success == 'function') {
+                success();
+            }
+        }
+
+    });
+
+    return {
+        on: function (fuc) {
+            success = fuc;
+        }
+    }
+}

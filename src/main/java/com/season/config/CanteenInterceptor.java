@@ -20,7 +20,6 @@ public class CanteenInterceptor extends HandlerInterceptorAdapter {
     private static final String[] INHERENT_ESCAPE_URIS = {"/index.jsp",
             "/index.html", "/login.jsp", "/login/doLogin",
             "/register.jsp", "/register.html", "/login/doRegister",
-            "/food/food_book.html","/food/food_list"
     };
 
     @Override

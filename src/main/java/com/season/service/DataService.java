@@ -147,11 +147,11 @@ public class DataService {
             }
             int num_day3 = 0, num_day2 = 0, num_day1 = 0, num_lastYear;
             //取前三天、去年当天
-            Date date_lastYear = DateUtil.addYears(showEndDate, -1);
-            Date date3 = DateUtil.addDays(showEndDate, -3);
-            Date date2 = DateUtil.addDays(showEndDate, -2);
+            Date date_lastYear = DateUtil.addYears(date, -1);
+            Date date3 = DateUtil.addDays(date, -3);
+            Date date2 = DateUtil.addDays(date, -2);
             String lastYear = DateUtil.convert2String(date_lastYear, format);
-            Date date1 = DateUtil.addDays(showEndDate, -1);
+            Date date1 = DateUtil.addDays(date, -1);
             if (!treeMap.containsKey(lastYear)) {
                 continue;//去年都没，不搞了
             }

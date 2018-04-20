@@ -27,6 +27,7 @@
         <div class="col-lg-6">
 
             <form role="form"
+                  style="width: 300px"
                   method="post" onsubmit="return myCheck()"
                   enctype="multipart/form-data"
                   action="<c:url value="/login/doRegister"/>">
@@ -56,11 +57,7 @@
                     <p class="help-block">请选择<1M的图片</p>
                 </div>
 
-                <%--<div class="form-group">--%>
-                <%--<button class="btn btn-default fileinput-button" type="button">学生证图片</button>--%>
-                <%--<input type="file" id="idCardImg" id='file' onchange="loadFile(this.files[0])" name="idCardImg" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">--%>
-                <%--<p class="help-block">请选择<1M的图片</p>--%>
-                <%--</div>--%>
+                <a href="<c:url value="/login.jsp"/> " style="float: right">已有帐号,去登陆</a>
                 <button type="submit" style="width: 260px;margin-left: 18px;margin-top: 20px;margin-bottom: 20px"
                         class="btn btn-success">注册
                 </button>
@@ -88,7 +85,7 @@
             alert('用户名不能为空');
             return false;
         }
-        if(!$('#pwd').val()){
+        if (!$('#pwd').val()) {
             alert('密码不能为空');
             return false;
         }

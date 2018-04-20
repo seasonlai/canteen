@@ -40,7 +40,7 @@ function queryList() {
             var $gallery = $('#gallery-wrapper');
             $gallery.empty();
             if (msg.code != 0) {
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             var foods = msg.data;
@@ -66,7 +66,7 @@ function queryList() {
             foodsCache = foods;
         },
         error: function () {
-            alert('请求失败');
+            alertWindow('请求失败');
         }
     })
 }
@@ -115,7 +115,7 @@ function addToCard() {
     var $myModal = $('#myModal');
     var date = $myModal.find("#foodDate").val();
     if (!date) {
-        alert('日期为空')
+        alertWindow('日期为空')
         return
     }
 
@@ -124,10 +124,10 @@ function addToCard() {
     var count = $myModal.find("#foodCount").val();
     try {
         if (new Number(count) <= 0) {
-            alert('数量必须大于0');
+            alertWindow('数量必须大于0');
         }
     } catch (e) {
-        alert('数量格式不对');
+        alertWindow('数量格式不对');
         return
     }
 
@@ -143,14 +143,14 @@ function addToCard() {
         type: 'post',
         success: function (msg) {
             if(msg.code!='0'){
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             $myModal.modal('hide');
-            alert('添加成功');
+            alertWindow('添加成功');
         },
         error: function () {
-            alert("请求失败")
+            alertWindow("请求失败")
         }
     })
 

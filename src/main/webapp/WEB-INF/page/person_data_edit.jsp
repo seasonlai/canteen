@@ -196,6 +196,7 @@
 <script src="<%=basePath%>static/js/vendor/morrisjs/morris.min.js"></script>
 <script src="<%=basePath%>static/person/data_edit.js"></script>
 
+<script src="<%=basePath%>static/js/bootbox.min.js"></script>
 <script src="<%=basePath%>static/js/init.js"></script>
 </body>
 </html>

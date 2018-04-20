@@ -16,6 +16,8 @@ DROP TABLE IF EXISTS t_person_data;
 
 DROP TABLE IF EXISTS t_order;
 
+DROP TABLE IF EXISTS t_shop_car;
+
 #
 # Source for table t_login_log
 #
@@ -86,6 +88,8 @@ CREATE TABLE `t_food` (
   COMMENT '发布时间',
   `kind_code`    INT(5)               DEFAULT NULL
   COMMENT '餐品类别',
+  `is_saling`    INT(1)               DEFAULT 0
+  COMMENT '是否接受预约',
   PRIMARY KEY (`food_id`),
   KEY `AK_AK_FOOD_FOOD_NAME` (`food_name`)
 )
@@ -133,6 +137,19 @@ CREATE TABLE `t_person_data` (
   ENGINE = InnoDB
   AUTO_INCREMENT = 4
   DEFAULT CHARSET = utf8;
+
+INSERT INTO `t_person_data` VALUE (NULL ,2000,NULL ,'2018-04-10');
+INSERT INTO `t_person_data` VALUE (NULL ,1950,NULL ,'2018-04-11');
+INSERT INTO `t_person_data` VALUE (NULL ,2522,NULL ,'2018-04-12');
+INSERT INTO `t_person_data` VALUE (NULL ,2422,NULL ,'2018-04-13');
+INSERT INTO `t_person_data` VALUE (NULL ,2344,NULL ,'2018-04-14');
+INSERT INTO `t_person_data` VALUE (NULL ,2200,NULL ,'2018-04-15');
+INSERT INTO `t_person_data` VALUE (NULL ,1800,NULL ,'2018-04-16');
+INSERT INTO `t_person_data` VALUE (NULL ,1700,NULL ,'2018-04-17');
+INSERT INTO `t_person_data` VALUE (NULL ,1754,NULL ,'2017-04-13');
+INSERT INTO `t_person_data` VALUE (NULL ,2002,NULL ,'2017-04-14');
+INSERT INTO `t_person_data` VALUE (NULL ,2012,NULL ,'2017-04-15');
+INSERT INTO `t_person_data` VALUE (NULL ,2014,NULL ,'2017-04-16');
 
 CREATE TABLE `t_order` (
   `order_id`       VARCHAR(50)  NOT NULL

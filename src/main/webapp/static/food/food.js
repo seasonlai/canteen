@@ -35,45 +35,47 @@ function updateFood(index) {
 function deleteFood(index) {
 
     var food = foodsCache[index];
-    if(!confirm("确定删除该商品吗？")){
-        return;
-    }
 
-    $.ajax({
-        url: basePath + 'food/food_edit-del',
-        dataType: 'json',
-        data: {foodId: food.foodId},
-        type: 'post',
-        success: function (msg) {
-            if (msg.code != 0) {
-                alert(msg.msg);
-                return;
+    // bootbox.confirm("确定删除该商品吗？");
+    sureWindow("确定删除该商品吗？").sucess(function () {
+        $.ajax({
+            url: basePath + 'food/food_edit-del',
+            dataType: 'json',
+            data: {foodId: food.foodId},
+            type: 'post',
+            success: function (msg) {
+                if (msg.code != 0) {
+                    alertWindow(msg.msg);
+                    return;
+                }
+                alertWindow('删除成功');
+                queryList();
+            },
+            error:function () {
+                alertWindow('请求失败');
             }
-            alert('删除成功');
-            queryList();
-        },
-        error:function () {
-            alert('请求失败');
-        }
+        });
     });
+
+
 }
 
 function foodModify() {
     var $foodModify = $('#foodModify');
     var img = $foodModify.find('#foodImg').val();
     if (modifyType == '1' && !img) {
-        alert('图片不能为空');
+        alertWindow('图片不能为空');
         return;
     }
     var foodName = $foodModify.find('#foodName').val();
-    if (!foodName) {
-        alert('名称不能为空');
-        return;
-    }
-    var foodPrice = $foodModify.find('#foodPrice').val();
-    if (!foodPrice) {
-        alert('价格不能为空');
-        return;
+        if (!foodName) {
+            alertWindow('名称不能为空');
+            return;
+        }
+        var foodPrice = $foodModify.find('#foodPrice').val();
+        if (!foodPrice) {
+            alertWindow('价格不能为空');
+            return;
     }
     var foodKind = $foodModify.find('#foodKind').val();
     $("#processbar").modal('show');
@@ -85,7 +87,7 @@ function foodModify() {
 
             $("#processbar").modal('hide');
             if (data.code != 0) {
-                alert(data.msg);
+                alertWindow(data.msg);
                 return;
             }
             $foodModify.modal('hide');
@@ -94,7 +96,7 @@ function foodModify() {
         },
         error: function (msg) {
             $("#processbar").modal('hide');
-            alert("请求失败")
+            alertWindow("请求失败")
         }
     })
 }
@@ -114,7 +116,7 @@ function queryList() {
             var $gallery = $('#gallery-wrappe');
             $gallery.empty();
             if (msg.code != 0) {
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             var foods = msg.data;
@@ -144,7 +146,7 @@ function queryList() {
             foodsCache = foods;
         },
         error:function(){
-            alert('请求失败');
+            alertWindow('请求失败');
         }
     })
 }

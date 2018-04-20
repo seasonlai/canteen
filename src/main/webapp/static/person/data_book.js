@@ -70,10 +70,10 @@ function queryPageList(num) {
                 dataStr += page.data[i][1];
                 dataStr += '</td>';
                 dataStr += '<td>';
-                dataStr += foodKind>0?getFoodKind(foodKind) : '- -';
+                dataStr += foodKind>=0?getFoodKind(foodKind) : '- -';
                 dataStr += '</td>';
                 dataStr += '<td>';
-                dataStr += foodTime>0?getFoodTime(foodTime) : '- -';
+                dataStr += foodTime>=0?getFoodTime(foodTime) : '- -';
                 dataStr += '</td>';
                 dataStr += '<td>';
                 dataStr += date;

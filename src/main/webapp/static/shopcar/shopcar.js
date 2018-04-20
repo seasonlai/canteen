@@ -20,7 +20,7 @@ function queryShopCarList() {
             var $shopCarBody = $('#shopCarBody');
             $shopCarBody.empty();
             if (msg.code != 0) {
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             var shopCars = msg.data;
@@ -57,7 +57,7 @@ function queryShopCarList() {
             shopCarCache = shopCars;
         },
         error: function () {
-            alert('请求失败');
+            alertWindow('请求失败');
         }
     })
 }
@@ -94,7 +94,7 @@ function submitOrder(index) {
     if (index==null) {
         var checkItems = $('#shopCarBody tr').find('input:checked[type="checkbox"]');
         if (!checkItems || checkItems.length <= 0) {
-            alert('请选择餐品项');
+            alertWindow('请选择餐品项');
             return;
         }
         checkItems.each(function () {
@@ -114,14 +114,14 @@ function submitOrder(index) {
         data: JSON.stringify(shopCars),
         success: function (msg) {
             if (msg.code != 0) {
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             $('#totalPrice').html(0);
             queryShopCarList();
         },
         error: function () {
-            alert('请求失败');
+            alertWindow('请求失败');
         }
     })
 }

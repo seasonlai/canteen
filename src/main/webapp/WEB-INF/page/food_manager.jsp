@@ -8,6 +8,7 @@
             + ":" + request.getServerPort() + path + "/";
 
 %>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>餐品管理</title>
@@ -150,6 +151,7 @@
     <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
     <script src="<%=basePath%>static/food/theme.js"></script>
     <script src="<%=basePath%>static/js/init.js"></script>
+    <script src="<%=basePath%>static/js/bootbox.min.js"></script>
     <script src="<%=basePath%>static/food/food.js"></script>
 </body>
 </html>

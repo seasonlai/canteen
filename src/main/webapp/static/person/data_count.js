@@ -15,6 +15,7 @@ function refreshChart(kindCode, kindName) {
 
 function queryCountData(kindCode) {
     $('#morris-area-chart').empty();
+    $('#processbar').modal('show');
     $.ajax({
         url: basePath + '/data/data-count',
         type: 'post',
@@ -22,10 +23,10 @@ function queryCountData(kindCode) {
         dataType: 'json',
         success: function (msg) {
             if(msg.code!=0){
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
-            new Morris.Line({
+            new Morris.Area({
                 element: 'morris-area-chart',
                 data:msg.data,
                 xkey: 'dataDate',
@@ -35,30 +36,13 @@ function queryCountData(kindCode) {
                 hideHover: 'auto',
                 resize: true
             });
+
+            $('#processbar').modal('hide');
         },
         error: function () {
-            alert('请求失败');
+            $('#processbar').modal('hide');
+            alertWindow('请求失败');
         }
     })
 
-    // new Morris.Line({
-    //     // ID of the element in which to draw the chart.
-    //     element: 'morris-area-chart',
-    //     // Chart data records -- each entry in this array corresponds to a point on
-    //     // the chart.
-    //     data: [
-    //         { year: '2010-10-01', value: 20 },
-    //         { year: '2010-10-02', value: 10 },
-    //         { year: '2010-10-03', value: 5 },
-    //         { year: '2010-10-04', value: 5 },
-    //         { year: '2010-10-05', value: 20 }
-    //     ],
-    //     // The name of the data record attribute that contains x-values.
-    //     xkey: 'year',
-    //     // A list of names of data record attributes that contain y-values.
-    //     ykeys: ['value'],
-    //     // Labels for the ykeys -- will be displayed when you hover over the
-    //     // chart.
-    //     labels: ['Value']
-    // });
 }

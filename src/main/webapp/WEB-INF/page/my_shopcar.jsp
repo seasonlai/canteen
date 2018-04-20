@@ -119,6 +119,7 @@
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>static/js/init.js"></script>
+<script src="<%=basePath%>static/js/bootbox.min.js"></script>
 <script src="<%=basePath%>static/shopcar/shopcar.js"></script>
 </body>
 </html>

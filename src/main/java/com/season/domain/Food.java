@@ -33,6 +33,17 @@ public class Food extends BaseDomain{
     @JoinColumn(name = "kind_code")
     private FoodKind foodKind;
 
+    @Column(name = "is_saling")
+    private Integer isSaling = 0;
+
+    public Integer getIsSaling() {
+        return isSaling;
+    }
+
+    public void setIsSaling(Integer isSaling) {
+        this.isSaling = isSaling;
+    }
+
     public Integer getFoodId() {
         return foodId;
     }

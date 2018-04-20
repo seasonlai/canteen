@@ -22,7 +22,6 @@ public class CanteenFilter implements Filter {
     private static final String[] INHERENT_ESCAPE_URIS = {"/index.jsp",
             "/index.html", "/login.jsp", "/login/doLogin",
             "/register.jsp", "/register.html","/login/doRegister",
-            "/food/food_book.html"
     };
 
 

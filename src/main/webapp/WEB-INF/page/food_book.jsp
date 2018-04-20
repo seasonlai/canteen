@@ -169,6 +169,7 @@
     <script src="<%=basePath%>static/js/bootstrap-datepicker.zh-CN.js"></script>
     <script src="<%=basePath%>static/food/theme.js"></script>
     <script src="<%=basePath%>static/food/food_book.js"></script>
+        <script src="<%=basePath%>static/js/bootbox.min.js"></script>
     <script src="<%=basePath%>static/js/init.js"></script>
 </body>
 </html>

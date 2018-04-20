@@ -27,7 +27,7 @@ function updateData() {
     var $checked = $('#tb_data tr[class!="headTitle"]').find('input:checked');
 
     if ($checked.length !== 1) {
-        alert('请选择一个进行修改')
+        alertWindow('请选择一个进行修改');
         return
     }
 
@@ -53,7 +53,7 @@ function delData() {
         var data = dataCache[new Number($(this).attr('index'))];
         delItem.push(data);
     });
-    console.log(JSON.stringify(delItem));
+    $('#processbar').modal('show');
     $.ajax({
         url: basePath + "data/data-del",
         contentType : "application/json;charset=UTF-8",
@@ -61,17 +61,20 @@ function delData() {
         dataType: 'json',
         type: 'post',
         success: function (msg) {
+            $('#processbar').modal('hide');
             if (msg.code != '0') {
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             queryPageList();
             setTimeout(function () {
-                alert('删除成功');
+                alertWindow('删除成功');
             }, 100);
         },
         error: function () {
-            alert('请求失败')
+
+            $('#processbar').modal('hide');
+            alertWindow('请求失败')
         }
     });
 }
@@ -82,18 +85,18 @@ function modifyData() {
 
     var date = $dataModify.find('#dataDate').val();
     if (!date) {
-        alert('日期不能为空');
+        alertWindow('日期不能为空');
         return;
     }
     var num = $dataModify.find('#dataPerson').val();
     if (!num) {
-        alert('人数不能为空');
+        alertWindow('人数不能为空');
         return;
     }
     try {
         new Number(num)
     } catch (e) {
-        alert('数字不合法');
+        alertWindow('数字不合法');
         return;
     }
     var dataId = $dataModify.find('#dataId').val();
@@ -104,17 +107,17 @@ function modifyData() {
         type: 'post',
         success: function (msg) {
             if (msg.code != '0') {
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             $dataModify.modal('hide');
             queryPageList();
             setTimeout(function () {
-                alert('保存成功');
+                alertWindow('保存成功');
             }, 100);
         },
         error: function () {
-            alert('请求失败')
+            alertWindow('请求失败')
         }
     })
 }
@@ -134,7 +137,7 @@ function queryPageList(num) {
         type: 'post',
         success: function (msg) {
             if (msg.code != '0') {
-                alert(msg.msg);
+                alertWindow(msg.msg);
                 return;
             }
             var page = msg.data;
@@ -195,7 +198,7 @@ function queryPageList(num) {
             $splitBar.html(splitBarStr);
         },
         error: function () {
-            alert('请求失败')
+            alertWindow('请求失败')
         }
     })
 

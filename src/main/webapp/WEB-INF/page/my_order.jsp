@@ -69,13 +69,13 @@
                 <div class="row filter-block">
                     <div class="pull-right">
                         <div id="statusBtnGroup" class="btn-group pull-right">
-                            <button status="-1" onclick="queryOrderList(-1)" class="glow left large active">全&nbsp;部</button>
+                            <button status="-1" onclick="queryPageList(-1)" class="glow left large active">全&nbsp;部</button>
                             <c:forEach var="item" items="${orderStatusObj}" varStatus="stat">
                                 <c:if test="${!stat.last}">
-                                    <button status="${item.code}" onclick="queryOrderList(${item.code})" class="glow middle large">${item.name}</button>
+                                    <button status="${item.code}" onclick="queryPageList(${item.code})" class="glow middle large">${item.name}</button>
                                 </c:if>
                                 <c:if test="${stat.last}">
-                                    <button status="${item.code}" onclick="queryOrderList(${item.code})" class="glow right large">${item.name}</button>
+                                    <button status="${item.code}" onclick="queryPageList(${item.code})" class="glow right large">${item.name}</button>
                                 </c:if>
                             </c:forEach>
                             <%--<button onclick="queryOrderList(0)" class="glow middle large">未完成</button>--%>
@@ -129,16 +129,17 @@
                 </div>
             </div>
             <!-- end orders table -->
-            <div class="text-center">
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
+            <div id="splitBarDiv" class="text-center">
+                <ul id="splitBar" style="margin-left: 10px;" class="pagination">
                 </ul>
+                <br>
+                <div>
+                    共&nbsp;
+                    <span id="pageCount"></span>
+                    &nbsp;页&nbsp;&nbsp;
+                    <span id="dataCount"></span>
+                    条数据
+                </div>
             </div>
         </div>
     </div>
@@ -151,6 +152,7 @@
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>static/js/init.js"></script>
+<script src="<%=basePath%>static/js/bootbox.min.js"></script>
 <script src="<%=basePath%>static/order/order.js"></script>
 </body>
 </html>

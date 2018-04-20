@@ -40,20 +40,20 @@ public class FoodController extends BaseController {
 
     @RequestMapping("/food/food_book.html")
     public ModelAndView food_book() {
-        ModelAndView mav =new ModelAndView("food_book");
+        ModelAndView mav = new ModelAndView("food_book");
 
         List<FoodKind> foodKinds = foodKindDao.loadAll();
-        mav.addObject("foodKinds",foodKinds);
-        mav.addObject("foodTime",getMealKind());
+        mav.addObject("foodKinds", foodKinds);
+        mav.addObject("foodTime", getMealKind());
         return mav;
     }
 
     @RequestMapping("/food/food_manager.html")
     public ModelAndView food_manager() {
-        ModelAndView mav =new ModelAndView("food_manager");
+        ModelAndView mav = new ModelAndView("food_manager");
 
         List<FoodKind> foodKinds = foodKindDao.loadAll();
-        mav.addObject("foodKinds",foodKinds);
+        mav.addObject("foodKinds", foodKinds);
         return mav;
     }
 
@@ -63,7 +63,7 @@ public class FoodController extends BaseController {
     public MsgBean food_add(HttpServletRequest request, FoodMultipart food) {
 
         FoodKind foodKind = foodKindDao.load(food.getKindCode());
-        if(foodKind==null)
+        if (foodKind == null)
             return new MsgBean().setCode(-1).setMsg("不支持的类别");
 
         food.setFoodKind(foodKind);
@@ -85,12 +85,13 @@ public class FoodController extends BaseController {
     @ResponseBody
     public MsgBean food_update(HttpServletRequest request, FoodMultipart food) {
         FoodKind foodKind = foodKindDao.load(food.getKindCode());
-        if(foodKind==null)
+        if (foodKind == null)
             return new MsgBean().setCode(-1).setMsg("不支持的类别");
+
         food.setFoodKind(foodKind);
 
         try {
-            foodService.update(food);
+            foodService.update(food,getWholeUrl(request, "/food/img-" + food.getFoodName()));
         } catch (MyException e) {
             return new MsgBean().setCode(-1)
                     .setMsg(e.getMessage());
@@ -122,14 +123,14 @@ public class FoodController extends BaseController {
         File foodImg = FileUtil.getServerFile("/food/" + foodName);
 
         if (foodImg.exists()) {
-            try (FileInputStream fis = new FileInputStream(foodImg)){
+            try (FileInputStream fis = new FileInputStream(foodImg)) {
                 byte[] buf = new byte[1024];
                 int len;
                 while ((len = fis.read(buf, 0, buf.length)) > 0) {
                     response.getOutputStream().write(buf, 0, len);
                 }
             } catch (IOException e) {
-                logger.error(e.getMessage(),e);
+                logger.error(e.getMessage(), e);
             }
         }
 
@@ -138,7 +139,7 @@ public class FoodController extends BaseController {
 
     @RequestMapping("/food/food_list")
     @ResponseBody
-    public MsgBean<List<Food>> query_food_list(@RequestParam("foodName")String name,@RequestParam("kind")int kind){
+    public MsgBean<List<Food>> query_food_list(@RequestParam("foodName") String name, @RequestParam("kind") int kind) {
         List<Food> foods = foodService.queryList(name, kind);
         return new MsgBean<List<Food>>().setCode(0)
                 .setData(foods);

@@ -1,6 +1,5 @@
 package com.season.web;
 
-import com.season.cons.CommonConstant;
 import com.season.dao.FoodKindDao;
 import com.season.domain.Food;
 import com.season.domain.FoodKind;
@@ -8,7 +7,7 @@ import com.season.domain.FoodMultipart;
 import com.season.domain.MsgBean;
 import com.season.exception.MyException;
 import com.season.service.FoodService;
-import com.season.utils.FileUtil;
+import com.season.utils.MyFileUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by season on 2018/4/15.
@@ -120,7 +116,7 @@ public class FoodController extends BaseController {
     public void get_food_img(@PathVariable("foodName") String foodName,
                              HttpServletResponse response) {
 
-        File foodImg = FileUtil.getServerFile("/food/" + foodName);
+        File foodImg = MyFileUtil.getServerFile("/food/" + foodName);
 
         if (foodImg.exists()) {
             try (FileInputStream fis = new FileInputStream(foodImg)) {

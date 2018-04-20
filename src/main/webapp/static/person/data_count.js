@@ -12,6 +12,7 @@ function refreshChart(kindCode, kindName) {
 
 }
 
+var logFilePath;
 
 function queryCountData(kindCode) {
     $('#morris-area-chart').empty();
@@ -22,13 +23,14 @@ function queryCountData(kindCode) {
         data: {kind: kindCode},
         dataType: 'json',
         success: function (msg) {
-            if(msg.code!=0){
+            if (msg.code != 0) {
                 alertWindow(msg.msg);
                 return;
             }
+            logFilePath = msg.data.logFilePath;
             new Morris.Area({
                 element: 'morris-area-chart',
-                data:msg.data,
+                data: msg.data.dataList,
                 xkey: 'dataDate',
                 ykeys: ['actualNum', 'estimateNum'],
                 labels: ['实际用餐数', '预估用餐数'],
@@ -45,4 +47,9 @@ function queryCountData(kindCode) {
         }
     })
 
+}
+
+
+function getCountLogFile() {
+    window.open(basePath + logFilePath);
 }

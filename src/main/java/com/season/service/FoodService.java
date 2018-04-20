@@ -4,7 +4,7 @@ import com.season.dao.FoodDao;
 import com.season.domain.Food;
 import com.season.domain.FoodMultipart;
 import com.season.exception.MyException;
-import com.season.utils.FileUtil;
+import com.season.utils.MyFileUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,6 @@ import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,7 +41,7 @@ public class FoodService {
             throw new MyException("餐品已存在");
         }
 
-        String filePath = FileUtil.prepareWrite("/food");
+        String filePath = MyFileUtil.prepareWrite("/food");
 
         try {
             food.getFile().transferTo(new File(filePath, food.getFoodName()));
@@ -59,7 +58,7 @@ public class FoodService {
     public void update(FoodMultipart food, String newImgUrl) {
         Food target = foodDao.load(food.getFoodId());
         if (food.getFile() != null && !food.getFile().isEmpty()) {
-            String filePath = FileUtil.prepareWrite("/food");
+            String filePath = MyFileUtil.prepareWrite("/food");
             try {
                 food.getFile().transferTo(new File(filePath, food.getFoodName()));
             } catch (IOException e) {

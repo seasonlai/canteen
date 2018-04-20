@@ -62,6 +62,7 @@
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/supersized.3.2.7.min.js"></script>
 <script src="<%=basePath%>static/login/supersized-init.js"></script>
+<script src="<%=basePath%>static/js/bootbox.min.js"></script>
 <script src="<%=basePath%>static/login/login.js"></script>
 
 

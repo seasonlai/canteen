@@ -12,11 +12,13 @@ import com.season.domain.MyParam;
 import com.season.domain.PersonData;
 import com.season.exception.MyException;
 import com.season.utils.DateUtil;
-import com.season.utils.FileUtil;
+import com.season.utils.MyFileUtil;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
@@ -63,7 +65,6 @@ public class DataService {
     }
 
 
-
     public MsgBean countData(int kind) {
         if (kind < 0 || kind >= CommonConstant.PERSON_COUNT.length) {
             return new MsgBean().setCode(-1).setMsg("不支持的统计类型");
@@ -94,7 +95,7 @@ public class DataService {
         }
 
         double M = dataDao.query_data_M();
-        List<PersonData> datas;
+        Object datas;
         try {
             datas = beginCount(personDatas, M, showCount);
         } catch (MyException e) {
@@ -104,7 +105,7 @@ public class DataService {
         return MsgBean.success().setData(datas);
     }
 
-    private List<PersonData> beginCount(List<PersonData> personDatas, double M, int showCount) throws MyException{
+    private Object beginCount(List<PersonData> personDatas, double M, int showCount) throws MyException {
 
         TreeMap<String, PersonData> treeMap = new TreeMap<>();
 
@@ -115,26 +116,20 @@ public class DataService {
         }
         List<MyParam> myParams;
         try (BufferedInputStream bufferedInputStream = (BufferedInputStream) Resources.getResource("param.json").getContent()) {
-//            byte[] bs = new byte[1024];
-//            StringBuffer sb = new StringBuffer();
-//            while (bufferedInputStream.read(bs) != -1) {
-//                sb.append(new String(bs));
-//            }
-
-//            System.out.println("==========="+sb.toString());
             Type type = new TypeToken<ArrayList<MyParam>>() {
             }.getType();
             JsonReader jsonReader = new JsonReader(new InputStreamReader(bufferedInputStream));
             jsonReader.setLenient(true);
-            myParams = new Gson().fromJson(jsonReader,type);
+            myParams = new Gson().fromJson(jsonReader, type);
 //            myParams = new Gson().fromJson(sb.toString(), type);
         } catch (IOException e) {
             throw new MyException("参数读取错误");
         }
 
-
+        String filePath = MyFileUtil.prepareWrite("/count_log");
+        File logFile = new File(filePath, DateUtil.convert2String(new Date(), "yyyy-MM-dd hh_mm_ss") + ".log");
+        StringBuffer logStr = new StringBuffer();
         Date showEndDate = DateUtil.addDays(new Date(), 1);
-
         List<PersonData> result = new LinkedList<>();
         for (int i = 0; i <= showCount; i++) {
             Date date = DateUtil.addDays(showEndDate, -i);
@@ -145,6 +140,14 @@ public class DataService {
             if (treeMap.containsKey(curDay)) {
                 data.setActualNum(treeMap.get(curDay).getActualNum());
             }
+            logStr.append("\n==========开始计算  ")
+                    .append(curDay)
+                    .append("(")
+                    .append(DateUtil.getDayName(date))
+                    .append(")")
+                    .append("==========\n")
+                    .append("实际用餐人数  当天：")
+                    .append(data.getActualNum());
             int num_day3 = 0, num_day2 = 0, num_day1 = 0, num_lastYear;
             //取前三天、去年当天
             Date date_lastYear = DateUtil.addYears(date, -1);
@@ -153,38 +156,56 @@ public class DataService {
             String lastYear = DateUtil.convert2String(date_lastYear, format);
             Date date1 = DateUtil.addDays(date, -1);
             if (!treeMap.containsKey(lastYear)) {
+                logStr.append("\n去年当天没有数据，不预估了\n");
                 continue;//去年都没，不搞了
             }
             num_lastYear = treeMap.get(lastYear).getActualNum();
-            String day3 = DateUtil.convert2String(date3, format);
-            if (!treeMap.containsKey(day3)) {
-                actualCount(date, data, myParams.get(0), M, date_lastYear, date3, date2, date1, num_lastYear, num_day3, num_day2, num_day1);
-                continue;
-            }
-            num_day3 = treeMap.get(day3).getActualNum();
-            String day2 = DateUtil.convert2String(date2, format);
-            if (!treeMap.containsKey(day2)) {
-                actualCount(date, data, myParams.get(1), M, date_lastYear, date3, date2, date1, num_lastYear, num_day3, num_day2, num_day1);
-                continue;
-            }
-            num_day2 = treeMap.get(day2).getActualNum();
+            logStr.append("    去年当天：")
+                    .append(data.getActualNum());
             String day1 = DateUtil.convert2String(date1, format);
             if (!treeMap.containsKey(day1)) {
-                actualCount(date, data, myParams.get(2), M, date_lastYear, date3, date2, date1, num_lastYear, num_day3, num_day2, num_day1);
+                logStr.append("\n昨天数据不存在，开始计算----\n");
+                actualCount(date, data, myParams.get(0), M, date_lastYear, date3,
+                        date2, date1, num_lastYear, num_day3, num_day2, num_day1, logStr);
                 continue;
             }
             num_day1 = treeMap.get(day1).getActualNum();
+            String day2 = DateUtil.convert2String(date2, format);
+            if (!treeMap.containsKey(day2)) {
+                logStr.append("\n前天数据不存在，开始计算----\n");
+                actualCount(date, data, myParams.get(1), M, date_lastYear, date3,
+                        date2, date1, num_lastYear, num_day3, num_day2, num_day1, logStr);
+                continue;
+            }
+            num_day2 = treeMap.get(day2).getActualNum();
+            String day3 = DateUtil.convert2String(date3, format);
+            if (!treeMap.containsKey(day3)) {
+                logStr.append("\n大前天数据不存在，开始计算----\n");
+                actualCount(date, data, myParams.get(2), M, date_lastYear, date3,
+                        date2, date1, num_lastYear, num_day3, num_day2, num_day1, logStr);
+                continue;
+            }
+            num_day3 = treeMap.get(day1).getActualNum();
 
-            actualCount(date, data, myParams.get(3), M, date_lastYear, date3, date2, date1, num_lastYear, num_day3, num_day2, num_day1);
+            logStr.append("\n数据完整，开始计算----\n");
+            actualCount(date, data, myParams.get(3), M, date_lastYear, date3, date2,
+                    date1, num_lastYear, num_day3, num_day2, num_day1, logStr);
 
         }
-
-        return result;
+        try {
+            FileUtils.write(logFile, logStr.toString(), "utf-8", true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("dataList", result);
+        map.put("logFilePath", "/log/logFile-" + logFile.getName()+".log");
+        return map;
     }
 
     private void actualCount(Date date, PersonData personData, MyParam myParam, double M
             , Date date_lastYear, Date date_day3, Date date_day2, Date date_day1
-            , int num_lastYear, int num_day3, int num_day2, int num_day1) {
+            , int num_lastYear, int num_day3, int num_day2, int num_day1, StringBuffer... sb) {
 
         //开始计算
         double e = DateUtil.isWeekend(date) ? 1 / M : 1;
@@ -198,8 +219,92 @@ public class DataService {
         double C = myParam.getC();
         double D = myParam.getD();
 
+
         int result = (int) Math.round(e * (a * A * num_day3 + b * B * num_day2 + c * C * num_day1 + d * D * num_lastYear));
         personData.setEstimateNum(result);
+
+
+        if (sb != null && sb[0] != null) {
+            StringBuffer logStr = sb[0];
+            logStr.append("加权参数： A: ")
+                    .append(myParam.getA())
+                    .append("  B: ")
+                    .append(myParam.getB())
+                    .append("  C: ")
+                    .append(myParam.getC())
+                    .append("  D: ")
+                    .append(myParam.getD());
+
+            String format = "yyyy-MM-dd";
+            logStr.append("   M（历史数据非周末均值/历史数据周末均值）：")
+                    .append(M)
+                    .append("    e: ")
+                    .append(e)
+                    .append("\n大前天：")
+                    .append(DateUtil.convert2String(date_day3, format))
+                    .append("(")
+                    .append(DateUtil.getDayName(date_day3))
+                    .append(")  a值：")
+                    .append(a)
+                    .append("   用餐人数：")
+                    .append(num_day3)
+                    .append("\n前天： ")
+                    .append(DateUtil.convert2String(date_day2, format))
+                    .append("(")
+                    .append(DateUtil.getDayName(date_day2))
+                    .append(")  b值：")
+                    .append(b)
+                    .append("   用餐人数：")
+                    .append(num_day2)
+                    .append("\n昨天： ")
+                    .append(DateUtil.convert2String(date_day1, format))
+                    .append("(")
+                    .append(DateUtil.getDayName(date_day1))
+                    .append(")  c值：")
+                    .append(c)
+                    .append("   用餐人数：")
+                    .append(num_day3)
+                    .append("\n去年当天： ")
+                    .append(DateUtil.convert2String(date_lastYear, format))
+                    .append("(")
+                    .append(DateUtil.getDayName(date_lastYear))
+                    .append(")  d值：")
+                    .append(d)
+                    .append("   用餐人数：")
+                    .append(num_day3);
+
+            logStr.append("\n最终计算公式：")
+                    .append(e)
+                    .append("*（")
+                    .append(a)
+                    .append("*")
+                    .append(A)
+                    .append("*")
+                    .append(num_day3)
+                    .append("+")
+                    .append(b)
+                    .append("*")
+                    .append(B)
+                    .append("*")
+                    .append(num_day2)
+                    .append("+")
+                    .append(c)
+                    .append("*")
+                    .append(C)
+                    .append("*")
+                    .append(num_day1)
+                    .append("+")
+                    .append(d)
+                    .append("*")
+                    .append(D)
+                    .append("*")
+                    .append(num_lastYear)
+                    .append("）")
+                    .append("\n最终结果: ")
+                    .append(result)
+                    .append("\n");
+
+        }
     }
 
 }

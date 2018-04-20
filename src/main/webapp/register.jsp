@@ -72,12 +72,13 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src='<%=basePath%>static/js/bootstrap.min.js'></script>
+<script src="<%=basePath%>static/js/bootbox.min.js"></script>
 
 <script>
 
     var errorMsg = "${errorMsg}";
     if (errorMsg)
-        alert(errorMsg);
+        alertWindow(errorMsg);
 
     function myCheck() {
 

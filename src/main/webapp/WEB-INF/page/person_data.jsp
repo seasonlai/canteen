@@ -76,6 +76,8 @@
             <div class="panel-body">
                 <div id="morris-area-chart"></div>
             </div>
+
+            <button class="btn btn-default" onclick="getCountLogFile()">下载计算日志</button>
             <!-- /.panel-body -->
         </div>
     </div>

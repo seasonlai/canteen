@@ -7,7 +7,7 @@ import java.io.File;
 /**
  * Created by season on 2018/4/14.
  */
-public class FileUtil {
+public class MyFileUtil {
 
     public static String prepareWrite(String path) {
         //如果文件不为空，写入上传路径

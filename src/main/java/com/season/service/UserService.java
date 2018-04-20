@@ -6,7 +6,7 @@ import com.season.domain.LoginLog;
 import com.season.domain.User;
 import com.season.exception.MyException;
 import com.season.exception.UserExistException;
-import com.season.utils.FileUtil;
+import com.season.utils.MyFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -45,7 +45,7 @@ public class UserService {
             user.setUserType(User.NORMAL_USER);
 
             //上传文件路径
-            String path = FileUtil.prepareWrite("images/");
+            String path = MyFileUtil.prepareWrite("images/");
             //上传文件名
 //                String filename = idCardImgFile.getOriginalFilename();
             try {

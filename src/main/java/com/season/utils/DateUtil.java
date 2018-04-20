@@ -534,4 +534,31 @@ public class DateUtil {
         return cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
     }
 
+
+    public static String getDayName(Date date) {
+        if(date==null)
+            return null;
+        Calendar cal = Calendar.getInstance();
+
+        cal.setTime(date);
+
+        switch (cal.get(Calendar.DAY_OF_WEEK)){
+            case Calendar.SUNDAY:
+                return "星期日";
+            case Calendar.MONDAY:
+                return "星期一";
+            case Calendar.TUESDAY:
+                return "星期二";
+            case Calendar.WEDNESDAY:
+                return "星期三";
+            case Calendar.THURSDAY:
+                return "星期四";
+            case Calendar.FRIDAY:
+                return "星期五";
+            case Calendar.SATURDAY:
+                return "星期六";
+        }
+        return null;
+    }
+
 }

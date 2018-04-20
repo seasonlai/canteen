@@ -24,7 +24,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<c:url value="/index.html"/>">饭堂系统</a>
+        <%--<c:url value="/index.html"/>--%>
+        <a class="navbar-brand" onclick="toHome()" href="javascript:void (0)">饭堂系统</a>
     </div>
 
     <div class="nav navbar-right top-nav" style="padding-top: 5px;padding-right: 30px">

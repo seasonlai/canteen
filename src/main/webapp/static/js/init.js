@@ -137,3 +137,7 @@ function alertWindow(msg) {
         }
     }
 }
+
+function toHome() {
+    $('.side-nav>li:first>a>i').click();
+}

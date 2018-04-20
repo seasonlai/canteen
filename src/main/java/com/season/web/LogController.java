@@ -36,7 +36,7 @@ public class LogController extends BaseController {
             //通知浏览器以attachment（下载方式）打开图片
             headers.setContentDispositionFormData("attachment", downloadFielName);
             //application/octet-stream ： 二进制流数据（最常见的文件下载）。
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
                     headers, HttpStatus.CREATED);
         } catch (IOException e) {

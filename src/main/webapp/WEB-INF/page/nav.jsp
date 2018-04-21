@@ -42,10 +42,13 @@
                     <img src="<%=basePath%>static/img/head_def.jpg" width="40" height="40" class="img-circle">
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="<c:url value="/login/user.html"/>" target="_blank">
-                            <i class="fa fa-fw fa-user"></i>&nbsp;&nbsp;用户中心</a>
-                    </li>
+
+                    <c:if test="${USER_CONTEXT.userType == 1}">
+                        <li>
+                            <a href="<c:url value="/login/user.html"/>">
+                                <i class="fa fa-fw fa-user"></i>&nbsp;&nbsp;用户中心</a>
+                        </li>
+                    </c:if>
                     <li>
                         <a href="<c:url value="/login/doLogout"/>">
                             <i class="fa fa-fw fa-power-off"></i>&nbsp;&nbsp;退出登录</a>
@@ -111,7 +114,8 @@
 
 
 <c:if test="${USER_CONTEXT.userType == 1}">
-    <a href="<c:url value="/shopcar/myShopCar.html"/>" id="myShopCart" style="position: fixed;right: 20px;bottom: 50px;"
+    <a href="<c:url value="/shopcar/myShopCar.html"/>" id="myShopCart"
+       style="position: fixed;right: 20px;bottom: 50px;"
        class="btn btn-lg btn-default">
         <li class="glyphicon glyphicon-shopping-cart"></li>
     </a>

@@ -29,8 +29,6 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/elements.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/icons.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>static/css/compiled/elements.css">
-    <!-- this page specific styles -->
-    <link rel="stylesheet" href="<%=basePath%>static/css/compiled/gallery.css" type="text/css" media="screen"/>
 
     <!-- libraries -->
     <link href="<%=basePath%>static/css/lib/font-awesome.css" type="text/css" rel="stylesheet"/>
@@ -38,8 +36,6 @@
     <!-- Custom CSS -->
     <link href='<%=basePath%>static/css/sb-admin.css' rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href='<%=basePath%>static/css/plugins/morris.css' rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href='<%=basePath%>static/font-awesome/css/font-awesome.min.css' rel="stylesheet" type="text/css">

@@ -28,7 +28,7 @@ public class UserService {
     @Autowired
     private LoginLogDao loginLogDao;
 
-    public void register(User user, MultipartFile idCardImgFile) throws MyException {
+    public void register(User user, MultipartFile idCardImgFile, String imgPath) throws MyException {
 
         //判空
         if (StringUtils.isEmpty(user.getUserName()) || StringUtils.isEmpty(user.getPassword())) {
@@ -54,6 +54,7 @@ public class UserService {
                 e.printStackTrace();
                 throw new MyException("上传图片失败");
             }
+            user.setIdCardImg(imgPath);
             userDao.save(user);
         }
     }

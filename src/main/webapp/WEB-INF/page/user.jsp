@@ -19,41 +19,6 @@
     <meta name="author" content="">
 
     <link href='<%=basePath%>static/css/bootstrap.min.css' rel="stylesheet">
-
-    <style type="text/css">
-
-        #box {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        #userOpt {
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            width: 320px;
-        }
-
-        #userInfo {
-            display: inline-flex;
-            flex-direction: column;
-            width: 300px;
-
-        }
-
-        #userInfo div {
-            display: inline-flex;
-            justify-content: flex-end
-        }
-
-        #userInfo input {
-            width: 200px;
-        }
-    </style>
 </head>
 <body>
 
@@ -62,30 +27,21 @@ background-color: #3b9ff3;padding-left: 20px">
     <span class="h3" style="color: white;">用户中心</span>
 </div>
 
-<div id="box">
-    <div id="userOpt">
-        <button class="btn btn-sm btn-default">编辑</button>
-        <span class="fa fa-line" style="width: 320px"></span>
-    </div>
-    <div id="userInfo">
-        <div class="form-inline form-group">
-            <label for="userName">用户名: </label>
-            <input class="" id="userName"/>
+<div id="box" class="text-center" style="margin: 30px auto">
+    <form class="form-horizontal" role="form">
+        <div class="form-group form-inline">
+            <label for="userName" class="col-md-4 control-label">用户名:</label>
+            <input readonly id="userName" value="${USER_CONTEXT.userName}" class="form-control col-md-2">
         </div>
-        <div class="form-inline form-group">
-            <label for="password">密 码: </label>
-            <input class="" id="password"/>
+        <div class="form-group form-inline">
+            <label for="password" class="col-md-4 control-label">密&nbsp;&nbsp;码:</label>
+            <input readonly id="password" type="password" value="xxxxxxx" class="form-control col-md-2">
         </div>
-        <div class="form-inline form-group">
-            <label for="password2">再次输入密码: </label>
-            <input class="" id="password2"/>
+        <div class="form-group">
+            <label for="cardImg" class="col-md-4 control-label">学生证图片:</label>
+            <img id="cardImg" src="${USER_CONTEXT.idCardImg}" style="width:280px;height: 280px;" class="form-control col-md-2">
         </div>
-        <div class="form-inline form-group">
-            <label for="cardImg">学生证图片: </label>
-            <input class="" type="file" id="cardImg"/>
-        </div>
-    </div>
-    <img src="" width="290" height="290">
+    </form>
 
 </div>
 

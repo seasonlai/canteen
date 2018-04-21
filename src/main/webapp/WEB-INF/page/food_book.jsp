@@ -37,9 +37,6 @@
     <!-- Custom CSS -->
     <link href='<%=basePath%>static/css/sb-admin.css' rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href='<%=basePath%>static/css/plugins/morris.css' rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href='<%=basePath%>static/font-awesome/css/font-awesome.min.css' rel="stylesheet" type="text/css">
 

@@ -43,6 +43,10 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
+                        <a href="<c:url value="/login/user.html"/>" target="_blank">
+                            <i class="fa fa-fw fa-user"></i>&nbsp;&nbsp;用户中心</a>
+                    </li>
+                    <li>
                         <a href="<c:url value="/login/doLogout"/>">
                             <i class="fa fa-fw fa-power-off"></i>&nbsp;&nbsp;退出登录</a>
                     </li>

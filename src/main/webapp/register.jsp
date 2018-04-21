@@ -77,8 +77,10 @@
 <script>
 
     var errorMsg = "${errorMsg}";
-    if (errorMsg)
-        alertWindow(errorMsg);
+    $(function () {
+        if (errorMsg)
+            alert(errorMsg);
+    });
 
     function myCheck() {
 

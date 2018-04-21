@@ -27,7 +27,7 @@ public class LogController extends BaseController {
     public ResponseEntity<byte[]> getCountDataLog(@PathVariable("fileName") String fileName,
                                                   HttpServletResponse response) {
 
-
+        fileName = fileName.endsWith(".log")?fileName:fileName+".log";
         File file = MyFileUtil.getServerFile("/count_log/" + fileName);
         try {
             HttpHeaders headers = new HttpHeaders();

@@ -24,7 +24,7 @@ public class CommonConstant
     */
    public static final int PAGE_SIZE = 15;
 
-   public static final String BASE_PATH_LINUX = "/canteen/";
+   public static final String BASE_PATH_LINUX = "/data/wwwfile/canteen/";
 
    public static final String BASE_PATH_WIN = "d://canteen/";
 

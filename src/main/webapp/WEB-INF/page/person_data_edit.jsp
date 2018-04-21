@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%
     String path = request.getContextPath();
@@ -9,6 +8,7 @@
             + ":" + request.getServerPort() + path + "/";
 
 %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>统计/预估</title>
@@ -30,9 +30,6 @@
     <link href='<%=basePath%>static/css/sb-admin.css' rel="stylesheet">
     <%--<link href='<%=basePath%>static/css/bootstrap-datetimepicker.min.css' rel="stylesheet">--%>
     <link href='<%=basePath%>static/css/bootstrap-datepicker.min.css' rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href='<%=basePath%>static/css/plugins/morris.css' rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href='<%=basePath%>static/font-awesome/css/font-awesome.min.css' rel="stylesheet" type="text/css">

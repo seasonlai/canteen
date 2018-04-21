@@ -92,8 +92,12 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/login/register.html", method = RequestMethod.GET)
     public String registerPage(HttpServletRequest request) {
-        System.out.println("register================================");
         return "forward:/register.jsp";
+    }
+
+    @RequestMapping(value = "/login/user.html", method = RequestMethod.GET)
+    public String userPage(HttpServletRequest request) {
+        return "user";
     }
 
 }

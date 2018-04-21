@@ -34,12 +34,14 @@ public class CanteenInterceptor extends HandlerInterceptorAdapter {
             if (userContext == null
                     && !isURILogin(httpRequest.getRequestURI(), httpRequest)) {
                 String toUrl = httpRequest.getRequestURL().toString();
-                if (!StringUtils.isEmpty(httpRequest.getQueryString())) {
-                    toUrl += "?" + httpRequest.getQueryString();
-                }
+                if(toUrl.endsWith(".html")) {
+                    if (!StringUtils.isEmpty(httpRequest.getQueryString())) {
+                        toUrl += "?" + httpRequest.getQueryString();
+                    }
 
-                // ②-4将用户的请求URL保存在session中，用于登录成功之后，跳到目标URL
-                httpRequest.getSession().setAttribute(LOGIN_TO_URL, toUrl);
+                    // ②-4将用户的请求URL保存在session中，用于登录成功之后，跳到目标URL
+                    httpRequest.getSession().setAttribute(LOGIN_TO_URL, toUrl);
+                }
                 // 重定向
                 String path = req.getContextPath();
                 String basePath = req.getScheme() + "://" + req.getServerName() + ":"

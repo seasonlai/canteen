@@ -199,7 +199,7 @@ public class DataService {
         }
         Map<String, Object> map = new HashMap<>();
         map.put("dataList", result);
-        map.put("logFilePath", "/log/logFile-" + logFile.getName()+".log");
+        map.put("logFilePath", "/log/logFile-" + logFile.getName());
         return map;
     }
 

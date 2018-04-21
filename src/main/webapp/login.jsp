@@ -18,6 +18,7 @@
     <meta name="author" content="">
 
     <!-- CSS -->
+    <%--<link href='<%=basePath%>static/css/bootstrap.min.css' rel="stylesheet">--%>
     <link rel="stylesheet" href="<%=basePath%>static/css/reset.css">
     <link rel="stylesheet" href="<%=basePath%>static/css/supersized.css">
     <link rel="stylesheet" href="<%=basePath%>static/css/style.css">
@@ -52,20 +53,20 @@
     <%--</div>--%>
 </div>
 
-<script>
-    var basePath = "<%=basePath%>";
-    var errorMsg = "${errorMsg}";
-    if (errorMsg)
-        alertWindow(errorMsg);
-</script>
 <!-- Javascript -->
 <script src="<%=basePath%>static/js/jquery.js"></script>
 <script src="<%=basePath%>static/js/supersized.3.2.7.min.js"></script>
 <script src="<%=basePath%>static/login/supersized-init.js"></script>
-<script src="<%=basePath%>static/js/bootbox.min.js"></script>
 <script src="<%=basePath%>static/login/login.js"></script>
 
-
+<script>
+    var basePath = "<%=basePath%>";
+    var errorMsg = "${errorMsg}";
+    $(function () {
+        if (errorMsg)
+            alert(errorMsg);
+    });
+</script>
 </body>
 <div style="text-align:center;">
 </div>

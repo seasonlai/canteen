@@ -5,4 +5,5 @@
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
     <import resource="classpath:canteen-dao.xml"/>
     <import resource="classpath:canteen-service.xml"/>
+    <import resource="classpath:quartz.xml"/>
 </beans>

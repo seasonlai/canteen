@@ -28,13 +28,13 @@ function queryCountData(kindCode) {
                 return;
             }
             logFilePath = msg.data.logFilePath;
-            new Morris.Area({
+            Morris.Line({
                 element: 'morris-area-chart',
                 data: msg.data.dataList,
                 xkey: 'dataDate',
                 ykeys: ['actualNum', 'estimateNum'],
                 labels: ['实际用餐数', '预估用餐数'],
-                pointSize: 2,
+                pointSize: 4,
                 hideHover: 'auto',
                 resize: true
             });

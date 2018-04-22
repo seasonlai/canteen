@@ -65,14 +65,14 @@
                                 style="margin-right:12px;width: 35px;height: 33px" type="button">
                             <i class="fa fa-refresh"></i>
                         </button>
-                        <select class="form-control" onchange="queryList()" id="foodKind"
+                        <select class="form-control" onchange="queryPageList()" id="foodKind"
                                 style="width:150px;height: 33px">
                             <option value="-1">全部分类</option>
                             <c:forEach items="${foodKinds}" var="foodKind">
                                 <option value="${foodKind.kindCode}">${foodKind.kindName}</option>
                             </c:forEach>
                         </select>
-                        <select class="form-control" onchange="queryList()" id="foodTimeKind"
+                        <select class="form-control" onchange="queryPageList()" id="foodTimeKind"
                                 style="width:150px;height: 33px">
                             <option value="-1">全部时间段</option>
                             <c:forEach items="${foodTimes}" var="time">
@@ -80,7 +80,7 @@
                             </c:forEach>
                         </select>
                         <div class="input-group">
-                            <input type="text" id="countTime" style="height:30px;width:200px;"
+                            <input onchange="queryPageList()" type="text" id="countTime" style="height:30px;width:200px;"
                                    data-provide="datepicker"
                                    class="form-control datepicker" placeholder="预约用餐日期">
                         </div>

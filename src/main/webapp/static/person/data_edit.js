@@ -132,7 +132,7 @@ function queryPageList(num) {
 
     $.ajax({
         url: basePath + "data/data-list",
-        data: {pageNo: num, pageSize: 10, startTime: startTime, endTime: endTime},
+        data: {sortKind:sortKind,pageNo: num, pageSize: 10, startTime: startTime, endTime: endTime},
         dataType: 'json',
         type: 'post',
         success: function (msg) {
@@ -202,6 +202,11 @@ function queryPageList(num) {
         }
     })
 
+}
+
+var sortKind = 1;
+function switchSort() {
+    sortKind = sortKind===1?0:1;
 }
 
 function clearInput(id) {

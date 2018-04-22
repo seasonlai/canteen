@@ -1,9 +1,9 @@
 package com.season.web;
 
 import com.season.cons.CommonConstant;
+import com.season.domain.MsgBean;
 import com.season.domain.User;
 import com.season.exception.MyException;
-import com.season.exception.UserExistException;
 import com.season.service.UserService;
 import com.season.utils.MyFileUtil;
 import org.apache.commons.io.FileUtils;
@@ -15,10 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -84,7 +81,7 @@ public class LoginController extends BaseController {
         try {
             user.setUserName(userName);
             user.setPassword(pwd);
-            userService.register(user, idCardImgFile, getWholeUrl(request,"/user/idcard-" + user.getUserName()));
+            userService.register(user, idCardImgFile, getWholeUrl(request, "/user/idcard-" + user.getUserName()));
         } catch (MyException e) {
             mav.addObject("errorMsg", e.getMessage());
             mav.setViewName("forward:/register.jsp");
@@ -132,6 +129,18 @@ public class LoginController extends BaseController {
             Logger.getLogger(LoginController.class).error(e.getMessage(), e);
         }
         return null;
+    }
+
+    @RequestMapping("/user/user-list.html")
+    public String userListPage() {
+        return "user_list";
+    }
+
+    @RequestMapping(value = "/user/user-list",method = RequestMethod.POST)
+    @ResponseBody
+    public MsgBean getUserList(@RequestParam("pageNo") Integer no,
+                               @RequestParam("pageSize") Integer size) {
+        return MsgBean.success().setData(userService.getPageUser(no,size));
     }
 
 }

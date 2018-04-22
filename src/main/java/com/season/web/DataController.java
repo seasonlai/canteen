@@ -87,11 +87,12 @@ public class DataController extends BaseController {
     @RequestMapping(value = "/data/data-list", method = RequestMethod.POST)
     @ResponseBody
     public MsgBean queryDataList(@RequestParam("pageNo") Integer no,
+                                 @RequestParam(value = "sortKind",required = false) Integer sortKind,
                                  @RequestParam("pageSize") Integer size,
                                  @RequestParam("startTime") String startTime,
                                  @RequestParam("endTime") String endTime
     ) {
-        Page page = dataService.queryDataList(no, size, startTime, endTime);
+        Page page = dataService.queryDataList(no, size, startTime, endTime,sortKind);
 
         return new MsgBean().setCode(0)
                 .setData(page);

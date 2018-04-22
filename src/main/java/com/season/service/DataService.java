@@ -55,8 +55,8 @@ public class DataService {
     }
 
 
-    public Page queryDataList(Integer no, Integer size, String startTime, String endTime) {
-        return dataDao.query_data_nec(no, size, startTime, endTime);
+    public Page queryDataList(Integer no, Integer size, String startTime, String endTime,Integer sortKind) {
+        return dataDao.query_data_nec(no, size, startTime, endTime,sortKind);
     }
 
     public MsgBean delData(List<PersonData> dataList) {

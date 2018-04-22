@@ -109,7 +109,7 @@
                                 <div class="form-group">
                                     <label for="foodDate" class="col-md-3 control-label">预约日期:</label>
                                     <div class="col-md-8">
-                                        <input type="text" id="foodDate" style="height:30px;width:200px;"
+                                        <input onchange="foodDateChange(this)" type="text" id="foodDate" style="height:30px;width:200px;"
                                                data-provide="datepicker" class="form-control datepicker"
                                                placeholder="选择时间">
                                     </div>

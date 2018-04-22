@@ -15,6 +15,10 @@ public class UserDao extends BaseDao<User> {
 
     private static final String QUERY_USER_BY_USERNAME = "from User u where u.userName like ?";
 
+    private static final String QUERY_USER = "from User u";
+
+
+
     public User getUserByUserName(String userName) {
         List list = hibernateTemplate.find(GET_USER_BY_USERNAME, userName);
         if (list != null && list.size() > 0) {
@@ -30,5 +34,9 @@ public class UserDao extends BaseDao<User> {
      */
     public List<User> queryUserByUserName(String userName){
         return (List<User>)hibernateTemplate.find(QUERY_USER_BY_USERNAME,userName+"%");
+    }
+
+    public Page queryPageUser(Integer no ,Integer pageSize){
+        return pagedQuery(QUERY_USER,no,pageSize);
     }
 }

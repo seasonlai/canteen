@@ -61,21 +61,6 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav" style="width: 185px">
-            <%--<li>--%>
-            <%--<a href="javascript:;" data-toggle="collapse" data-target="#people_data">--%>
-            <%--<i class="fa fa-fw fa-bar-chart-o"></i> 饭堂数据<i class="fa fa-fw fa-caret-down"></i></a>--%>
-            <%--<ul id="people_data" class="collapse"> &lt;%&ndash;aria-labelledby="dLabel"&ndash;%&gt;--%>
-            <%--<li>--%>
-            <%--<a href="<c:url value="/data/data.html"/> ">人次统计/预估</a>--%>
-            <%--</li>--%>
-            <%--<li>--%>
-            <%--<a href="<c:url value="/data/data-book.html"/> ">预约用餐统计</a>--%>
-            <%--</li>--%>
-            <%--<li>--%>
-            <%--<a href="<c:url value="/data/data-edit.html"/>">数据修改</a>--%>
-            <%--</li>--%>
-            <%--</ul>--%>
-            <%--</li>--%>
             <c:if test="${USER_CONTEXT.userType == 2}">
                 <li>
                     <a href="<c:url value="/data/data.html"/>"><i class="fa fa-fw fa-bar-chart-o"></i> 人次统计/预估</a>
@@ -88,6 +73,9 @@
                 </li>
                 <li>
                     <a href="<c:url value="/food/food_manager.html"/>"><i class="fa fa-fw fa-dashboard"></i> 餐品管理</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/user/user-list.html"/>"><i class="fa fa-fw fa-user"></i> 用户列表</a>
                 </li>
             </c:if>
 

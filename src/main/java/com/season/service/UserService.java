@@ -1,6 +1,7 @@
 package com.season.service;
 
 import com.season.dao.LoginLogDao;
+import com.season.dao.Page;
 import com.season.dao.UserDao;
 import com.season.domain.LoginLog;
 import com.season.domain.User;
@@ -88,7 +89,7 @@ public class UserService {
         userDao.update(user);
     }
 
-    public List<User> getAllUser() {
-        return userDao.loadAll();
+    public Page getPageUser(Integer no, Integer size) {
+        return userDao.queryPageUser(no,size);
     }
 }

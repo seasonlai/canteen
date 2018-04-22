@@ -46,17 +46,25 @@ public class DataDao extends BaseDao<PersonData> {
         return list.size() > 0 ? (PersonData) list.get(0) : null;
     }
 
-    public Page query_data_nec(Integer no, Integer size, String startTime, String endTime) {
+    public Page query_data_nec(Integer no, Integer size, String startTime, String endTime,Integer sortKind) {
+
+        String  orderBy;
+        if(sortKind==null||sortKind==0){//升序
+            orderBy = " order by d.data_date asc";
+        }else {
+            //降序
+            orderBy = " order by d.data_date desc";
+        }
 
         if (StringUtils.isEmpty(startTime) && StringUtils.isEmpty(endTime)) {
-            return pagedQuery(QUERY_DATA_LIST, no, size);
+            return pagedQuery(QUERY_DATA_LIST+orderBy, no, size);
         } else if (!StringUtils.isEmpty(startTime) && !StringUtils.isEmpty(endTime)) {
-            return pagedQuery(QUERY_DATA_LIST_START_END, no, size,
+            return pagedQuery(QUERY_DATA_LIST_START_END+orderBy, no, size,
                     DateUtil.convert2Date(startTime, DATE_FORMAT), DateUtil.convert2Date(endTime, DATE_FORMAT));
         } else if (!StringUtils.isEmpty(startTime)) {
-            return pagedQuery(QUERY_DATA_LIST_START, no, size, DateUtil.convert2Date(startTime, DATE_FORMAT));
+            return pagedQuery(QUERY_DATA_LIST_START+orderBy, no, size, DateUtil.convert2Date(startTime, DATE_FORMAT));
         } else {
-            return pagedQuery(QUERY_DATA_LIST_END,no, size, DateUtil.convert2Date(endTime, DATE_FORMAT));
+            return pagedQuery(QUERY_DATA_LIST_END+orderBy,no, size, DateUtil.convert2Date(endTime, DATE_FORMAT));
         }
     }
 
@@ -86,25 +94,4 @@ public class DataDao extends BaseDao<PersonData> {
         return nomal.divide(weekend,10,ROUND_HALF_DOWN).doubleValue();
     }
 
-    public static void main(String... arg) {
-        Date today = new Date();
-        Date startShowDate = DateUtil.addDays(today, 1);
-        Date startQryDate = DateUtil.addDays(startShowDate, -3);
-        TreeMap<Date, Integer> treeMap = new TreeMap<>(new Comparator<Date>() {
-            @Override
-            public int compare(Date o1, Date o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        treeMap.put(today, 1);
-        treeMap.put(startQryDate, 3);
-        treeMap.put(startShowDate, 2);
-        System.out.println(DateUtil.diffDay(today, new Date()));
-//        for (Date date : treeMap.keySet()) {
-//            System.out.println(treeMap.get(date));
-//        }
-
-//        System.out.println(treeMap.get(DateUtil.addDays(today,  1)));
-//        System.out.println(treeMap.get(DateUtil.addDays(startShowDate, - 3)));
-    }
 }

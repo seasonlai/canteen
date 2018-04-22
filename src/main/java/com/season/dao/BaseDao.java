@@ -67,7 +67,7 @@ public class BaseDao<T> {
     }
 
     public List runSql(String sql, Object... values) {
-        return createSqlQuery(sql,values).list();
+        return createSqlQuery(sql, values).list();
     }
 
     public List find(String sql) {
@@ -82,7 +82,7 @@ public class BaseDao<T> {
         hibernateTemplate.initialize(entity);
     }
 
-    public SQLQuery createSqlQuery(String sql, Object... values){
+    public SQLQuery createSqlQuery(String sql, Object... values) {
         Assert.hasText(sql);
         SQLQuery query = getSession().createSQLQuery(sql);
         if (values != null) {
@@ -97,7 +97,7 @@ public class BaseDao<T> {
         Assert.hasText(hql);
         Assert.isTrue(pageNo >= 1, "页数应从1开始");
         String countStr;
-        countStr = "select count(*) " + removeSelect(hql);
+        countStr = "select count(*) " + removeOrders(removeSelect(hql));
         List countlist = hibernateTemplate.find(countStr, values);
         long totalCount = countlist.size() > 0 ? (Long) countlist.get(0) : 0;
         return pagedQuery(hql, totalCount, pageNo, pageSize, values);

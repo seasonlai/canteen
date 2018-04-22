@@ -21,6 +21,13 @@ public class DataTest extends AbstractTestNGSpringContextTests {
 
     }
 
+    @Test
+    public void dataList(){
+
+        dataService.queryDataList(1,10,null,null,1);
+
+    }
+
 }
 
 

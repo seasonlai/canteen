@@ -71,7 +71,9 @@
                         </button>
                     </div>
                     <div class="pull-right form-inline" role="form" aria-orientation="horizontal">
-                            <button class="btn btn-sm btn-default" onclick="switchSort()" data-toggle="tooltip" title="排序" style="margin-right: 12px"><i class="glyphicon glyphicon-sort"></i></button>
+                            <button class="btn btn-sm btn-default" onclick="switchSort()" data-toggle="tooltip" title="排序" style="margin-right: 12px">
+                                <i class="glyphicon glyphicon-sort"></i>
+                            </button>
                             <div class="input-group">
                                 <input type="text" id="startTime" style="height:30px;width:200px;"
                                        data-provide="datepicker"

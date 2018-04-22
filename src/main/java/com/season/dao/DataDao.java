@@ -20,7 +20,7 @@ import static java.math.BigDecimal.ROUND_HALF_DOWN;
 public class DataDao extends BaseDao<PersonData> {
 
     private static final String QUERY_DATA_LIST =
-            "from PersonData";
+            "from PersonData d";
 
     private static final String QUERY_DATA_FOR_DATE =
             "from PersonData d where d.dataDate = ?";
@@ -50,10 +50,10 @@ public class DataDao extends BaseDao<PersonData> {
 
         String  orderBy;
         if(sortKind==null||sortKind==0){//升序
-            orderBy = " order by d.data_date asc";
+            orderBy = " order by d.dataDate asc";
         }else {
             //降序
-            orderBy = " order by d.data_date desc";
+            orderBy = " order by d.dataDate desc";
         }
 
         if (StringUtils.isEmpty(startTime) && StringUtils.isEmpty(endTime)) {

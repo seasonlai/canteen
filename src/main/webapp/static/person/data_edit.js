@@ -207,6 +207,7 @@ function queryPageList(num) {
 var sortKind = 1;
 function switchSort() {
     sortKind = sortKind===1?0:1;
+    queryPageList();
 }
 
 function clearInput(id) {

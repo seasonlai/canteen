@@ -15,7 +15,7 @@ function addData() {
 
     var $dataModify = $('#dataModify');
 
-    $dataModify.find('input').val(null);
+    $dataModify.find('input').attr("readonly",false).val(null);
 
     modifyType = '1';
     $dataModify.modal('show');
@@ -35,9 +35,10 @@ function updateData() {
     var data = dataCache[new Number($checked.attr('index'))];
     var $dataModify = $('#dataModify');
     $dataModify.find('input').val(null);
-    $dataModify.find('#dataDate').val(data.dataDate);
+    $dataModify.find('#dataDate').attr("readonly",true).val(data.dataDate);
     $dataModify.find('#dataPerson').val(data.actualNum);
     $dataModify.find('#dataId').val(data.dataId);
+
     $dataModify.modal('show');
 }
 

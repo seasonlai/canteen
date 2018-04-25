@@ -45,18 +45,18 @@ public class DataService {
     }
 
     public void modify(PersonData data) {
-        if (data.getActualNum() <= 0) {
+        if (data.getDataDate() == null || data.getActualNum() <= 0) {
             throw new MyException("信息有误");
         }
-        PersonData personData = dataDao.query_data_for_date(data.getDataDate());
-        if (personData != null)
-            throw new MyException("该日期已存在");
+//        PersonData personData = dataDao.query_data_for_date(data.getDataDate());
+//        if (personData != null)
+//            throw new MyException("该日期已存在");
         dataDao.update(data);
     }
 
 
-    public Page queryDataList(Integer no, Integer size, String startTime, String endTime,Integer sortKind) {
-        return dataDao.query_data_nec(no, size, startTime, endTime,sortKind);
+    public Page queryDataList(Integer no, Integer size, String startTime, String endTime, Integer sortKind) {
+        return dataDao.query_data_nec(no, size, startTime, endTime, sortKind);
     }
 
     public MsgBean delData(List<PersonData> dataList) {

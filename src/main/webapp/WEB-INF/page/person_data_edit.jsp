@@ -116,10 +116,10 @@
                                 <span class="line"></span>
                                 实际用餐人数
                             </th>
-                            <th class="col-md-2">
-                                <span class="line"></span>
-                                预估用餐人数
-                            </th>
+                            <%--<th class="col-md-2">--%>
+                                <%--<span class="line"></span>--%>
+                                <%--预估用餐人数--%>
+                            <%--</th>--%>
                             <th class="col-md-2">
                                 数据日期
                             </th>
@@ -132,9 +132,17 @@
                 </div>
             </div>
             <!-- end orders table -->
-            <div class="text-center">
-                <ul id="splitBar" class="pagination">
+            <div id="splitBarDiv" class="text-center">
+                <ul id="splitBar" style="margin-left: 10px;" class="pagination">
                 </ul>
+                <br>
+                <div>
+                    共&nbsp;
+                    <span id="pageCount"></span>
+                    &nbsp;页&nbsp;&nbsp;
+                    <span id="dataCount"></span>
+                    条数据
+                </div>
             </div>
 
 

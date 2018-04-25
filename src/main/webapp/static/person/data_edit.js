@@ -146,6 +146,9 @@ function queryPageList(num) {
 
             var curPageNo = page.currentPageNo;
 
+
+            var totalDataCount = page.totalCount;
+
             dataCache = page.data;
 
             var $tBody = $('#tBody');
@@ -164,9 +167,9 @@ function queryPageList(num) {
                 dataStr += '<td>';
                 dataStr += page.data[i].actualNum;
                 dataStr += '</td>';
-                dataStr += '<td>';
-                dataStr += page.data[i].estimateNum ? page.data[i].estimateNum : '- -';
-                dataStr += '</td>';
+                // dataStr += '<td>';
+                // dataStr += page.data[i].estimateNum ? page.data[i].estimateNum : '- -';
+                // dataStr += '</td>';
                 dataStr += '<td>';
                 dataStr += page.data[i].dataDate;
                 dataStr += '</td>';
@@ -175,6 +178,8 @@ function queryPageList(num) {
             $tBody.html(dataStr);
 
             //分页处理
+            $('#dataCount').html(totalDataCount);
+            $('#pageCount').html(totalPageCount);
             var $splitBar = $('#splitBar');
             $splitBar.empty();
             var splitBarStr = '<li><a href="#" ' + (page.hasPreviousPage ? 'onclick="queryPageList(' + (curPageNo - 1) + ')"' : '') + '>&laquo;</a></li>';

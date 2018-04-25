@@ -161,7 +161,7 @@ public class DataService {
             }
             num_lastYear = treeMap.get(lastYear).getActualNum();
             logStr.append("    去年当天：")
-                    .append(data.getActualNum());
+                    .append(num_lastYear);
             String day1 = DateUtil.convert2String(date1, format);
             if (!treeMap.containsKey(day1)) {
                 logStr.append("\n昨天数据不存在，开始计算----\n");
@@ -185,7 +185,7 @@ public class DataService {
                         date2, date1, num_lastYear, num_day3, num_day2, num_day1, logStr);
                 continue;
             }
-            num_day3 = treeMap.get(day1).getActualNum();
+            num_day3 = treeMap.get(day3).getActualNum();
 
             logStr.append("\n数据完整，开始计算----\n");
             actualCount(date, data, myParams.get(3), M, date_lastYear, date3, date2,
@@ -263,7 +263,7 @@ public class DataService {
                     .append(")  c值：")
                     .append(c)
                     .append("   用餐人数：")
-                    .append(num_day3)
+                    .append(num_day1)
                     .append("\n去年当天： ")
                     .append(DateUtil.convert2String(date_lastYear, format))
                     .append("(")
@@ -271,7 +271,7 @@ public class DataService {
                     .append(")  d值：")
                     .append(d)
                     .append("   用餐人数：")
-                    .append(num_day3);
+                    .append(num_lastYear);
 
             logStr.append("\n最终计算公式：")
                     .append(e)

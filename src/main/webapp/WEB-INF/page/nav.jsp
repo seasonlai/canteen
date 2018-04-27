@@ -66,7 +66,7 @@
                     <a href="<c:url value="/data/data.html"/>"><i class="fa fa-fw fa-bar-chart-o"></i> 人次统计/预估</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/data/data-book.html"/>"><i class="fa fa-fw fa-list-alt"></i> 预约用餐统计</a>
+                    <a href="<c:url value="/data/data-book.html"/>"><i class="fa fa-fw fa-list-alt"></i> 订单统计</a>
                 </li>
                 <li>
                     <a href="<c:url value="/data/data-edit.html"/>"><i class="fa fa-fw fa-pencil"></i> 用餐数据修改</a>

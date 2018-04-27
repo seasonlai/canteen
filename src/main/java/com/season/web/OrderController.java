@@ -102,11 +102,11 @@ public class OrderController extends BaseController {
 
     @ResponseBody
     @RequestMapping("/order/data-list")
-    public MsgBean countBook(@RequestParam("foodKind") Integer foodKind,
+    public MsgBean countBook(@RequestParam(value = "foodKind",required = false) Integer foodKind,
                              @RequestParam("date")
                              @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
                              @RequestParam("content") String content,
-                             @RequestParam("foodTime") Integer foodTime,
+                             @RequestParam(value = "foodTime",required = false) Integer foodTime,
                              @RequestParam("pageSize") Integer pageSize,
                              @RequestParam("pageNum") Integer pageNum) {
 

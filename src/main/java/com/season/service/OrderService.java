@@ -68,7 +68,8 @@ public class OrderService {
     public MsgBean countBook(Integer pageSize, Integer pageNum, Date date,
                              Integer foodKind, Integer foodTime, String content){
 
-        Page page = orderDao.queryOrderByCondition(pageNum, pageSize, date, foodKind, foodTime, content);
+//        Page page = orderDao.queryOrderByCondition(pageNum, pageSize, date, foodKind, foodTime, content);
+        Page page = orderDao.queryOrderByCondition2(pageNum, pageSize, date, content);
 
         return MsgBean
                 .success().setData(page);

@@ -106,25 +106,25 @@
                                         <small>￥</small><span id="foodPrice"></span>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="foodDate" class="col-md-3 control-label">预约日期:</label>
-                                    <div class="col-md-8">
-                                        <input onchange="foodDateChange(this)" type="text" id="foodDate" style="height:30px;width:200px;"
-                                               data-provide="datepicker" class="form-control datepicker"
-                                               placeholder="选择时间">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="foodTime" class="col-md-3 control-label">用餐时间:</label>
+                                <%--<div class="form-group">--%>
+                                    <%--<label for="foodDate" class="col-md-3 control-label">预约日期:</label>--%>
+                                    <%--<div class="col-md-8">--%>
+                                        <%--<input onchange="foodDateChange(this)" type="text" id="foodDate" style="height:30px;width:200px;"--%>
+                                               <%--data-provide="datepicker" class="form-control datepicker"--%>
+                                               <%--placeholder="选择时间">--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<label for="foodTime" class="col-md-3 control-label">用餐时间:</label>--%>
 
-                                    <div class="col-md-8">
-                                        <select id="foodTime" class="form-control" style="height:31px;width:200px;">
-                                            <c:forEach items="${foodTime}" var="item">
-                                                <option value="${item.code}">${item.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
+                                    <%--<div class="col-md-8">--%>
+                                        <%--<select id="foodTime" class="form-control" style="height:31px;width:200px;">--%>
+                                            <%--<c:forEach items="${foodTime}" var="item">--%>
+                                                <%--<option value="${item.code}">${item.name}</option>--%>
+                                            <%--</c:forEach>--%>
+                                        <%--</select>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
                                 <div class="form-group">
                                     <label for="foodCount" class="col-md-3 control-label">餐品份数:</label>
                                     <div class="col-md-8  form-inline">
@@ -149,6 +149,18 @@
 
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <button type="button" class="btn btn-primary" onclick="addToCard()">确定</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="QRcodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" style="width: 200px">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img src="<%=basePath%>static/img/QR_code.png" width="200px" height="200px">
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

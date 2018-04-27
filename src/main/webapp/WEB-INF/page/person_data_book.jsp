@@ -65,24 +65,24 @@
                                 style="margin-right:12px;width: 35px;height: 33px" type="button">
                             <i class="fa fa-refresh"></i>
                         </button>
-                        <select class="form-control" onchange="queryPageList()" id="foodKind"
-                                style="width:150px;height: 33px">
-                            <option value="-1">全部分类</option>
-                            <c:forEach items="${foodKinds}" var="foodKind">
-                                <option value="${foodKind.kindCode}">${foodKind.kindName}</option>
-                            </c:forEach>
-                        </select>
-                        <select class="form-control" onchange="queryPageList()" id="foodTimeKind"
-                                style="width:150px;height: 33px">
-                            <option value="-1">全部时间段</option>
-                            <c:forEach items="${foodTimes}" var="time">
-                                <option value="${time.code}">${time.name}</option>
-                            </c:forEach>
-                        </select>
+                        <%--<select class="form-control" onchange="queryPageList()" id="foodKind"--%>
+                                <%--style="width:150px;height: 33px">--%>
+                            <%--<option value="-1">全部分类</option>--%>
+                            <%--<c:forEach items="${foodKinds}" var="foodKind">--%>
+                                <%--<option value="${foodKind.kindCode}">${foodKind.kindName}</option>--%>
+                            <%--</c:forEach>--%>
+                        <%--</select>--%>
+                        <%--<select class="form-control" onchange="queryPageList()" id="foodTimeKind"--%>
+                                <%--style="width:150px;height: 33px">--%>
+                            <%--<option value="-1">全部时间段</option>--%>
+                            <%--<c:forEach items="${foodTimes}" var="time">--%>
+                                <%--<option value="${time.code}">${time.name}</option>--%>
+                            <%--</c:forEach>--%>
+                        <%--</select>--%>
                         <div class="input-group">
                             <input onchange="queryPageList()" type="text" id="countTime" style="height:30px;width:200px;"
                                    data-provide="datepicker"
-                                   class="form-control datepicker" placeholder="预约用餐日期">
+                                   class="form-control datepicker" placeholder="日期">
                         </div>
                         <div class="input-group">
                             <input type="text" id="searchContent" style="height:30px;width:200px;"
@@ -119,15 +119,15 @@
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                餐品类别
+                                订单号
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                用餐类型
+                                下单时间
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                预约日期
+                                总费用
                             </th>
                         </tr>
                         </thead>

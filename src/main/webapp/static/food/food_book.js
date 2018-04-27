@@ -121,13 +121,13 @@ function cutCount() {
 
 function addToCard() {
     var $myModal = $('#myModal');
-    var date = $myModal.find("#foodDate").val();
-    if (!date) {
-        alertWindow('日期为空')
-        return
-    }
-
-    var time = $myModal.find("#foodTime").val();
+    // var date = $myModal.find("#foodDate").val();
+    // if (!date) {
+    //     alertWindow('日期为空')
+    //     return
+    // }
+    //
+    // var time = $myModal.find("#foodTime").val();
 
     var count = $myModal.find("#foodCount").val();
     try {
@@ -142,12 +142,14 @@ function addToCard() {
     var foodId = $myModal.find('#foodId').val();
     var foodTotalPrice = $myModal.find('#foodTotalPrice').html();
     $.ajax({
-        url: basePath + 'shopcar/add',
+        url: basePath + 'order/submit2',
         dataType: 'json',
         data: {
-            foodTime: time, foodCount: count,
-            foodId: foodId, foodTotalPrice: foodTotalPrice,
-            subscribeDate: date
+            // foodTime: time,
+            foodCount: count,
+            foodId: foodId,
+            foodTotalPrice: foodTotalPrice,
+            // subscribeDate: date
         },
         type: 'post',
         success: function (msg) {
@@ -156,7 +158,8 @@ function addToCard() {
                 return;
             }
             $myModal.modal('hide');
-            alertWindow('添加成功');
+            $('#QRcodeModal').modal('show');
+            // alertWindow('添加成功');
         },
         error: function () {
             alertWindow("请求失败")

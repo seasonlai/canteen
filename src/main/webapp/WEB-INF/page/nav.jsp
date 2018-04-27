@@ -83,10 +83,10 @@
                 <li>
                     <a href="<c:url value="/food/food_book.html"/>"><i class="fa fa-fw fa-book"></i> 用餐预约</a>
                 </li>
-                <li>
-                    <a href="<c:url value="/shopcar/myShopCar.html"/>"><i class="fa fa-fw fa-shopping-cart"></i>
-                        我的餐车</a>
-                </li>
+                <%--<li>--%>
+                    <%--<a href="<c:url value="/shopcar/myShopCar.html"/>"><i class="fa fa-fw fa-shopping-cart"></i>--%>
+                        <%--我的餐车</a>--%>
+                <%--</li>--%>
                 <li>
                     <a href="<c:url value="/order/myOrder.html"/>"><i class="fa fa-fw fa-edit"></i> 我的订单</a>
                 </li>
@@ -101,14 +101,14 @@
 </nav>
 
 
-<c:if test="${USER_CONTEXT.userType == 1}">
-    <a href="<c:url value="/shopcar/myShopCar.html"/>" id="myShopCart"
-       style="position: fixed;right: 20px;bottom: 50px;"
-       class="btn btn-lg btn-default">
-        <li class="glyphicon glyphicon-shopping-cart"></li>
-    </a>
+<%--<c:if test="${USER_CONTEXT.userType == 1}">--%>
+    <%--<a href="<c:url value="/shopcar/myShopCar.html"/>" id="myShopCart"--%>
+       <%--style="position: fixed;right: 20px;bottom: 50px;"--%>
+       <%--class="btn btn-lg btn-default">--%>
+        <%--<li class="glyphicon glyphicon-shopping-cart"></li>--%>
+    <%--</a>--%>
 
-</c:if>
+<%--</c:if>--%>
 
 <div class="modal fade" id="processbar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="false"

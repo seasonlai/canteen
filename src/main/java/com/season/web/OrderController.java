@@ -1,6 +1,7 @@
 package com.season.web;
 
 import com.google.gson.Gson;
+import com.season.domain.Food;
 import com.season.domain.MsgBean;
 import com.season.domain.MyOrder;
 import com.season.domain.ShopCar;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +44,21 @@ public class OrderController extends BaseController {
         orderService.submitOrder(shopCars);
         return MsgBean.success();
     }
+
+
+    @RequestMapping(value = "/order/submit2", method = RequestMethod.POST)
+    @ResponseBody
+    public MsgBean submitOrder2(HttpServletRequest request, ShopCar shopCar, Food food) {
+
+        shopCar.setFood(food);
+        shopCar.setUser(getSessionUser(request));
+        shopCar.setSubscribeDate(new Date());
+
+        orderService.submitOrder(Arrays.asList(shopCar));
+        return MsgBean.success();
+    }
+
+
 
     @RequestMapping("/order/list")
     @ResponseBody

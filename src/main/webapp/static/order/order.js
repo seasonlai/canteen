@@ -59,10 +59,10 @@ function queryPageList(orderStatus, pageNum) {
                 str += '<td>';
                 str += '<span>' + order.foodCount + '</span>';
                 str += '</td>';
-                str += '<td>';
-                str += '<span>' + order.subscribeDate + '</span></br>';
-                str += '<span>' + getFoodTime(order.foodTime) + '</span>';
-                str += '</td>';
+                // str += '<td>';
+                // str += '<span>' + order.subscribeDate + '</span></br>';
+                // str += '<span>' + getFoodTime(order.foodTime) + '</span>';
+                // str += '</td>';
                 str += '<td>';
                 str += '<span>' + order.orderDate + '</span>';
                 str += '</td>';

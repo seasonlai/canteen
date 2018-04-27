@@ -22,9 +22,9 @@ function queryPageList(num) {
         alert('请选择统计日期');
         return;
     }
-
-    var foodTime = $('#foodTimeKind').val();
-    var foodKind = $('#foodKind').val();
+    //
+    // var foodTime = $('#foodTimeKind').val();
+    // var foodKind = $('#foodKind').val();
 
     var content = $('#searchContent').val();
 
@@ -32,9 +32,12 @@ function queryPageList(num) {
         url: basePath + '/order/data-list',
         type: 'post',
         data: {
-            foodKind: foodKind, date: date,
-            foodTime: foodTime, content: content,
-            pageNum: num, pageSize: 10
+            // foodKind: foodKind,
+            date: date,
+            // foodTime: foodTime,
+            content: content,
+            pageNum: num,
+            pageSize: 10
         },
         dataType: 'json',
         success: function (msg) {
@@ -51,7 +54,7 @@ function queryPageList(num) {
 
             var totalDataCount = page.totalCount;
 
-            dataCache = page.data;
+            // dataCache = page.data;
 
             var $tBody = $('#tBody');
             $tBody.empty();

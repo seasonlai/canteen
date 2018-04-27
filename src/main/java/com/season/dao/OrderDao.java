@@ -20,6 +20,9 @@ public class OrderDao extends BaseDao<MyOrder> {
     private static final String QUERY_ORDER_LIST_BY_USER =
             "from MyOrder d where d.user = ?";
 
+    private static final String QUERY_ORDER_LIST_BY_DATE =
+            "from MyOrder d where d.subscribeDate = ? ";
+
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     public Page queryOrderByUser(User user, Integer orderStatus, Integer pageNum, Integer pageSize) {
@@ -71,5 +74,19 @@ public class OrderDao extends BaseDao<MyOrder> {
         Page page = pagedQuery(sb_hql.toString(), count.longValue(), pageNum, pageSize, params_hql.toArray());
         return page;
     }
-
+    public Page queryOrderByCondition2(Integer pageNum, Integer pageSize, Date date, String content) {
+        if (date == null) {
+            return null;
+        }
+        List<Object> params_hql = new ArrayList<>();
+        StringBuffer sb_hql = new StringBuffer(QUERY_ORDER_LIST_BY_DATE);
+        params_hql.add(date);
+        if (!StringUtils.isEmpty(content)) {
+            sb_hql.append(" and d.food.foodName like ?");
+            params_hql.add("%"+content+"%");
+        }
+        Page page = pagedQuery(sb_hql.toString(),
+                 pageNum, pageSize, params_hql.toArray());
+        return page;
+    }
 }

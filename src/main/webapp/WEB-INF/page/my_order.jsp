@@ -66,14 +66,16 @@
                     <div class="pull-right">
                         <div id="statusBtnGroup" class="btn-group pull-right">
                             <button status="-1" onclick="queryPageList(-1)" class="glow left large active">全&nbsp;部</button>
-                            <c:forEach var="item" items="${orderStatusObj}" varStatus="stat">
-                                <c:if test="${!stat.last}">
-                                    <button status="${item.code}" onclick="queryPageList(${item.code})" class="glow middle large">${item.name}</button>
-                                </c:if>
-                                <c:if test="${stat.last}">
-                                    <button status="${item.code}" onclick="queryPageList(${item.code})" class="glow right large">${item.name}</button>
-                                </c:if>
-                            </c:forEach>
+                            <button status="-1" onclick="queryPageList(2)" class="glow left large active">已取消</button>
+
+                            <%--<c:forEach var="item" items="${orderStatusObj}" varStatus="stat">--%>
+                                <%--<c:if test="${!stat.last}">--%>
+                                    <%--<button status="${item.code}" onclick="queryPageList(${item.code})" class="glow middle large">${item.name}</button>--%>
+                                <%--</c:if>--%>
+                                <%--<c:if test="${stat.last}">--%>
+                                    <%--<button status="${item.code}" onclick="queryPageList(${item.code})" class="glow right large">${item.name}</button>--%>
+                                <%--</c:if>--%>
+                            <%--</c:forEach>--%>
                             <%--<button onclick="queryOrderList(0)" class="glow middle large">未完成</button>--%>
                             <%--<button onclick="queryOrderList(1)" class="glow right large">已完成</button>--%>
                             <%--<button onclick="queryOrderList(2)" class="glow right large">已取消</button>--%>
@@ -97,10 +99,10 @@
                                 <span class="line"></span>
                                 餐品数量
                             </th>
-                            <th class="col-md-2">
-                                <span class="line"></span>
-                                预约时间
-                            </th>
+                            <%--<th class="col-md-2">--%>
+                                <%--<span class="line"></span>--%>
+                                <%--预约时间--%>
+                            <%--</th>--%>
                             <th class="col-md-2">
                                 <span class="line"></span>
                                 下单时间

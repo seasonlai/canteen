@@ -114,7 +114,7 @@
                             </th>
                             <th class="col-md-2">
                                 <span class="line"></span>
-                                实际用餐人数
+                                实际下单数
                             </th>
                             <%--<th class="col-md-2">--%>
                                 <%--<span class="line"></span>--%>

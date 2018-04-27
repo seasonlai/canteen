@@ -66,10 +66,10 @@
                     <a href="<c:url value="/data/data.html"/>"><i class="fa fa-fw fa-bar-chart-o"></i> 人次统计/预估</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/data/data-book.html"/>"><i class="fa fa-fw fa-list-alt"></i> 订单统计</a>
+                    <a href="<c:url value="/data/data-book.html"/>"><i class="fa fa-fw fa-list-alt"></i> 订单详情</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/data/data-edit.html"/>"><i class="fa fa-fw fa-pencil"></i> 用餐数据修改</a>
+                    <a href="<c:url value="/data/data-edit.html"/>"><i class="fa fa-fw fa-pencil"></i> 下单数据修改</a>
                 </li>
                 <li>
                     <a href="<c:url value="/food/food_manager.html"/>"><i class="fa fa-fw fa-dashboard"></i> 餐品管理</a>

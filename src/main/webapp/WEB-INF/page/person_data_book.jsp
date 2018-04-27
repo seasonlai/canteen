@@ -11,7 +11,7 @@
 %>
 <html>
 <head>
-    <title>用餐预约统计</title>
+    <title>订单统计</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +56,7 @@
             <div class="table-wrapper orders-table section">
                 <div class="row head">
                     <div class="col-md-12">
-                        <h4>预约用餐统计</h4>
+                        <h4>订单统计</h4>
                     </div>
                 </div>
                 <div class="row filter-block">

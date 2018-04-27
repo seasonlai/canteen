@@ -169,11 +169,12 @@ function delOrder(index) {
                 }
 
                 setTimeout(function () {
-                    $processbar.modal('hide');
+                    // $processbar.modal('hide');
                     queryPageList();
                 }, 1000);
             },
             error: function () {
+                $processbar.modal('hide');
                 alertWindow('请求失败');
             }
         })

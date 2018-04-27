@@ -33,7 +33,7 @@ function queryCountData(kindCode) {
                 data: msg.data.dataList,
                 xkey: 'dataDate',
                 ykeys: ['actualNum', 'estimateNum'],
-                labels: ['实际用餐数', '预估用餐数'],
+                labels: ['实际下单数', '预估用餐数'],
                 pointSize: 4,
                 hideHover: 'auto',
                 resize: true

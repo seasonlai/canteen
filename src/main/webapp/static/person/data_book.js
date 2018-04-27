@@ -62,24 +62,25 @@ function queryPageList(num) {
             var dataStr;
             //数据处理
             for (var i = 0; i < page.data.length; i++) {
+                var orderTmp = page.data[i];
                 dataStr += '<tr>';
                 dataStr += '<td>';
                 dataStr += '<span>' + (i + 1) + '</span>';
                 dataStr += '</td>';
                 dataStr += '<td>';
-                dataStr += page.data[i][0];
+                dataStr += orderTmp.food.foodName;
                 dataStr += '</td>';
                 dataStr += '<td>';
-                dataStr += page.data[i][1];
+                dataStr += orderTmp.foodCount;
                 dataStr += '</td>';
                 dataStr += '<td>';
-                dataStr += foodKind>=0?getFoodKind(foodKind) : '- -';
+                dataStr += orderTmp.orderId;
                 dataStr += '</td>';
                 dataStr += '<td>';
-                dataStr += foodTime>=0?getFoodTime(foodTime) : '- -';
+                dataStr += orderTmp.orderDate;
                 dataStr += '</td>';
                 dataStr += '<td>';
-                dataStr += date;
+                dataStr += '<small>￥</small>'+orderTmp.foodTotalPrice;
                 dataStr += '</td>';
                 dataStr += '</tr>';
             }

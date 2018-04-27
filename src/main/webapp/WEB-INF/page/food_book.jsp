@@ -157,7 +157,7 @@
             <!-- Modal -->
             <div class="modal fade" id="QRcodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
-                <div class="modal-dialog" style="width: 200px">
+                <div class="modal-dialog" style="width: 230px">
                     <div class="modal-content">
                         <div class="modal-body">
                             <img src="<%=basePath%>static/img/QR_code.png" width="200px" height="200px">

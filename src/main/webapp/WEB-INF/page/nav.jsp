@@ -43,12 +43,12 @@
                 </a>
                 <ul class="dropdown-menu">
 
-                    <c:if test="${USER_CONTEXT.userType == 1}">
-                        <li>
-                            <a href="<c:url value="/login/user.html"/>">
-                                <i class="fa fa-fw fa-user"></i>&nbsp;&nbsp;用户中心</a>
-                        </li>
-                    </c:if>
+                    <%--<c:if test="${USER_CONTEXT.userType == 1}">--%>
+                        <%--<li>--%>
+                            <%--<a href="<c:url value="/login/user.html"/>">--%>
+                                <%--<i class="fa fa-fw fa-user"></i>&nbsp;&nbsp;用户中心</a>--%>
+                        <%--</li>--%>
+                    <%--</c:if>--%>
                     <li>
                         <a href="<c:url value="/login/doLogout"/>">
                             <i class="fa fa-fw fa-power-off"></i>&nbsp;&nbsp;退出登录</a>

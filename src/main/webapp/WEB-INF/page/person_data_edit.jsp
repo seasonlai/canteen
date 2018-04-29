@@ -168,11 +168,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="dataPerson" class="col-lg-4 control-label">用餐人数:</label>
+                                    <label for="dataPerson" class="col-lg-4 control-label">下单数:</label>
                                     <div class="col-lg-8">
                                         <input type="text" style="width: 200px" name="dataPerson" class="form-control"
                                                id="dataPerson"
-                                               placeholder="请输入用餐人数">
+                                               placeholder="请输入下单数">
                                     </div>
                                 </div>
                             </form>
